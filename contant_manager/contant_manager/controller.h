@@ -1,46 +1,62 @@
+#ifndef _CONTROLLER_H_
+#define _CONTROLLER_H_
+
+#include <iostream>
+#include <string>
+#include <list>
+
+#include "person.h"
+
 using namespace std;
 
-class Controller {
-private:
+namespace ContactManager {
 
-	list<Person> person;
+	class Controller {
+	private:
 
-public:
+		list<Person> person;
 
-	Controller() {
-		bool isMan = true;
-		string firstname = "Max";
-		string lastname = "Musterman";
-		Person* person1 = new Person(isMan, firstname, lastname, 18);
+	public:
 
-		person.push_front(*person1);
+		Controller() {
 
-		list<Person>::iterator iter = person.begin();		
-		while (iter != person.end())
-		{
-		
-			Person& s = *iter;
-			cout << s.print() << endl;			
-			iter++;
+			GenderType gender = GenderType::MAN;
+			string firstname = "Max";
+			string lastname = "Musterman";
+			Person* person1 = new Person(gender, firstname, lastname, 18);
+
+			person.push_front(*person1);
+
+			list<Person>::iterator iter = person.begin();
+			while (iter != person.end())
+			{
+
+				Person& s = *iter;
+				cout << s << endl;
+				iter++;
+			}
 		}
-	}
 
-	void printMenu() {
-		cout << "++++++ MAIN - MENU ++++++ \n";
-		cout << "0 | Show Main Menu \n";
-		cout << "1 | Print All Contacts \n";
-	}
+		void printMenu() {
+			cout << "++++++ MAIN - MENU ++++++ \n";
+			cout << "0 | Show Main Menu \n";
+			cout << "1 | Print All Contacts \n";
 
-	void loadContacts() {
+			cout << "9 | Close Application \n";
+		}
 
-	}
+		void loadContacts() {
 
-	/// <summary>Speichert alle Kontakte ab</summary>
-    /// <param name="value">Noch keinen</param>
-    /// <returns>Gibt den Status zurück ob der Speichervorgang erfolgreich abgeschlossen wurde</returns>
-	void saveContacts() {
+		}
 
-	}
+		/// <summary>Speichert alle Kontakte ab</summary>
+		/// <param name="value">Noch keinen</param>
+		/// <returns>Gibt den Status zurück ob der Speichervorgang erfolgreich abgeschlossen wurde</returns>
+		void saveContacts() {
+
+		}
 
 
-};
+	};
+}
+#endif

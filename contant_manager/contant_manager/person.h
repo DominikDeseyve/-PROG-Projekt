@@ -1,56 +1,53 @@
-#ifndef _TEMPERATUR_H_
-#define _TEMPERATUR_H_
-#include <string>
+#ifndef _PERSON_H_
+#define _PERSON_H_
 
 using namespace std;
 
-typedef enum
-{
-	/// <summary>
-	/// SI Basiseinheit, nach Lord Kelvin
-	/// </summary>
-	KELVIN,
-	/// <summary>
-	/// Nach Anders Celsius
-	/// </summary>
-	CELSIUS,
-	/// <summary>
-	/// SAE, nach Daniel Gabriel Fahrenheit
-	/// </summary>
-	FAHRENHEIT
-} ETemperaturType;
+namespace ContactManager {
+	
+	typedef enum
+	{
+		/// <summary>
+		/// männlich
+		/// </summary>
+		MAN,
+		/// <summary>
+		/// weiblich
+		/// </summary>
+		WOMAN,
+		/// <summary>
+		/// diverse
+		/// </summary>
+		DIVERSE
+	} GenderType;
 
 
-class Person {
-private:
-	bool isMan;
-	string firstname;
+	class Person {
+	protected:
+		GenderType gender;
+		string firstname;
+		string lastname;
 
-	string lastname;
+		string mail;
+		string telNr;
+		uint8_t age;
 
-	string mail;
-	string telNr;
-	uint8_t age;
-
-
-public:
-	Person(bool pIsMan, string pFirstname, string pLastname, uint8_t pAge) {
-		this->isMan = pIsMan;
-		this->firstname = pFirstname;
-		this->lastname = pLastname;
-		this->age = pAge;
-	}
-	//Copy-Constructor
-	Person() {
-
-	}
-
-	string print() {
-		return this->firstname + " " + this->lastname + " | m | " + to_string(this->age);
-	}
+		static uint32_t countPersons;
 
 
+	public:
+		Person(GenderType pGender, string pFirstname, string pLastname, uint8_t pAge);
+		//Copy-Constructor
+		Person(Person& pPerson);
+		//Destruktor
+		~Person();
 
+		const void changeValues() {
 
-};
+		}
+
+	};
+	extern ostream& operator<< (ostream& os, const Person& pPerson);
+	
+}
 #endif

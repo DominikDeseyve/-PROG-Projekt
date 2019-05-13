@@ -152,6 +152,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="contant_manager.cpp" />
+    <ClCompile Include="controller.cpp" />
+    <ClCompile Include="person.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="controller.h" />
