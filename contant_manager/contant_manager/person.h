@@ -1,6 +1,9 @@
 #ifndef _PERSON_H_
 #define _PERSON_H_
 
+#include <iostream>
+#include <string>
+
 using namespace std;
 
 namespace ContactManager {
@@ -8,15 +11,15 @@ namespace ContactManager {
 	typedef enum
 	{
 		/// <summary>
-		/// männlich
+		/// männlich (0)
 		/// </summary>
 		MAN,
 		/// <summary>
-		/// weiblich
+		/// weiblich (1)
 		/// </summary>
 		WOMAN,
 		/// <summary>
-		/// diverse
+		/// diverse (2)
 		/// </summary>
 		DIVERSE
 	} GenderType;
@@ -24,30 +27,27 @@ namespace ContactManager {
 
 	class Person {
 	protected:
-		GenderType gender;
-		string firstname;
 		string lastname;
-
-		string mail;
-		string telNr;
-		uint8_t age;
-
+		string firstname;
+		GenderType gender;
+		uint32_t age;
+		string place;
+		string street;
+		uint32_t housenumber;
+		uint8_t prefix;
+		uint8_t phonenumber;
+		
 		static uint32_t countPersons;
 
 
 	public:
-		Person(GenderType pGender, string pFirstname, string pLastname, uint8_t pAge);
-		//Copy-Constructor
-		Person(Person& pPerson);
-		//Destruktor
-		~Person();
+		Person(string pLastname, string pFirstname, GenderType pGender, uint32_t age, string place, string street, uint32_t housenumber, uint8_t prefix, uint8_t phonenumber);
 
-		const void changeValues() {
+		friend ostream& operator<< (ostream& os, const Person& pPerson);
 
-		}
+		const void changeValues();
 
 	};
-	extern ostream& operator<< (ostream& os, const Person& pPerson);
 	
 }
 #endif

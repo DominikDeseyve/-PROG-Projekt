@@ -15,13 +15,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="contant_manager.cpp">
-      <Filter>Quelldateien</Filter>
-    </ClCompile>
     <ClCompile Include="person.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="controller.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
@@ -32,5 +32,10 @@
     <ClInclude Include="person.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="contacts.csv">
+      <Filter>Quelldateien</Filter>
+    </None>
   </ItemGroup>
 </Project>

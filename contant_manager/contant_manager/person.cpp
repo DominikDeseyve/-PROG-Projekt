@@ -1,21 +1,27 @@
 #include <iostream>
+#include <string>
 #include "person.h"
 
-
+using namespace std;
 using namespace ContactManager;
 
-/*
-ContactManager::Person(GenderType pGender, string pFirstname, string pLastname, uint8_t pAge) {
-	/*this->gender = pGender;
-	this->firstname = pFirstname;
+
+Person::Person(string pLastname, string pFirstname, GenderType pGender, uint32_t pAge, string pPlace, string pStreet, uint32_t pHousenumber, uint8_t pPrefix, uint8_t pPhonenumber) {
 	this->lastname = pLastname;
+	this->firstname = pFirstname;
+	this->gender = pGender;
 	this->age = pAge;
+	this->place = pPlace;
+	this->street = pStreet;
+	this->housenumber = pHousenumber;
+	this->prefix = pPrefix;
+	this->phonenumber = pPhonenumber;
+}
 
-	countPersons++;
-}*//*
 
-ostream& operator<< (ostream& os, const Person& obj) {
-	string line = this->firstname + " " + this->lastname + " | m | " + to_string(this->age);
+ostream& ContactManager::operator<<(ostream& os, const Person& pPerson)
+{
+	string line = pPerson.firstname;
 	os << line;
 	return os;
-}*/
+}
