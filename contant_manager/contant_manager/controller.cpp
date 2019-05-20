@@ -20,8 +20,6 @@ Controller::Controller(){
 	loadContacts(person);
 	
 	printMenu();
-	
-	//printContacts();
 }
 
 /********************************************************************/
@@ -30,8 +28,7 @@ Controller::Controller(){
 void Controller::loadContacts(vector<Person>& person) {
 	ifstream file;
 	string lastname, firstname, helpPostcode, place, street, helpHousenumber, helpAge, helpPhonenumber, helpPrefix, helpGender;
-	uint32_t age, housenumber;
-	uint8_t prefix, phonenumber, postcode;
+	uint32_t age, housenumber, prefix, phonenumber, postcode;
 	GenderType gender;
 
 	//CSV-Datei öffnen
@@ -51,7 +48,7 @@ void Controller::loadContacts(vector<Person>& person) {
 			getline(file, street, token);
 			getline(file, helpHousenumber, token);
 			getline(file, helpPrefix, token);
-			getline(file, helpPhonenumber, '.');
+			getline(file, helpPhonenumber, '\n');
 
 			//Die Daten in richtige Datentypen wandeln
 			age = stoi(helpAge);
@@ -68,7 +65,7 @@ void Controller::loadContacts(vector<Person>& person) {
 			}
 
 			//Person anlegen und Werte übergeben
-			Person* person1 = new Person(lastname, firstname, gender, age, postcode, place, street, housenumber, prefix, phonenumber);
+			Person *person1 = new Person(lastname, firstname, gender, age, postcode, place, street, housenumber, prefix, phonenumber);
 			person.push_back(*person1);
 		}
 
@@ -77,7 +74,7 @@ void Controller::loadContacts(vector<Person>& person) {
 	} 
 	else {
 		//CSV-Datei konnte nicht ausgelesen werden
-		cout << "Unable to open file" << endl;
+		cout << "Datei kann nicht geladen werden!" << endl;
 	}
 }
 
@@ -91,7 +88,13 @@ void Controller::saveContacts(vector<Person>& person) {
 	// jedes Buch in eine Zeile schreiben
 	for (size_t i = 0; i < person.size(); i++)
 	{
-		file << person[i].getCSV_string().str();
+		//cout << endl << person[i].getCSV_string().str().size();
+		if (i < person.size() - 1) {
+			file << person[i].csv_string().str();
+		}
+		else {
+			file << person[i].last_csv_string().str();
+		}
 	}
 
 	// CSV Datei schließen    
@@ -112,7 +115,7 @@ void Controller::actionHandler(int number) {
 	case 4: editContact(person); break;
 	case 5: deleteContact(person); break;
 	case 6: exitProgram(person); break;
-	default: cout << endl << "Your number was wrong!" << endl; break;
+	default: cout << endl << "Die eingegebene Nummer war falsch!" << endl; break;
 	}
 }
 
@@ -122,19 +125,22 @@ void Controller::actionHandler(int number) {
 
 void Controller::printMenu() {
 	//Ausgabe des Menues
-	cout << endl << "++++++ MAIN - MENU ++++++" << endl;
-	cout << " | 0 | Show main menu" << endl;
-	cout << " | 1 | Print all contacts" << endl;
-	cout << " | 2 | Print single contact" << endl;
-	cout << " | 3 | Create new contact" << endl;
-	cout << " | 4 | Edit contact" << endl;
-	cout << " | 5 | Delete single contact" << endl;
-	cout << " | 6 | Close Application" << endl;
+	cout << endl << "++++++ MAIN - MENUE ++++++";
+	cout << endl << "------------------------------------" << endl;
+	cout << " | 0 | Main Menue anzeigen" << endl;
+	cout << " | 1 | Alle Kontakte auflisten" << endl;
+	cout << " | 2 | Einen Kontakt auflisten" << endl;
+	cout << " | 3 | Kontakt erstellen" << endl;
+	cout << " | 4 | Kontakt bearbeiten" << endl;
+	cout << " | 5 | Kontakt loeschen" << endl;
+	cout << " | 6 | Programm speichern und beenden" << endl;
 
 	//Eingabe der entsprechenden Nummer
 	int menu_number;
-	cout << endl << "Enter your number: ";
+	cout << endl << "Gib deine Nummer ein: ";
 	cin >> menu_number;
+
+	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 
 	//Actionhandler nach Eingabe ausführen
 	actionHandler(menu_number);
@@ -142,23 +148,39 @@ void Controller::printMenu() {
 
 void Controller::printContacts(vector<Person>& person) {
 	cout << endl << "Alle Kontakte: ";
-	cout << endl << "---------------------------------" << endl;
+	cout << endl << "------------------------------------" << endl;
 
 	//Ausgabe des Tabellenkopf
-	cout << setw(5) << " Nr." << setw(20) << "Nachname" << setw(20) << "Vorname" << setw(6) << "Age" << setw(15) << "Ort" << endl;
-	cout << "--------------------------------------------------------------------------------------" << endl;
+	cout << setw(5) << " Nr." << setw(20) << "Nachname" << setw(20) << "Vorname" << setw(10) << "Alter" << setw(15) << "Ort" << endl;
+	cout << "------------------------------------------------------------------------" << endl;
 
-	for (int i = 0; i < person.size(); i++)
+	for (uint32_t i = 0; i < person.size(); i++)
 	{
 		int tmp = i + 1;
 		string ind = " " + to_string(tmp) + ".)";
-		cout << ind << person[i].printAllPersons().str() << endl;
+		cout << setw(5) << tmp << person[i].printAllPersons().str() << endl;
+		
 	}
+
+	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
+
 	printMenu();
 }
 
 void Controller::printSingleContact(vector<Person>& person) {
-	cout << endl << "Einen Kontakt printen";
+	cout << endl << "Einen Kontakt auflisten";
+	cout << endl << "------------------------------------" << endl;
+
+	int tmp;
+	cout << "Gib die Nummer des gewuenschten Kontakts ein: ";
+	cin >> tmp;
+
+	cout << endl << "Ausgabe des Kontakt " << tmp;
+	cout << endl << "------------------------------";
+
+	cout << person[tmp-1].printPerson().str();
+	
+	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 
 	printMenu();
 }
@@ -168,26 +190,131 @@ void Controller::printSingleContact(vector<Person>& person) {
 /********************************************************************************/
 void Controller::createContact(vector<Person>& person) {
 	cout << endl << "Einen Kontakt erstellen";
+	cout << endl << "------------------------------------" << endl;
+
+	string lastname, firstname, place, street, helpGender;
+	uint32_t age, housenumber, prefix, phonenumber, postcode;
+	GenderType gender;
+
+	cout << "Gib deinen Nachnamen ein: ";
+	cin >> lastname;
+	cout << endl << "Gib deinen Vornamen ein: ";
+	cin >> firstname;
+	cout << endl << "Gib dein Geschlecht ein (Man = 0, Woman = 1, Diverse = 2): ";
+	cin >> helpGender;
+	cout << endl << "Gib dein Alter ein: ";
+	cin >> age;
+	cout << endl << "Gib deine Postleitzahl ein: ";
+	cin >> postcode;
+	cout << endl << "Gib deinen Wohnort ein: ";
+	cin >> place;
+	cout << endl << "Gib deine Strasse ein: ";
+	cin >> street;
+	cout << endl << "Gib deine Hausnummer ein: ";
+	cin >> housenumber;
+	cout << endl << "Gib deine Vorwahl ein: ";
+	cin >> prefix;
+	cout << endl << "Gib deine Telefonnummer ein: ";
+	cin >> phonenumber;
+
+	switch (stoi(helpGender))
+	{
+		case 0: gender = GenderType::MAN; break;
+		case 1: gender = GenderType::WOMAN; break;
+		case 2: gender = GenderType::DIVERSE; break;
+	}
+
+	//Person anlegen und Werte übergeben
+	Person* person1 = new Person(lastname, firstname, gender, age, postcode, place, street, housenumber, prefix, phonenumber);
+	person.push_back(*person1);
+
+	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 
 	printMenu();
 }
 
 void Controller::editContact(vector<Person>& person) {
 	cout << endl << "Einen Kontakt bearbeiten";
+	cout << endl << "------------------------------------" << endl;
+
+	int tmp;
+	cout << "Gib die Nummer ein, welche du bearbeiten moechtest: ";
+	cin >> tmp;
+
+	int tmp2;
+	cout << endl << " 0.) Nachname" << endl << " 1.) Vorname" << endl << " 2.) Geschlecht" << endl << " 3.) Alter" << endl << " 4.) Postleitzahl" << endl << " 5.) Wohnort" << endl << " 6.) Strasse" << endl << " 7.) Hausnummer" << endl << " 8.) Vorwahl" << endl << " 9.) Telefonnummer" << endl;
+	cout << endl << "Gib die Nummer ein, welche du bearbeiten moechtest: ";
+	cin >> tmp2;
+
+	string tmp3;
+
+	switch (tmp2) {
+		case 0: 
+			cout << endl << "Gib den neuen Nachname ein: ";
+			cin >> tmp3; 
+			break;
+		case 1: 
+			cout << endl << "Gib den neuen Vorname ein: ";
+			cin >> tmp3;
+			break;
+		case 2:
+			cout << endl << "Gib das neue Geschlecht ein (Man = 0, Woman = 1, Diverse = 2): ";
+			cin >> tmp3;
+			break;
+		case 3: 
+			cout << endl << "Gib das neue Alter ein: ";
+			cin >> tmp3;
+			break;
+		case 4: 
+			cout << endl << "Gib die neue Postleitzahl ein: ";
+			cin >> tmp3;
+			break;
+		case 5: 
+			cout << endl << "Gib den neuen Wohnort ein: ";
+			cin >> tmp3;
+			break;
+		case 6: 
+			cout << endl << "Gib die neue Strasse ein: ";
+			cin >> tmp3;
+			break;
+		case 7: 
+			cout << endl << "Gib die neue Hausnummer ein: ";
+			cin >> tmp3;
+			break;
+		case 8:
+			cout << endl << "Gib die neue Vorwahl ein: ";
+			cin >> tmp3;
+			break;
+		case 9: 
+			cout << endl << "Gib die neue Telefonnummer ein: ";
+			cin >> tmp3;
+			break;
+		default: cout << endl << "Die eingegebene Nummer war falsch!" << endl; break;
+	}
+
+	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 
 	printMenu();
 }
 
 void Controller::deleteContact(vector<Person>& person) {
 	cout << endl << "Einen Kontakt loeschen";
+	cout << endl << "------------------------------------" << endl;
+	
+	int tmp;
+	cout << "Gib die Nummer ein, welche du loeschen moechtest: ";
+	cin >> tmp;
+
+	//person.erase(tmp - 1);
+	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 
 	printMenu();
 }
 
 void Controller::exitProgram(vector<Person>& person) {
-	//saveContacts(person);
+	saveContacts(person);
 
 	cout << endl << "------------------------------";
 	cout << endl << "Das Programm wird nun beendet!";
-	cout << endl << "------------------------------";
+	cout << endl << "------------------------------" << endl;
 }

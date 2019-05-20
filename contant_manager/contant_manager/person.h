@@ -32,24 +32,27 @@ namespace ContactManager {
 		string firstname;
 		GenderType gender;
 		uint32_t age;
-		uint8_t postcode;
+		uint32_t postcode;
 		string place;
 		string street;
 		uint32_t housenumber;
-		uint8_t prefix;
-		uint8_t phonenumber;
+		uint32_t prefix;
+		uint32_t phonenumber;
 		
 		static uint32_t countPersons;
 
 
 	public:
-		Person(string pLastname, string pFirstname, GenderType pGender, uint32_t pAge, uint8_t pPostcode, string pPlace, string pStreet, uint32_t pHousenumber, uint8_t pPrefix, uint8_t pPhonenumber);
+		Person(string pLastname, string pFirstname, GenderType pGender, uint32_t pAge, uint32_t pPostcode, string pPlace, string pStreet, uint32_t pHousenumber, uint32_t pPrefix, uint32_t pPhonenumber);
 
 		friend ostream& operator<< (ostream& os, const Person& pPerson);
 
-		stringstream getCSV_string();
+		stringstream csv_string();
+		stringstream last_csv_string();
 
 		stringstream printAllPersons();
+
+		stringstream printPerson();
 	};
 	
 }

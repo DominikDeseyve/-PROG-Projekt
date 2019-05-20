@@ -1,5 +1,2 @@
 ﻿  controller.cpp
-C:\Users\Robin\Documents\GitHub\-PROG-Projekt\contant_manager\contant_manager\controller.cpp(151): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
-  person.cpp
-  Code wird generiert...
   contant_manager.vcxproj -> C:\Users\Robin\Documents\GitHub\-PROG-Projekt\contant_manager\Debug\contant_manager.exe
