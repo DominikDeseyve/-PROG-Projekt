@@ -8,11 +8,11 @@
 using namespace std;
 
 namespace ContactManager {
-	
+
 	typedef enum
 	{
 		/// <summary>
-		/// männlich (0)
+		/// mï¿½nnlich (0)
 		/// </summary>
 		MAN,
 		/// <summary>
@@ -27,18 +27,19 @@ namespace ContactManager {
 
 
 	class Person {
+		
 	protected:
 		string lastname;
 		string firstname;
 		GenderType gender;
-		uint32_t age;
+		uint8_t age;
 		uint8_t postcode;
 		string place;
 		string street;
-		uint32_t housenumber;
+		uint8_t housenumber;
 		uint8_t prefix;
 		uint8_t phonenumber;
-		
+
 		static uint32_t countPersons;
 
 
@@ -51,6 +52,6 @@ namespace ContactManager {
 
 		stringstream printAllPersons();
 	};
-	
+
 }
 #endif
