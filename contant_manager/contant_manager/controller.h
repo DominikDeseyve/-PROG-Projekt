@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string>
-#include <list>
+#include <vector>
 
 #include "person.h"
 
@@ -14,24 +14,26 @@ namespace ContactManager {
 	class Controller {
 	
 	private:
-		int menu_number;
 		bool sys_status = true;
-		list<Person> person;
+		vector<Person> person;
 
 	public:
-
 		Controller();
 
-		void printMenu(int& menu_number);
-		void actionHandler(bool& sys_status);
-		void loadContacts();
+		void actionHandler(int number);
 
-		/// <summary>Speichert alle Kontakte ab</summary>
-		/// <param name="value">Noch keinen</param>
-		/// <returns>Gibt den Status zurück ob der Speichervorgang erfolgreich abgeschlossen wurde</returns>
-		void saveContacts();
+		void loadContacts(vector<Person>& person);
+		void saveContacts(vector<Person>& person);
 
-		void printContacts();
+		void printMenu();
+		void printContacts(vector<Person>& person);
+		void printSingleContact(vector<Person>& person);
+
+		void createContact(vector<Person>& person);
+		void editContact(vector<Person>& person);
+		void deleteContact(vector<Person>& person);
+
+		void exitProgram(vector<Person>& person);
 	};
 }
 #endif

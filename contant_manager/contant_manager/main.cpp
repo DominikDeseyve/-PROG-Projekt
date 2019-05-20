@@ -4,6 +4,7 @@
 #include "controller.h"
 #include "person.h"
 
+
 using namespace std;
 using namespace ContactManager;
 
@@ -22,4 +23,3 @@ template <class T>
 inline T Methodenname(const T &a, const T &b) {
 	return a * b;
 }
-

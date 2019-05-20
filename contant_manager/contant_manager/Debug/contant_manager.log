@@ -1,3 +1,5 @@
 ﻿  controller.cpp
-controller.obj : error LNK2019: Verweis auf nicht aufgelöstes externes Symbol ""public: void __thiscall ContactManager::Controller::actionHandler(bool &)" (?actionHandler@Controller@ContactManager@@QAEXAA_N@Z)" in Funktion ""public: __thiscall ContactManager::Controller::Controller(void)" (??0Controller@ContactManager@@QAE@XZ)".
-D:\CLOUD\➔ DHBW\Semester_2\Scribble\Programmieren\project\contant_manager\Debug\contant_manager.exe : fatal error LNK1120: 1 nicht aufgelöste Externe
+C:\Users\Robin\Documents\GitHub\-PROG-Projekt\contant_manager\contant_manager\controller.cpp(151): warning C4018: "<": Konflikt zwischen "signed" und "unsigned"
+  person.cpp
+  Code wird generiert...
+  contant_manager.vcxproj -> C:\Users\Robin\Documents\GitHub\-PROG-Projekt\contant_manager\Debug\contant_manager.exe
