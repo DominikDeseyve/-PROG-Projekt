@@ -25,6 +25,8 @@ Controller::Controller(){
 /********************************************************************/
 /************		Kontakte laden und speichern		*************/
 /********************************************************************/
+
+// Kontakte aus CSV-Datei laden
 void Controller::loadContacts(vector<Person>& person) {
 	ifstream file;
 	string lastname, firstname, helpPostcode, place, street, helpHousenumber, helpAge, helpPhonenumber, helpPrefix, helpGender;
@@ -78,6 +80,7 @@ void Controller::loadContacts(vector<Person>& person) {
 	}
 }
 
+// Kontakte in CSV-Datei speichern
 void Controller::saveContacts(vector<Person>& person) {
 	//lokale Variablen
 	ofstream file;
@@ -104,6 +107,8 @@ void Controller::saveContacts(vector<Person>& person) {
 /********************************************************************/
 /************		Actionhandler						*************/
 /********************************************************************/
+
+// Handler für die einzelnen Funktionen
 void Controller::actionHandler(int number) {
 	
 	switch (number)
@@ -123,6 +128,7 @@ void Controller::actionHandler(int number) {
 /************		Printfunktionen						*************/
 /********************************************************************/
 
+// Menue ausgeben
 void Controller::printMenu() {
 	//Ausgabe des Menues
 	cout << endl << "++++++ MAIN - MENUE ++++++";
@@ -146,6 +152,7 @@ void Controller::printMenu() {
 	actionHandler(menu_number);
 }
 
+// Alle Kontakte anzeigen
 void Controller::printContacts(vector<Person>& person) {
 	cout << endl << "Alle Kontakte: ";
 	cout << endl << "------------------------------------" << endl;
@@ -167,6 +174,7 @@ void Controller::printContacts(vector<Person>& person) {
 	printMenu();
 }
 
+// Einzelnen Kontakt anzeigen
 void Controller::printSingleContact(vector<Person>& person) {
 	cout << endl << "Einen Kontakt auflisten";
 	cout << endl << "------------------------------------" << endl;
@@ -188,6 +196,8 @@ void Controller::printSingleContact(vector<Person>& person) {
 /********************************************************************************/
 /************		Kontakte erstellen, bearbeiten und loeschen		*************/
 /********************************************************************************/
+
+// Kontakt erstellen
 void Controller::createContact(vector<Person>& person) {
 	cout << endl << "Einen Kontakt erstellen";
 	cout << endl << "------------------------------------" << endl;
@@ -233,6 +243,7 @@ void Controller::createContact(vector<Person>& person) {
 	printMenu();
 }
 
+// Kontakt bearbeiten
 void Controller::editContact(vector<Person>& person) {
 	cout << endl << "Einen Kontakt bearbeiten";
 	cout << endl << "------------------------------------" << endl;
@@ -297,6 +308,7 @@ void Controller::editContact(vector<Person>& person) {
 	printMenu();
 }
 
+//Kontakt loeschen
 void Controller::deleteContact(vector<Person>& person) {
 	cout << endl << "Einen Kontakt loeschen";
 	cout << endl << "------------------------------------" << endl;
@@ -305,7 +317,7 @@ void Controller::deleteContact(vector<Person>& person) {
 	cout << "Gib die Nummer ein, welche du loeschen moechtest: ";
 	cin >> tmp;
 
-	//person.erase(tmp - 1);
+	person.erase(person.begin() + (tmp-1));
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 
 	printMenu();
