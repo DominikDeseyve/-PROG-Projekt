@@ -58,15 +58,10 @@ void Controller::loadContacts(vector<Person>& person) {
 			housenumber = stoi(helpHousenumber);
 			phonenumber = stoi(helpPhonenumber);
 			prefix = stoi(helpPrefix);
-
-			switch (stoi(helpGender))
-			{
-			case 0: gender = GenderType::MAN; break;
-			case 1: gender = GenderType::WOMAN; break;
-			case 2: gender = GenderType::DIVERSE; break;
-			}
+			gender = Person::string_to_enum(helpGender);
 
 			//Person anlegen und Werte übergeben
+			
 			Person *person1 = new Person(lastname, firstname, gender, age, postcode, place, street, housenumber, prefix, phonenumber);
 			person.push_back(*person1);
 		}
@@ -163,10 +158,7 @@ void Controller::printContacts(vector<Person>& person) {
 
 	for (uint32_t i = 0; i < person.size(); i++)
 	{
-		int tmp = i + 1;
-		string ind = " " + to_string(tmp) + ".)";
-		cout << setw(5) << tmp << person[i].printAllPersons().str() << endl;
-		
+		cout << setw(5) << to_string(i+1)+".)" << person[i].printAllPersons().str() << endl;
 	}
 
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
@@ -263,10 +255,12 @@ void Controller::editContact(vector<Person>& person) {
 		case 0: 
 			cout << endl << "Gib den neuen Nachname ein: ";
 			cin >> tmp3; 
+			person[tmp-1].editPerson(tmp2, tmp3);
 			break;
 		case 1: 
 			cout << endl << "Gib den neuen Vorname ein: ";
 			cin >> tmp3;
+
 			break;
 		case 2:
 			cout << endl << "Gib das neue Geschlecht ein (Man = 0, Woman = 1, Diverse = 2): ";
@@ -325,7 +319,7 @@ void Controller::deleteContact(vector<Person>& person) {
 
 void Controller::exitProgram(vector<Person>& person) {
 	saveContacts(person);
-
+	
 	cout << endl << "------------------------------";
 	cout << endl << "Das Programm wird nun beendet!";
 	cout << endl << "------------------------------" << endl;

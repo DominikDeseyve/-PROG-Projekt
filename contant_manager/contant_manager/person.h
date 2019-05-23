@@ -51,9 +51,14 @@ namespace ContactManager {
 		stringstream csv_string();
 		stringstream last_csv_string();
 
+		void editPerson(int ind, string input);
+
 		stringstream printAllPersons();
 
 		stringstream printPerson();
+
+		static GenderType string_to_enum(string tmp);
+		static string enum_to_string();
 	};
 
 }

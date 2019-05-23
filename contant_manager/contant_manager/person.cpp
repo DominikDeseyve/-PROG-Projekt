@@ -46,6 +46,70 @@ stringstream Person::printPerson() {
 	return ss;
 }
 
+void Person::editPerson(int ind, string input) {
+	
+	switch (ind) {
+	case 0:
+		this->lastname = input;
+		break;
+	case 1:
+		this->firstname = input;
+		break;
+	case 2:
+		GenderType helpGender;
+
+		switch (stoi(input))
+		{
+			case 0: helpGender = GenderType::MAN; break;
+			case 1: helpGender = GenderType::WOMAN; break;
+			case 2: helpGender = GenderType::DIVERSE; break;
+		}
+
+		this->gender = helpGender;
+		break;
+	case 3:
+		this->age = stoi(input);
+		break;
+	case 4:
+		this->postcode = stoi(input);
+		break;
+	case 5:
+		this->place = input;
+		break;
+	case 6:
+		this->street = input;
+		break;
+	case 7:
+		this->housenumber = stoi(input);
+		break;
+	case 8:
+		this->prefix = stoi(input);
+		break;
+	case 9:
+		this->phonenumber = stoi(input);
+		break;
+	default: cout << endl << "Die eingegebene Nummer war falsch!" << endl; break;
+	}
+}
+
+string enum_to_string() {
+	
+	return 0;
+}
+
+static GenderType string_to_enum(string tmp) {
+	GenderType gender;
+
+	switch (stoi(tmp))
+	{
+		case 0: gender = GenderType::MAN; break;
+		case 1: gender = GenderType::WOMAN; break;
+		case 2: gender = GenderType::DIVERSE; break;
+		default: gender = GenderType::DIVERSE; break;
+	}
+	return gender;
+}
+
 ostream& ContactManager::operator<<(ostream& os, const Person& pPerson)
 {
 	string line = pPerson.firstname;

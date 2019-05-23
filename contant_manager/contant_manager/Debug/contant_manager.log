@@ -1,2 +1,6 @@
 ﻿  controller.cpp
-  contant_manager.vcxproj -> C:\Users\Robin\Documents\GitHub\-PROG-Projekt\contant_manager\Debug\contant_manager.exe
+  main.cpp
+  person.cpp
+  Code wird generiert...
+controller.obj : error LNK2019: Verweis auf nicht aufgelöstes externes Symbol ""public: static enum ContactManager::GenderType __cdecl ContactManager::Person::string_to_enum(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?string_to_enum@Person@ContactManager@@SA?AW4GenderType@2@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)" in Funktion ""public: void __thiscall ContactManager::Controller::loadContacts(class std::vector<class ContactManager::Person,class std::allocator<class ContactManager::Person> > &)" (?loadContacts@Controller@ContactManager@@QAEXAAV?$vector@VPerson@ContactManager@@V?$allocator@VPerson@ContactManager@@@std@@@std@@@Z)".
+C:\Users\Robin\Documents\GitHub\-PROG-Projekt\contant_manager\Debug\contant_manager.exe : fatal error LNK1120: 1 nicht aufgelöste Externe
