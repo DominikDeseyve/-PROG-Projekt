@@ -18,7 +18,6 @@ using namespace ContactManager;
 /********************************************************************/
 Controller::Controller(){
 	loadContacts(person);
-	
 	printMenu();
 }
 
@@ -107,15 +106,17 @@ void Controller::actionHandler(int number) {
 	
 	switch (number)
 	{
-	case 0: printMenu(); break;
-	case 1: printContacts(person); break;
-	case 2: printSingleContact(person); break;
-	case 3: createContact(person); break;
-	case 4: editContact(person); break;
-	case 5: deleteContact(person); break;
-	case 6: sortContacts(person); break;
-	case 7: exitProgram(person); break;
-	default: cout << endl << "Die eingegebene Nummer war falsch!" << endl; break;
+		case 0: printMenu(); break;
+		case 1: printContacts(person); 
+			printMenu(); 
+			break;
+		case 2: printSingleContact(person); break;
+		case 3: createContact(person); break;
+		case 4: editContact(person); break;
+		case 5: deleteContact(person); break;
+		case 6: sortContacts(person); break;
+		case 7: exitProgram(person); break;
+		default: cout << endl << "Die eingegebene Nummer war falsch!" << endl; break;
 	}
 }
 
@@ -126,7 +127,8 @@ void Controller::actionHandler(int number) {
 // Menue ausgeben
 void Controller::printMenu() {
 	//Ausgabe des Menues
-	cout << endl << "++++++ MAIN - MENUE ++++++";
+	system("COLOR 3");
+	cout << endl << endl << "+++++++     MAIN - MENUE      ++++++";
 	cout << endl << "------------------------------------" << endl;
 	cout << " | 0 | Main Menue anzeigen" << endl;
 	cout << " | 1 | Alle Kontakte auflisten" << endl;
@@ -150,6 +152,8 @@ void Controller::printMenu() {
 
 // Alle Kontakte anzeigen
 void Controller::printContacts(vector<Person>& person) {
+	system("CLS");
+	
 	cout << endl << "Alle Kontakte: ";
 	cout << endl << "------------------------------------" << endl;
 
@@ -163,12 +167,13 @@ void Controller::printContacts(vector<Person>& person) {
 	}
 
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
-
-	printMenu();
 }
 
 // Einzelnen Kontakt anzeigen
 void Controller::printSingleContact(vector<Person>& person) {
+	system("CLS");
+	printContacts(person);
+	
 	cout << endl << "Einen Kontakt auflisten";
 	cout << endl << "------------------------------------" << endl;
 
@@ -182,7 +187,6 @@ void Controller::printSingleContact(vector<Person>& person) {
 	cout << person[tmp-1].printPerson().str();
 	
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
-
 	printMenu();
 }
 
@@ -192,19 +196,20 @@ void Controller::printSingleContact(vector<Person>& person) {
 
 // Kontakt erstellen
 void Controller::createContact(vector<Person>& person) {
+	system("CLS");
+
 	cout << endl << "Einen Kontakt erstellen";
 	cout << endl << "------------------------------------" << endl;
 
-	string lastname, firstname, place, street, helpGender;
+	string lastname, firstname, place, street, gender;
 	uint32_t age, housenumber, prefix, phonenumber, postcode;
-	GenderType gender;
 
 	cout << "Gib deinen Nachnamen ein: ";
 	cin >> lastname;
 	cout << endl << "Gib deinen Vornamen ein: ";
 	cin >> firstname;
 	cout << endl << "Gib dein Geschlecht ein (Man = 0, Woman = 1, Diverse = 2): ";
-	cin >> helpGender;
+	cin >> gender;
 	cout << endl << "Gib dein Alter ein: ";
 	cin >> age;
 	cout << endl << "Gib deine Postleitzahl ein: ";
@@ -220,24 +225,20 @@ void Controller::createContact(vector<Person>& person) {
 	cout << endl << "Gib deine Telefonnummer ein: ";
 	cin >> phonenumber;
 
-	switch (stoi(helpGender))
-	{
-		case 0: gender = GenderType::MAN; break;
-		case 1: gender = GenderType::WOMAN; break;
-		case 2: gender = GenderType::DIVERSE; break;
-	}
 
 	//Person anlegen und Werte übergeben
-	Person* person1 = new Person(lastname, firstname, gender, age, postcode, place, street, housenumber, prefix, phonenumber);
+	Person* person1 = new Person(lastname, firstname, Person::string_to_enum(gender), age, postcode, place, street, housenumber, prefix, phonenumber);
 	person.push_back(*person1);
 
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
-
 	printMenu();
 }
 
 // Kontakt bearbeiten
 void Controller::editContact(vector<Person>& person) {
+	system("CLS");
+	printContacts(person);
+	
 	cout << endl << "Einen Kontakt bearbeiten";
 	cout << endl << "------------------------------------" << endl;
 
@@ -299,12 +300,14 @@ void Controller::editContact(vector<Person>& person) {
 	person[tmp - 1].editPerson(tmp2, tmp3);
 
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
-
 	printMenu();
 }
 
 //Kontakt loeschen
 void Controller::deleteContact(vector<Person>& person) {
+	system("CLS");
+	printContacts(person);
+	
 	cout << endl << "Einen Kontakt loeschen";
 	cout << endl << "------------------------------------" << endl;
 	
@@ -313,23 +316,31 @@ void Controller::deleteContact(vector<Person>& person) {
 	cin >> tmp;
 
 	person.erase(person.begin() + (tmp-1));
-	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 
+	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 	printMenu();
 }
 
 //Kontakte sortieren
 void Controller::sortContacts(vector<Person>& person) {
+	system("CLS");
+
 	cout << endl << "Kontakte sortieren";
 	cout << endl << "------------------------------------" << endl;
 
 
+	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
+	printMenu();
 }
 
+/********************************************************************************/
+/************		Programm beenden und Kontakte speichern			*************/
+/********************************************************************************/
 void Controller::exitProgram(vector<Person>& person) {
+	system("CLS");
 	saveContacts(person);
 	
-	cout << endl << "------------------------------";
-	cout << endl << "Das Programm wird nun beendet!";
-	cout << endl << "------------------------------" << endl;
+	cout << endl << "------------------------------------------------------------";
+	cout << endl << "-------------- Das Programm wird nun beendet! --------------";
+	cout << endl << "------------------------------------------------------------" << endl;
 }

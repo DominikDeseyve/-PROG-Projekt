@@ -12,7 +12,9 @@ uint32_t Person::countPersons = { 0 };
 
 int main()
 {
-   cout << "------------ ADRESSBUCH ------------" << endl; 
+	cout << endl << "------------------------------------";
+	cout << endl << "+++++++     Adressbuch!      +++++++";
+	cout << endl << "------------------------------------" << endl;
 
 	Controller *controller = new Controller();
 
