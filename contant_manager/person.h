@@ -29,8 +29,8 @@ namespace ContactManager {
 	class Person {
 
 	protected:
-		string lastname;
 		string firstname;
+		string lastname;
 		GenderType gender;
 		uint32_t age;
 		uint32_t postcode;
@@ -40,13 +40,13 @@ namespace ContactManager {
 		uint32_t prefix;
 		uint32_t phonenumber;
 
-		static uint32_t countPersons;
+		//static uint32_t countPersons;
 
 
 	public:
-		Person(string pLastname, string pFirstname, GenderType pGender, uint32_t pAge, uint32_t pPostcode, string pPlace, string pStreet, uint32_t pHousenumber, uint32_t pPrefix, uint32_t pPhonenumber);
+		Person(string pFirstname, string pLastname, GenderType pGender, uint32_t pAge, uint32_t pPostcode, string pPlace, string pStreet, uint32_t pHousenumber, uint32_t pPrefix, uint32_t pPhonenumber);
 
-		friend ostream& operator<< (ostream& os, const Person& pPerson);
+		//friend ostream& operator<< (ostream& os, const Person& pPerson);
 
 		stringstream csv_string();
 		stringstream last_csv_string();

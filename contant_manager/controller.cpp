@@ -28,7 +28,7 @@ Controller::Controller(){
 // Kontakte aus CSV-Datei laden
 void Controller::loadContacts(vector<Person>& person) {
 	ifstream file;
-	string lastname, firstname, helpPostcode, place, street, helpHousenumber, helpAge, helpPhonenumber, helpPrefix, helpGender;
+	string firstname, lastname, helpPostcode, place, street, helpHousenumber, helpAge, helpPhonenumber, helpPrefix, helpGender;
 	uint32_t age, housenumber, prefix, phonenumber, postcode;
 	GenderType gender = GenderType::DIVERSE;
 
@@ -40,8 +40,8 @@ void Controller::loadContacts(vector<Person>& person) {
 	if (file) {
 		//jede Zeile auslesen
 		while (!file.eof()) {
-			getline(file, lastname, token);
 			getline(file, firstname, token);
+			getline(file, lastname, token);
 			getline(file, helpGender, token);
 			getline(file, helpAge, token);
 			getline(file, helpPostcode, token);
@@ -61,7 +61,7 @@ void Controller::loadContacts(vector<Person>& person) {
 
 			//Person anlegen und Werte übergeben
 			
-			Person *person1 = new Person(lastname, firstname, gender, age, postcode, place, street, housenumber, prefix, phonenumber);
+			Person *person1 = new Person(firstname, lastname, gender, age, postcode, place, street, housenumber, prefix, phonenumber);
 			person.push_back(*person1);
 		}
 
@@ -103,7 +103,7 @@ void Controller::saveContacts(vector<Person>& person) {
 
 // Handler für die einzelnen Funktionen
 void Controller::actionHandler(int number) {
-	
+
 	switch (number)
 	{
 		case 0: printMenu(); break;
@@ -127,8 +127,8 @@ void Controller::actionHandler(int number) {
 // Menue ausgeben
 void Controller::printMenu() {
 	//Ausgabe des Menues
-	system("COLOR 3");
-	cout << endl << endl << "+++++++     MAIN - MENUE      ++++++";
+	system("COLOR 7");
+	cout << endl << "+++++++     HAUPTMENUE       +++++++";
 	cout << endl << "------------------------------------" << endl;
 	cout << " | 0 | Main Menue anzeigen" << endl;
 	cout << " | 1 | Alle Kontakte auflisten" << endl;
@@ -158,7 +158,7 @@ void Controller::printContacts(vector<Person>& person) {
 	cout << endl << "------------------------------------" << endl;
 
 	//Ausgabe des Tabellenkopf
-	cout << setw(5) << " Nr." << setw(20) << "Nachname" << setw(20) << "Vorname" << setw(10) << "Alter" << setw(15) << "Ort" << endl;
+	cout << setw(5) << " Nr." << setw(20) << "Vorname" << setw(20) << "Nachname" << setw(10) << "Alter" << setw(15) << "Ort" << endl;
 	cout << "------------------------------------------------------------------------" << endl;
 
 	for (uint32_t i = 0; i < person.size(); i++)
@@ -201,13 +201,13 @@ void Controller::createContact(vector<Person>& person) {
 	cout << endl << "Einen Kontakt erstellen";
 	cout << endl << "------------------------------------" << endl;
 
-	string lastname, firstname, place, street, gender;
+	string firstname, lastname, place, street, gender;
 	uint32_t age, housenumber, prefix, phonenumber, postcode;
 
-	cout << "Gib deinen Nachnamen ein: ";
-	cin >> lastname;
 	cout << endl << "Gib deinen Vornamen ein: ";
 	cin >> firstname;
+	cout << "Gib deinen Nachnamen ein: ";
+	cin >> lastname;
 	cout << endl << "Gib dein Geschlecht ein (Man = 0, Woman = 1, Diverse = 2): ";
 	cin >> gender;
 	cout << endl << "Gib dein Alter ein: ";
@@ -227,9 +227,10 @@ void Controller::createContact(vector<Person>& person) {
 
 
 	//Person anlegen und Werte übergeben
-	Person* person1 = new Person(lastname, firstname, Person::string_to_enum(gender), age, postcode, place, street, housenumber, prefix, phonenumber);
+	Person* person1 = new Person(firstname, lastname, Person::string_to_enum(gender), age, postcode, place, street, housenumber, prefix, phonenumber);
 	person.push_back(*person1);
 
+	cout << endl << "Der Kontakt " << firstname + " " + lastname << " wurde erfolgreich erstellt!" << endl;
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 	printMenu();
 }
@@ -243,23 +244,23 @@ void Controller::editContact(vector<Person>& person) {
 	cout << endl << "------------------------------------" << endl;
 
 	int tmp;
-	cout << "Gib die Nummer ein, welche du bearbeiten moechtest: ";
+	cout << "Gib die Nummer des Kontakts ein, welchen du bearbeiten moechtest: ";
 	cin >> tmp;
 
 	int tmp2;
-	cout << endl << " 0.) Nachname" << endl << " 1.) Vorname" << endl << " 2.) Geschlecht" << endl << " 3.) Alter" << endl << " 4.) Postleitzahl" << endl << " 5.) Wohnort" << endl << " 6.) Strasse" << endl << " 7.) Hausnummer" << endl << " 8.) Vorwahl" << endl << " 9.) Telefonnummer" << endl;
-	cout << endl << "Gib die Nummer ein, welche du bearbeiten moechtest: ";
+	cout << endl << " 0.) Vorname" << endl << " 1.) Nachname" << endl << " 2.) Geschlecht" << endl << " 3.) Alter" << endl << " 4.) Postleitzahl" << endl << " 5.) Wohnort" << endl << " 6.) Strasse" << endl << " 7.) Hausnummer" << endl << " 8.) Vorwahl" << endl << " 9.) Telefonnummer" << endl;
+	cout << endl << "Gib die Nummer ein, die du bearbeiten moechtest: ";
 	cin >> tmp2;
 
 	string tmp3;
 
 	switch (tmp2) {
 		case 0: 
-			cout << endl << "Gib den neuen Nachname ein: ";
+			cout << endl << "Gib den neuen Vorname ein: ";
 			cin >> tmp3; 
 			break;
 		case 1: 
-			cout << endl << "Gib den neuen Vorname ein: ";
+			cout << endl << "Gib den neuen Nachname ein: ";
 			cin >> tmp3;
 			break;
 		case 2:
@@ -299,6 +300,7 @@ void Controller::editContact(vector<Person>& person) {
 
 	person[tmp - 1].editPerson(tmp2, tmp3);
 
+	cout << endl << "Der Kontakt " << tmp << " wurde erfolgreich bearbeitet!" << endl;
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 	printMenu();
 }
@@ -317,6 +319,7 @@ void Controller::deleteContact(vector<Person>& person) {
 
 	person.erase(person.begin() + (tmp-1));
 
+	cout << endl << "Der Kontakt " << tmp << " wurde erfolgreich geloescht!" << endl;
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 	printMenu();
 }
@@ -329,6 +332,8 @@ void Controller::sortContacts(vector<Person>& person) {
 	cout << endl << "------------------------------------" << endl;
 
 
+
+	cout << endl << "Die Kontaktliste wurde erfolgreich sortiert!" << endl;
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 	printMenu();
 }
@@ -344,3 +349,41 @@ void Controller::exitProgram(vector<Person>& person) {
 	cout << endl << "-------------- Das Programm wird nun beendet! --------------";
 	cout << endl << "------------------------------------------------------------" << endl;
 }
+
+
+//Quicksort
+/*
+void quickSort(int arr[], int left, int right) {
+	int i = left, j = right;
+	int tmp;
+	int pivot = arr[(left + right) / 2];
+
+	//Partition
+	while (i <= j) {
+		while (arr[i] < pivot) {
+			i++;
+		}
+
+		while (arr[j] > pivot) {
+			j--;
+		}
+
+		if (i <= j) {
+			tmp = arr[i];
+			arr[i] = arr[j];
+			arr[j] = tmp;
+			i++;
+			j--;
+		}
+	};
+
+	//Rekursion
+	if (left < j) {
+		quickSort(arr, left, j);
+	}
+
+	if (i < right) {
+		quickSort(arr, i, right);
+	}
+}
+*/

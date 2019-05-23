@@ -8,13 +8,13 @@
 using namespace std;
 using namespace ContactManager;
 
-uint32_t Person::countPersons = { 0 };
+//uint32_t Person::countPersons = { 0 };
 
 int main()
 {
 	cout << endl << "------------------------------------";
 	cout << endl << "+++++++     Adressbuch!      +++++++";
-	cout << endl << "------------------------------------" << endl;
+	cout << endl << "------------------------------------" << endl << endl;
 
 	Controller *controller = new Controller();
 

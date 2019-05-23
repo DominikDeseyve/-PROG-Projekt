@@ -9,9 +9,9 @@ using namespace std;
 using namespace ContactManager;
 
 
-Person::Person(string pLastname, string pFirstname, GenderType pGender, uint32_t pAge, uint32_t pPostcode, string pPlace, string pStreet, uint32_t pHousenumber, uint32_t pPrefix, uint32_t pPhonenumber) {
-	this->lastname = pLastname;
+Person::Person(string pFirstname, string pLastname, GenderType pGender, uint32_t pAge, uint32_t pPostcode, string pPlace, string pStreet, uint32_t pHousenumber, uint32_t pPrefix, uint32_t pPhonenumber) {
 	this->firstname = pFirstname;
+	this->lastname = pLastname;
 	this->gender = pGender;
 	this->age = pAge;
 	this->postcode = pPostcode;
@@ -24,25 +24,25 @@ Person::Person(string pLastname, string pFirstname, GenderType pGender, uint32_t
 
 stringstream Person::csv_string() {
 	stringstream ss;
-	ss << lastname << ';' << firstname << ';' << gender << ';' << age << ';' << postcode << ';' << place << ';' << street << ';' << housenumber << ';' << prefix << ';' << phonenumber << '\n';
+	ss << firstname << ';' << lastname << ';' << gender << ';' << age << ';' << postcode << ';' << place << ';' << street << ';' << housenumber << ';' << prefix << ';' << phonenumber << '\n';
 	return ss;
 }
 
 stringstream Person::last_csv_string() {
 	stringstream ss;
-	ss << lastname << ';' << firstname << ';' << gender << ';' << age << ';' << postcode << ';' << place << ';' << street << ';' << housenumber << ';' << prefix << ';' << phonenumber;
+	ss << firstname << ';' << lastname << ';' << gender << ';' << age << ';' << postcode << ';' << place << ';' << street << ';' << housenumber << ';' << prefix << ';' << phonenumber;
 	return ss;
 }
 
 stringstream Person::printAllPersons() {
 	stringstream ss;
-	ss << setw(20) << lastname << setw(20) << firstname << setw(10) << age << setw(15) << place;
+	ss << setw(20) << firstname << setw(20) << lastname << setw(10) << age << setw(15) << place;
 	return ss;
 }
 
 stringstream Person::printPerson() {
 	stringstream ss;
-	ss << endl << "Nachname: " << lastname << endl << "Vorname: " << firstname << endl << "Geschlecht: " << enum_to_string(gender) << endl << "Alter: " << age << endl << "Wohnort: " << postcode << " " << place << endl << "Strasse: " << street << " " << housenumber << endl << "Telefonnummer: " << prefix << "/" << phonenumber << endl;
+	ss << endl << "Vorname: " << firstname << endl << "Nachname: " << lastname << endl << "Geschlecht: " << enum_to_string(gender) << endl << "Alter: " << age << endl << "Wohnort: " << postcode << " " << place << endl << "Strasse: " << street << " " << housenumber << endl << "Telefonnummer: " << prefix << "/" << phonenumber << endl;
 	return ss;
 }
 
@@ -50,10 +50,10 @@ void Person::editPerson(int ind, string input) {
 
 	switch (ind) {
 	case 0:
-		this->lastname = input;
+		this->firstname = input;
 		break;
 	case 1:
-		this->firstname = input;
+		this->lastname = input;
 		break;
 	case 2:
 		this->gender = string_to_enum(input);
@@ -109,9 +109,12 @@ GenderType Person::string_to_enum(string tmp) {
 	return gender;
 }
 
+/*
+// Keine Ahnung, was die soll
 ostream& ContactManager::operator<<(ostream& os, const Person& pPerson)
 {
 	string line = pPerson.firstname;
 	os << line;
 	return os;
 }
+*/
