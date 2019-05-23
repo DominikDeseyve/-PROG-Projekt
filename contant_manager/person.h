@@ -57,8 +57,8 @@ namespace ContactManager {
 
 		stringstream printPerson();
 
-		static GenderType string_to_enum(string tmp);
-		static string enum_to_string();
+	static GenderType string_to_enum(string tmp);
+	static string enum_to_string(GenderType tmp);
 	};
 
 }

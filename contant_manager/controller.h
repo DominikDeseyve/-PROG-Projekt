@@ -32,6 +32,7 @@ namespace ContactManager {
 		void createContact(vector<Person>& person);
 		void editContact(vector<Person>& person);
 		void deleteContact(vector<Person>& person);
+		void sortContacts(vector<Person>& person);
 
 		void exitProgram(vector<Person>& person);
 	};

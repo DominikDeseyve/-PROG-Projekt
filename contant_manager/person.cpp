@@ -42,12 +42,12 @@ stringstream Person::printAllPersons() {
 
 stringstream Person::printPerson() {
 	stringstream ss;
-	ss << endl << "Nachname: " << lastname << endl << "Vorname: " << firstname << endl << "Geschlecht: " << gender << endl << "Alter: " << age << endl << "Wohnort: " << postcode << " " << place << endl << "Strasse: " << street << " " << housenumber << endl << "Telefonnummer: " << prefix << "/" << phonenumber << endl;
+	ss << endl << "Nachname: " << lastname << endl << "Vorname: " << firstname << endl << "Geschlecht: " << enum_to_string(gender) << endl << "Alter: " << age << endl << "Wohnort: " << postcode << " " << place << endl << "Strasse: " << street << " " << housenumber << endl << "Telefonnummer: " << prefix << "/" << phonenumber << endl;
 	return ss;
 }
 
 void Person::editPerson(int ind, string input) {
-	
+
 	switch (ind) {
 	case 0:
 		this->lastname = input;
@@ -56,16 +56,7 @@ void Person::editPerson(int ind, string input) {
 		this->firstname = input;
 		break;
 	case 2:
-		GenderType helpGender;
-
-		switch (stoi(input))
-		{
-			case 0: helpGender = GenderType::MAN; break;
-			case 1: helpGender = GenderType::WOMAN; break;
-			case 2: helpGender = GenderType::DIVERSE; break;
-		}
-
-		this->gender = helpGender;
+		this->gender = string_to_enum(input);
 		break;
 	case 3:
 		this->age = stoi(input);
@@ -92,12 +83,20 @@ void Person::editPerson(int ind, string input) {
 	}
 }
 
-string enum_to_string() {
+string Person::enum_to_string(GenderType tmp) {
 	
-	return 0;
+	string gender;
+	
+	switch (tmp){
+		case MAN: gender = "maennlich"; break;
+		case WOMAN: gender = "weiblich"; break;
+		case DIVERSE: gender = "divers"; break;
+		default: gender = "divers"; break;
+	}
+	return gender;
 }
 
-static GenderType string_to_enum(string tmp) {
+GenderType Person::string_to_enum(string tmp) {
 	GenderType gender;
 
 	switch (stoi(tmp))
