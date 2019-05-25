@@ -5,6 +5,7 @@
 #include <iostream>
 #include <istream>
 #include <iomanip>
+#include <Windows.h>
 
 #include "controller.h"
 #include "person.h"
@@ -70,7 +71,7 @@ void Controller::loadContacts(vector<Person>& person) {
 	} 
 	else {
 		//CSV-Datei konnte nicht ausgelesen werden
-		cout << "Datei kann nicht geladen werden!" << endl;
+		cout << "  Datei kann nicht geladen werden!" << endl;
 	}
 }
 
@@ -106,7 +107,9 @@ void Controller::actionHandler(int number) {
 
 	switch (number)
 	{
-		case 0: printMenu(); break;
+		case 0: system("CLS"); 
+			printMenu(); 
+			break;
 		case 1: printContacts(person); 
 			printMenu(); 
 			break;
@@ -116,7 +119,7 @@ void Controller::actionHandler(int number) {
 		case 5: deleteContact(person); break;
 		case 6: sortContacts(person); break;
 		case 7: exitProgram(person); break;
-		default: cout << endl << "Die eingegebene Nummer war falsch!" << endl; break;
+		default: cout << endl << "  Die eingegebene Nummer war falsch!" << endl; break;
 	}
 }
 
@@ -127,21 +130,22 @@ void Controller::actionHandler(int number) {
 // Menue ausgeben
 void Controller::printMenu() {
 	//Ausgabe des Menues
-	system("COLOR 7");
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
 	cout << endl << "+++++++     HAUPTMENUE       +++++++";
 	cout << endl << "------------------------------------" << endl;
-	cout << " | 0 | Main Menue anzeigen" << endl;
-	cout << " | 1 | Alle Kontakte auflisten" << endl;
-	cout << " | 2 | Einen Kontakt auflisten" << endl;
-	cout << " | 3 | Kontakt erstellen" << endl;
-	cout << " | 4 | Kontakt bearbeiten" << endl;
-	cout << " | 5 | Kontakt loeschen" << endl;
-	cout << " | 6 | Kontakte sortieren" << endl;
-	cout << " | 7 | Programm speichern und beenden" << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+	cout << "  | 0 | Main Menue anzeigen" << endl;
+	cout << "  | 1 | Alle Kontakte auflisten" << endl;
+	cout << "  | 2 | Einen Kontakt auflisten" << endl;
+	cout << "  | 3 | Kontakt erstellen" << endl;
+	cout << "  | 4 | Kontakt bearbeiten" << endl;
+	cout << "  | 5 | Kontakt loeschen" << endl;
+	cout << "  | 6 | Kontakte sortieren" << endl;
+	cout << "  | 7 | Programm speichern und beenden" << endl;
 
 	//Eingabe der entsprechenden Nummer
 	int menu_number;
-	cout << endl << "Gib deine Nummer ein: ";
+	cout << endl << "  Gib deine Nummer ein: ";
 	cin >> menu_number;
 
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
@@ -154,8 +158,10 @@ void Controller::printMenu() {
 void Controller::printContacts(vector<Person>& person) {
 	system("CLS");
 	
-	cout << endl << "Alle Kontakte: ";
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+	cout << endl << "  Alle Kontakte: ";
 	cout << endl << "------------------------------------" << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 
 	//Ausgabe des Tabellenkopf
 	cout << setw(5) << " Nr." << setw(20) << "Vorname" << setw(20) << "Nachname" << setw(10) << "Alter" << setw(15) << "Ort" << endl;
@@ -174,15 +180,19 @@ void Controller::printSingleContact(vector<Person>& person) {
 	system("CLS");
 	printContacts(person);
 	
-	cout << endl << "Einen Kontakt auflisten";
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+	cout << endl << "  Einen Kontakt auflisten";
 	cout << endl << "------------------------------------" << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 
 	int tmp;
-	cout << "Gib die Nummer des gewuenschten Kontakts ein: ";
+	cout << "  Gib die Nummer des gewuenschten Kontakts ein: ";
 	cin >> tmp;
 
-	cout << endl << "Ausgabe des Kontakt " << tmp;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 13);
+	cout << endl << "  Ausgabe des Kontakt " << tmp;
 	cout << endl << "------------------------------";
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 
 	cout << person[tmp-1].printPerson().str();
 	
@@ -198,31 +208,33 @@ void Controller::printSingleContact(vector<Person>& person) {
 void Controller::createContact(vector<Person>& person) {
 	system("CLS");
 
-	cout << endl << "Einen Kontakt erstellen";
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+	cout << endl << "  Einen Kontakt erstellen";
 	cout << endl << "------------------------------------" << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 
 	string firstname, lastname, place, street, gender;
 	uint32_t age, housenumber, prefix, phonenumber, postcode;
 
-	cout << endl << "Gib deinen Vornamen ein: ";
+	cout << "  Gib deinen Vornamen ein: ";
 	cin >> firstname;
-	cout << "Gib deinen Nachnamen ein: ";
+	cout << endl << "  Gib deinen Nachnamen ein: ";
 	cin >> lastname;
-	cout << endl << "Gib dein Geschlecht ein (Man = 0, Woman = 1, Diverse = 2): ";
+	cout << endl << "  Gib dein Geschlecht ein (Man = 0, Woman = 1, Diverse = 2): ";
 	cin >> gender;
-	cout << endl << "Gib dein Alter ein: ";
+	cout << endl << "  Gib dein Alter ein: ";
 	cin >> age;
-	cout << endl << "Gib deine Postleitzahl ein: ";
+	cout << endl << "  Gib deine Postleitzahl ein: ";
 	cin >> postcode;
-	cout << endl << "Gib deinen Wohnort ein: ";
+	cout << endl << "  Gib deinen Wohnort ein: ";
 	cin >> place;
-	cout << endl << "Gib deine Strasse ein: ";
+	cout << endl << "  Gib deine Strasse ein: ";
 	cin >> street;
-	cout << endl << "Gib deine Hausnummer ein: ";
+	cout << endl << "  Gib deine Hausnummer ein: ";
 	cin >> housenumber;
-	cout << endl << "Gib deine Vorwahl ein: ";
+	cout << endl << "  Gib deine Vorwahl ein: ";
 	cin >> prefix;
-	cout << endl << "Gib deine Telefonnummer ein: ";
+	cout << endl << "  Gib deine Telefonnummer ein: ";
 	cin >> phonenumber;
 
 
@@ -230,7 +242,9 @@ void Controller::createContact(vector<Person>& person) {
 	Person* person1 = new Person(firstname, lastname, Person::string_to_enum(gender), age, postcode, place, street, housenumber, prefix, phonenumber);
 	person.push_back(*person1);
 
-	cout << endl << "Der Kontakt " << firstname + " " + lastname << " wurde erfolgreich erstellt!" << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
+	cout << endl << "  Der Kontakt " << firstname + " " + lastname << " wurde erfolgreich erstellt!" << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 	printMenu();
 }
@@ -240,67 +254,71 @@ void Controller::editContact(vector<Person>& person) {
 	system("CLS");
 	printContacts(person);
 	
-	cout << endl << "Einen Kontakt bearbeiten";
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+	cout << endl << "  Einen Kontakt bearbeiten";
 	cout << endl << "------------------------------------" << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 
 	int tmp;
-	cout << "Gib die Nummer des Kontakts ein, welchen du bearbeiten moechtest: ";
+	cout << "  Gib die Nummer des Kontakts ein, welchen du bearbeiten moechtest: ";
 	cin >> tmp;
 
 	int tmp2;
-	cout << endl << " 0.) Vorname" << endl << " 1.) Nachname" << endl << " 2.) Geschlecht" << endl << " 3.) Alter" << endl << " 4.) Postleitzahl" << endl << " 5.) Wohnort" << endl << " 6.) Strasse" << endl << " 7.) Hausnummer" << endl << " 8.) Vorwahl" << endl << " 9.) Telefonnummer" << endl;
-	cout << endl << "Gib die Nummer ein, die du bearbeiten moechtest: ";
+	cout << endl << "  0.) Vorname" << endl << "  1.) Nachname" << endl << "  2.) Geschlecht" << endl << "  3.) Alter" << endl << "  4.) Postleitzahl" << endl << "  5.) Wohnort" << endl << "  6.) Strasse" << endl << "  7.) Hausnummer" << endl << "  8.) Vorwahl" << endl << "  9.) Telefonnummer" << endl;
+	cout << endl << "  Gib die Nummer ein, die du bearbeiten moechtest: ";
 	cin >> tmp2;
 
 	string tmp3;
 
 	switch (tmp2) {
 		case 0: 
-			cout << endl << "Gib den neuen Vorname ein: ";
+			cout << endl << "  Gib den neuen Vorname ein: ";
 			cin >> tmp3; 
 			break;
 		case 1: 
-			cout << endl << "Gib den neuen Nachname ein: ";
+			cout << endl << "  Gib den neuen Nachname ein: ";
 			cin >> tmp3;
 			break;
 		case 2:
-			cout << endl << "Gib das neue Geschlecht ein (Man = 0, Woman = 1, Diverse = 2): ";
+			cout << endl << "  Gib das neue Geschlecht ein (Man = 0, Woman = 1, Diverse = 2): ";
 			cin >> tmp3;
 			break;
 		case 3: 
-			cout << endl << "Gib das neue Alter ein: ";
+			cout << endl << "  Gib das neue Alter ein: ";
 			cin >> tmp3;
 			break;
 		case 4: 
-			cout << endl << "Gib die neue Postleitzahl ein: ";
+			cout << endl << "  Gib die neue Postleitzahl ein: ";
 			cin >> tmp3;
 			break;
 		case 5: 
-			cout << endl << "Gib den neuen Wohnort ein: ";
+			cout << endl << "  Gib den neuen Wohnort ein: ";
 			cin >> tmp3;
 			break;
 		case 6: 
-			cout << endl << "Gib die neue Strasse ein: ";
+			cout << endl << "  Gib die neue Strasse ein: ";
 			cin >> tmp3;
 			break;
 		case 7: 
-			cout << endl << "Gib die neue Hausnummer ein: ";
+			cout << endl << "  Gib die neue Hausnummer ein: ";
 			cin >> tmp3;
 			break;
 		case 8:
-			cout << endl << "Gib die neue Vorwahl ein: ";
+			cout << endl << "  Gib die neue Vorwahl ein: ";
 			cin >> tmp3;
 			break;
 		case 9: 
-			cout << endl << "Gib die neue Telefonnummer ein: ";
+			cout << endl << "  Gib die neue Telefonnummer ein: ";
 			cin >> tmp3;
 			break;
-		default: cout << endl << "Die eingegebene Nummer war falsch!" << endl; break;
+		default: cout << endl << "  Die eingegebene Nummer war falsch!" << endl; break;
 	}
 
 	person[tmp - 1].editPerson(tmp2, tmp3);
 
-	cout << endl << "Der Kontakt " << tmp << " wurde erfolgreich bearbeitet!" << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
+	cout << endl << "  Der Kontakt " << tmp << " wurde erfolgreich bearbeitet!" << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 	printMenu();
 }
@@ -310,16 +328,20 @@ void Controller::deleteContact(vector<Person>& person) {
 	system("CLS");
 	printContacts(person);
 	
-	cout << endl << "Einen Kontakt loeschen";
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+	cout << endl << "  Einen Kontakt loeschen";
 	cout << endl << "------------------------------------" << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 	
 	int tmp;
-	cout << "Gib die Nummer ein, welche du loeschen moechtest: ";
+	cout << "  Gib die Nummer ein, welche du loeschen moechtest: ";
 	cin >> tmp;
 
 	person.erase(person.begin() + (tmp-1));
 
-	cout << endl << "Der Kontakt " << tmp << " wurde erfolgreich geloescht!" << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
+	cout << endl << "  Der Kontakt " << tmp << " wurde erfolgreich geloescht!" << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 	printMenu();
 }
@@ -328,12 +350,33 @@ void Controller::deleteContact(vector<Person>& person) {
 void Controller::sortContacts(vector<Person>& person) {
 	system("CLS");
 
-	cout << endl << "Kontakte sortieren";
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
+	cout << endl << "  Kontakte sortieren";
 	cout << endl << "------------------------------------" << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+
+	int tmp;
+	cout << "  0.) Vorname" << endl << "  1.) Nachname" << endl << "  2.) Alter" << endl << "  3.) Wohnort" << endl;
+	cout << endl << "  Gib die Nummer ein, nach der du aufsteigend sortieren moechtest: ";
+	cin >> tmp;
+
+	switch (tmp) {
+		case 0: //...;
+			break;
+		case 1: //...;
+			break;
+		case 2: //...;
+			break;
+		case 3: //...;
+			break;
+		default: cout << endl << "  Die eingegebene Nummer war falsch!" << endl; break;
+	}
 
 
 
-	cout << endl << "Die Kontaktliste wurde erfolgreich sortiert!" << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
+	cout << endl << "  Die Kontaktliste wurde erfolgreich sortiert!" << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 	printMenu();
 }
@@ -341,13 +384,16 @@ void Controller::sortContacts(vector<Person>& person) {
 /********************************************************************************/
 /************		Programm beenden und Kontakte speichern			*************/
 /********************************************************************************/
+
 void Controller::exitProgram(vector<Person>& person) {
 	system("CLS");
 	saveContacts(person);
 	
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
 	cout << endl << "------------------------------------------------------------";
 	cout << endl << "-------------- Das Programm wird nun beendet! --------------";
 	cout << endl << "------------------------------------------------------------" << endl;
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 }
 
 

@@ -42,7 +42,7 @@ stringstream Person::printAllPersons() {
 
 stringstream Person::printPerson() {
 	stringstream ss;
-	ss << endl << "Vorname: " << firstname << endl << "Nachname: " << lastname << endl << "Geschlecht: " << enum_to_string(gender) << endl << "Alter: " << age << endl << "Wohnort: " << postcode << " " << place << endl << "Strasse: " << street << " " << housenumber << endl << "Telefonnummer: " << prefix << "/" << phonenumber << endl;
+	ss << endl << "  Vorname: " << firstname << endl << "  Nachname: " << lastname << endl << "  Geschlecht: " << enum_to_string(gender) << endl << "  Alter: " << age << endl << "  Wohnort: " << postcode << " " << place << endl << "  Strasse: " << street << " " << housenumber << endl << "  Telefonnummer: " << prefix << "/" << phonenumber << endl;
 	return ss;
 }
 
@@ -79,7 +79,7 @@ void Person::editPerson(int ind, string input) {
 	case 9:
 		this->phonenumber = stoi(input);
 		break;
-	default: cout << endl << "Die eingegebene Nummer war falsch!" << endl; break;
+	default: cout << endl << "  Die eingegebene Nummer war falsch!" << endl; break;
 	}
 }
 
