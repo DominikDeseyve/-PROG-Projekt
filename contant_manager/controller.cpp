@@ -372,7 +372,21 @@ void Controller::sortContacts(vector<Person>& person) {
 		default: cout << endl << "  Die eingegebene Nummer war falsch!" << endl; break;
 	}
 
-
+	/*
+	//Bubblesort
+	Person* tmp_person;
+	int length = person.size();
+	
+	for (uint32_t i = 1; i < person.size(); i++) {
+		for (uint32_t j = 0; j < person.size() - 1; j++) {
+			if (person[j].getAge < person[j + 1].getAge) {
+				tmp_person = &person[j];
+				person[j] = person[j + 1];
+				person[j + 1] = *tmp_person;
+			}
+		}
+	}
+	*/
 
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
 	cout << endl << "  Die Kontaktliste wurde erfolgreich sortiert!" << endl;
@@ -396,40 +410,41 @@ void Controller::exitProgram(vector<Person>& person) {
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
 }
 
-
-//Quicksort
 /*
-void quickSort(int arr[], int left, int right) {
-	int i = left, j = right;
+//Integers sortieren
+void BubbleSort(){
 	int tmp;
-	int pivot = arr[(left + right) / 2];
 
-	//Partition
-	while (i <= j) {
-		while (arr[i] < pivot) {
-			i++;
+	for (int i = 1; i < length ; i++)
+	{
+		for (int a = 0; a < length - i ; a++)
+		{
+			if (Lottozahlen[a] > Lottozahlen[a+1])
+			{
+				tmp = Lottozahlen[a];
+				Lottozahlen[a] = Lottozahlen[a+1];
+				Lottozahlen[a+1] = tmp;
+			}
 		}
-
-		while (arr[j] > pivot) {
-			j--;
-		}
-
-		if (i <= j) {
-			tmp = arr[i];
-			arr[i] = arr[j];
-			arr[j] = tmp;
-			i++;
-			j--;
-		}
-	};
-
-	//Rekursion
-	if (left < j) {
-		quickSort(arr, left, j);
 	}
+}
 
-	if (i < right) {
-		quickSort(arr, i, right);
+//Strings sortieren
+void bubblesort(vector <string>& vec)
+{
+	string tmp;
+	int n = vec.size();
+
+	for (int i = 1; i < n; i++)
+	{
+		for (int j = 0; j < n - i; j++)
+		{
+			if (vec[j + 1].compare(vec[j]) < 0) {
+				tmp = vec[j];
+				vec[j] = vec[j + 1];
+				vec[j + 1] = tmp;
+			}
+		}
 	}
 }
 */

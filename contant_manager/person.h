@@ -40,11 +40,19 @@ namespace ContactManager {
 		uint32_t prefix;
 		uint32_t phonenumber;
 
-		//static uint32_t countPersons;
-
 
 	public:
 		Person(string pFirstname, string pLastname, GenderType pGender, uint32_t pAge, uint32_t pPostcode, string pPlace, string pStreet, uint32_t pHousenumber, uint32_t pPrefix, uint32_t pPhonenumber);
+
+
+		//GETTER UND SETTER
+		uint32_t& getAge() {
+			return age;
+		}
+
+		void setAge(uint32_t& age) {
+			this->age = age;
+		}
 
 		//friend ostream& operator<< (ostream& os, const Person& pPerson);
 
@@ -57,8 +65,8 @@ namespace ContactManager {
 
 		stringstream printPerson();
 
-	static GenderType string_to_enum(string tmp);
-	static string enum_to_string(GenderType tmp);
+		static GenderType string_to_enum(string tmp);
+		static string enum_to_string(GenderType tmp);
 	};
 
 }

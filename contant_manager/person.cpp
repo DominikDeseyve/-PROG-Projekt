@@ -22,6 +22,7 @@ Person::Person(string pFirstname, string pLastname, GenderType pGender, uint32_t
 	this->phonenumber = pPhonenumber;
 }
 
+
 stringstream Person::csv_string() {
 	stringstream ss;
 	ss << firstname << ';' << lastname << ';' << gender << ';' << age << ';' << postcode << ';' << place << ';' << street << ';' << housenumber << ';' << prefix << ';' << phonenumber << '\n';
@@ -107,6 +108,22 @@ GenderType Person::string_to_enum(string tmp) {
 		default: gender = GenderType::DIVERSE; break;
 	}
 	return gender;
+}
+
+void age_sort() {
+	
+}
+
+void firstname_sort() {
+
+}
+
+void lastname_sort() {
+
+}
+
+void place_sort() {
+
 }
 
 /*

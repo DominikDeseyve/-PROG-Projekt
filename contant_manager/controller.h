@@ -14,7 +14,6 @@ namespace ContactManager {
 	class Controller {
 	
 	private:
-		bool sys_status = true;
 		vector<Person> person;
 
 	public:
