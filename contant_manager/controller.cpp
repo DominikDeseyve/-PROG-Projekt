@@ -106,7 +106,7 @@ void Controller::actionHandler(int number) {
 
 	switch (number)
 	{
-		case 0: system("CLS"); 
+		case 0: system("clear"); 
 			printMenu(); 
 			break;
 		case 1: printContacts(person); 
@@ -158,7 +158,7 @@ void Controller::printMenu() {
 
 // Alle Kontakte anzeigen
 void Controller::printContacts(vector<Person>& person) {
-	system("CLS");
+	system("clear");
 	
 	cout << endl << "\x1B[0;36m" << "  Alle Kontakte: ";
 	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl;
@@ -177,7 +177,7 @@ void Controller::printContacts(vector<Person>& person) {
 
 // Einzelnen Kontakt anzeigen
 void Controller::printSingleContact(vector<Person>& person) {
-	system("CLS");
+	system("clear");
 	printContacts(person);
 	
 	cout << endl << "\x1B[0;36m" << "  Einen Kontakt auflisten";
@@ -202,7 +202,7 @@ void Controller::printSingleContact(vector<Person>& person) {
 
 // Kontakt erstellen
 void Controller::createContact(vector<Person>& person) {
-	system("CLS");
+	system("clear");
 
 	cout << endl << "\x1B[0;36m" << "  Einen Kontakt erstellen";
 	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl;
@@ -243,7 +243,7 @@ void Controller::createContact(vector<Person>& person) {
 
 // Kontakt bearbeiten
 void Controller::editContact(vector<Person>& person) {
-	system("CLS");
+	system("clear");
 	printContacts(person);
 	
 	cout << endl << "\x1B[0;36m" << "  Einen Kontakt bearbeiten";
@@ -313,7 +313,7 @@ void Controller::editContact(vector<Person>& person) {
 
 //Kontakt loeschen
 void Controller::deleteContact(vector<Person>& person) {
-	system("CLS");
+	system("clear");
 	printContacts(person);
 	
 	cout << endl << "\x1B[0;36m" << "  Einen Kontakt loeschen";
@@ -332,7 +332,7 @@ void Controller::deleteContact(vector<Person>& person) {
 
 //Kontakte sortieren
 void Controller::sortContacts(vector<Person>& person) {
-	system("CLS");
+	system("clear");
 
 	cout << endl << "\x1B[0;36m" << "  Kontakte sortieren";
 	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl;
@@ -354,22 +354,6 @@ void Controller::sortContacts(vector<Person>& person) {
 		default: cout << endl << "  Die eingegebene Nummer war falsch!" << endl; break;
 	}
 
-	/*
-	//Bubblesort
-	Person* tmp_person;
-	int length = person.size();
-	
-	for (uint32_t i = 1; i < person.size(); i++) {
-		for (uint32_t j = 0; j < person.size() - 1; j++) {
-			if (person[j].getAge < person[j + 1].getAge) {
-				tmp_person = &person[j];
-				person[j] = person[j + 1];
-				person[j + 1] = *tmp_person;
-			}
-		}
-	}
-	*/
-
 	cout << endl << "\x1B[0;32m" << "  Die Kontaktliste wurde erfolgreich sortiert!" << "\x1B[0;37m" << endl;
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 	printMenu();
@@ -380,7 +364,7 @@ void Controller::sortContacts(vector<Person>& person) {
 /********************************************************************************/
 
 void Controller::exitProgram(vector<Person>& person) {
-	system("CLS");
+	system("clear");
 	saveContacts(person);
 	
 	cout << endl << "\x1B[0;32m" << "------------------------------------------------------------";
