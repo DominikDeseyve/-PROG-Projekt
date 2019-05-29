@@ -5,7 +5,6 @@
 #include <iostream>
 #include <istream>
 #include <iomanip>
-#include <Windows.h>
 
 #include "controller.h"
 #include "person.h"
@@ -130,10 +129,13 @@ void Controller::actionHandler(int number) {
 // Menue ausgeben
 void Controller::printMenu() {
 	//Ausgabe des Menues
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
-	cout << endl << "+++++++     HAUPTMENUE       +++++++";
-	cout << endl << "------------------------------------" << endl;
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+	// "\x1B[0;32m" <<
+	// "\x1B[0;37m" <<
+	// << "\33[0;33m"
+	// << "\x1B[0;33m"
+	cout << endl << "\x1B[0;36m" << "+++++++     HAUPTMENUE       +++++++";
+	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl;
+	
 	cout << "  | 0 | Main Menue anzeigen" << endl;
 	cout << "  | 1 | Alle Kontakte auflisten" << endl;
 	cout << "  | 2 | Einen Kontakt auflisten" << endl;
@@ -158,10 +160,8 @@ void Controller::printMenu() {
 void Controller::printContacts(vector<Person>& person) {
 	system("CLS");
 	
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
-	cout << endl << "  Alle Kontakte: ";
-	cout << endl << "------------------------------------" << endl;
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+	cout << endl << "\x1B[0;36m" << "  Alle Kontakte: ";
+	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl;
 
 	//Ausgabe des Tabellenkopf
 	cout << setw(5) << " Nr." << setw(20) << "Vorname" << setw(20) << "Nachname" << setw(10) << "Alter" << setw(15) << "Ort" << endl;
@@ -180,19 +180,15 @@ void Controller::printSingleContact(vector<Person>& person) {
 	system("CLS");
 	printContacts(person);
 	
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
-	cout << endl << "  Einen Kontakt auflisten";
-	cout << endl << "------------------------------------" << endl;
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+	cout << endl << "\x1B[0;36m" << "  Einen Kontakt auflisten";
+	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl;
 
 	int tmp;
 	cout << "  Gib die Nummer des gewuenschten Kontakts ein: ";
 	cin >> tmp;
 
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 13);
-	cout << endl << "  Ausgabe des Kontakt " << tmp;
-	cout << endl << "------------------------------";
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+	cout << endl << "\x1B[1;35m" << "  Ausgabe des Kontakt " << tmp;
+	cout << endl << "------------------------------" << "\x1B[0;37m";
 
 	cout << person[tmp-1].printPerson().str();
 	
@@ -208,10 +204,8 @@ void Controller::printSingleContact(vector<Person>& person) {
 void Controller::createContact(vector<Person>& person) {
 	system("CLS");
 
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
-	cout << endl << "  Einen Kontakt erstellen";
-	cout << endl << "------------------------------------" << endl;
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+	cout << endl << "\x1B[0;36m" << "  Einen Kontakt erstellen";
+	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl;
 
 	string firstname, lastname, place, street, gender;
 	uint32_t age, housenumber, prefix, phonenumber, postcode;
@@ -242,9 +236,7 @@ void Controller::createContact(vector<Person>& person) {
 	Person* person1 = new Person(firstname, lastname, Person::string_to_enum(gender), age, postcode, place, street, housenumber, prefix, phonenumber);
 	person.push_back(*person1);
 
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
-	cout << endl << "  Der Kontakt " << firstname + " " + lastname << " wurde erfolgreich erstellt!" << endl;
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+	cout << endl << "\x1B[0;32m" << "  Der Kontakt " << firstname + " " + lastname << " wurde erfolgreich erstellt!" << "\x1B[0;37m" << endl;
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 	printMenu();
 }
@@ -254,10 +246,8 @@ void Controller::editContact(vector<Person>& person) {
 	system("CLS");
 	printContacts(person);
 	
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
-	cout << endl << "  Einen Kontakt bearbeiten";
-	cout << endl << "------------------------------------" << endl;
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+	cout << endl << "\x1B[0;36m" << "  Einen Kontakt bearbeiten";
+	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl;
 
 	int tmp;
 	cout << "  Gib die Nummer des Kontakts ein, welchen du bearbeiten moechtest: ";
@@ -316,9 +306,7 @@ void Controller::editContact(vector<Person>& person) {
 
 	person[tmp - 1].editPerson(tmp2, tmp3);
 
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
-	cout << endl << "  Der Kontakt " << tmp << " wurde erfolgreich bearbeitet!" << endl;
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+	cout << endl << "\x1B[0;32m" << "  Der Kontakt " << tmp << " wurde erfolgreich bearbeitet!" << "\x1B[0;37m" << endl;
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 	printMenu();
 }
@@ -328,10 +316,8 @@ void Controller::deleteContact(vector<Person>& person) {
 	system("CLS");
 	printContacts(person);
 	
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
-	cout << endl << "  Einen Kontakt loeschen";
-	cout << endl << "------------------------------------" << endl;
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+	cout << endl << "\x1B[0;36m" << "  Einen Kontakt loeschen";
+	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl;
 	
 	int tmp;
 	cout << "  Gib die Nummer ein, welche du loeschen moechtest: ";
@@ -339,9 +325,7 @@ void Controller::deleteContact(vector<Person>& person) {
 
 	person.erase(person.begin() + (tmp-1));
 
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
-	cout << endl << "  Der Kontakt " << tmp << " wurde erfolgreich geloescht!" << endl;
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+	cout << endl << "\x1B[0;32m" << "  Der Kontakt " << tmp << " wurde erfolgreich geloescht!" << "\x1B[0;37m" << endl;
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 	printMenu();
 }
@@ -350,10 +334,8 @@ void Controller::deleteContact(vector<Person>& person) {
 void Controller::sortContacts(vector<Person>& person) {
 	system("CLS");
 
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 11);
-	cout << endl << "  Kontakte sortieren";
-	cout << endl << "------------------------------------" << endl;
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+	cout << endl << "\x1B[0;36m" << "  Kontakte sortieren";
+	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl;
 
 	int tmp;
 	cout << "  0.) Vorname" << endl << "  1.) Nachname" << endl << "  2.) Alter" << endl << "  3.) Wohnort" << endl;
@@ -388,9 +370,7 @@ void Controller::sortContacts(vector<Person>& person) {
 	}
 	*/
 
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
-	cout << endl << "  Die Kontaktliste wurde erfolgreich sortiert!" << endl;
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+	cout << endl << "\x1B[0;32m" << "  Die Kontaktliste wurde erfolgreich sortiert!" << "\x1B[0;37m" << endl;
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 	printMenu();
 }
@@ -403,11 +383,9 @@ void Controller::exitProgram(vector<Person>& person) {
 	system("CLS");
 	saveContacts(person);
 	
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 10);
-	cout << endl << "------------------------------------------------------------";
+	cout << endl << "\x1B[0;32m" << "------------------------------------------------------------";
 	cout << endl << "-------------- Das Programm wird nun beendet! --------------";
-	cout << endl << "------------------------------------------------------------" << endl;
-	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), 7);
+	cout << endl << "------------------------------------------------------------" << "\x1B[0;37m" << endl;
 }
 
 /*
