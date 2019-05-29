@@ -1,6 +1,3 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(411,5): warning MSB8028: Das Zwischenverzeichnis (Debug\) enthält freigegebene Dateien aus einem anderen Projekt (contant_manager.vcxproj). Dies kann zu einem falschen Bereinigungs- und Neuerstellungsverhalten führen.
-  main.cpp
-  controller.cpp
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(452,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (contant_manager.vcxproj).  This can lead to incorrect clean and rebuild behavior.
   person.cpp
-  Code wird generiert...
   contant_manager.vcxproj -> C:\Users\Robin\Documents\GitHub\-PROG-Projekt\Debug\contact_manager.exe

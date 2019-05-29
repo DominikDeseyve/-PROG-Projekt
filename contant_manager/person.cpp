@@ -43,7 +43,7 @@ stringstream Person::printAllPersons() {
 
 stringstream Person::printPerson() {
 	stringstream ss;
-	ss << endl << "  Vorname: " << firstname << endl << "  Nachname: " << lastname << endl << "  Geschlecht: " << enum_to_string(gender) << endl << "  Alter: " << age << endl << "  Wohnort: " << postcode << " " << place << endl << "  Strasse: " << street << " " << housenumber << endl << "  Telefonnummer: " << prefix << "/" << phonenumber << endl;
+	ss << endl << setw(18) << "  Vorname: " << firstname << endl << setw(18) << "  Nachname: " << lastname << endl << setw(18) << "  Geschlecht: " << enum_to_string(gender) << endl << setw(18) << "  Alter: " << age << endl << setw(18) << "  Wohnort: " << postcode << " " << place << endl << setw(18) << "  Strasse: " << street << " " << housenumber << endl << setw(18) << "  Telefonnummer: " << prefix << "/" << phonenumber << endl;
 	return ss;
 }
 
