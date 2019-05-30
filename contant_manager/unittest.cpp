@@ -19,13 +19,18 @@ const struct SamplesPerson
 
 SamplesPersonn SAMPLES_PERSON[SAMPLES_PERSON_COUNT] =
 {
-  SamplesPerson();
-  SamplesPerson();
-  SamplesPerson();
+  SamplesPerson(Rachel, Kroesen, 1, 21, 88069, Tettnang, Vogelherdbogen, 67, 07542, 939700);
+  SamplesPerson(Clemens, Maier-Schmidt, 0, 18, 79098, Freiburg, Seestraße, 4, 07664, 3902521);
+  SamplesPerson(Kasimir, Romer, 2, 19, 88045, Friedrichshafen, Rosiskeller, 2, 07541, 56402);
 }
 
 
 TEST_CASE("Constructor")
+{
+
+}
+
+TEST_CASE("actionHandler", "functions of main menu")
 {
 
 }
