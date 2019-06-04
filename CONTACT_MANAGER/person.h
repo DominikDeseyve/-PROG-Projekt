@@ -29,6 +29,7 @@ namespace ContactManager {
 	class Person {
 
 	protected:
+		// Attribute 
 		string firstname;
 		string lastname;
 		GenderType gender;
@@ -42,19 +43,28 @@ namespace ContactManager {
 
 
 	public:
+		// Konstruktor
 		Person(string pFirstname, string pLastname, GenderType pGender, uint32_t pAge, uint32_t pPostcode, string pPlace, string pStreet, uint32_t pHousenumber, uint32_t pPrefix, uint32_t pPhonenumber);
 
 
-		//GETTER UND SETTER
+		// Getter
+		string& getFirstname() {
+			return firstname;
+		}
+
+		string& getLastname() {
+			return lastname;
+		}
+
 		uint32_t& getAge() {
 			return age;
 		}
 
-		void setAge(uint32_t& age) {
-			this->age = age;
+		string& getPlace() {
+			return place;
 		}
 
-
+		// sonstige Methoden
 		stringstream csv_string();
 		stringstream last_csv_string();
 
