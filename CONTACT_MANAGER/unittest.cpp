@@ -1,23 +1,26 @@
 #define _UNITTEST_
-#include <person.h>
-#include <controller.h>
+#include "person.h"
+#include "controller.h"
 
 using namespace ContactManager;
 
 using namespace std;
 
 #define CATCH_CONFIG_FAST_COMPILE
-#include <catch.hpp>
+#define CATCH_CONFIG_MAIN
 
-TEST_CASE("Pass Tests")
-{
-    REQUIRE(1 == 1);
-}
+#include "catch.hpp"
 
 TEST_CASE("Fail test")
 {
-    REQUIRE(1 == 0);
+    CHECK(1 == 0);
 }
+
+TEST_CASE("Pass Tests")
+{
+    CHECK(1 == 1);
+}
+
 
 /*const int SAMPLES_PERSON_COUNT = {3};
 
