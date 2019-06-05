@@ -11,6 +11,7 @@ using namespace std;
 
 #include "catch.hpp"
 
+// kurzer Test obs laeuft
 TEST_CASE("Fail test")
 {
     CHECK(1 == 0);
@@ -21,7 +22,7 @@ TEST_CASE("Pass Tests")
     CHECK(1 == 1);
 }
 
-
+/*
 const int SAMPLES_PERSON_COUNT = {3};
 
 const struct SamplesPerson
@@ -43,6 +44,7 @@ const struct SamplesPerson
   {
 
   }
+
 };
 
 SamplesPersonn SAMPLES_PERSON[SAMPLES_PERSON_COUNT] =
@@ -51,10 +53,15 @@ SamplesPersonn SAMPLES_PERSON[SAMPLES_PERSON_COUNT] =
   SamplesPerson(Clemens, Maier-Schmidt, 0, 18, 79098, Freiburg, Seestraße, 4, 07664, 3902521);
   SamplesPerson(Kasimir, Kalbrecht, 2, 19, 88045, Friedrichshafen, Rosiskeller, 2, 07541, 56402);
 }
+*/
 
-
-TEST_CASE("Controller_Constructor")
+TEST_CASE("LoadContacts")
 {
+  vector<Person> person;
+  Controller *controller = new Controller();
+  controller->loadContacts(person);
+  CHECK(person.size() > 0);
+
 
 }
 
