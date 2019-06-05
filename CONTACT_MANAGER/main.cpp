@@ -19,6 +19,7 @@ int main()
 
 	// ein Controller wird erstellt
 	Controller *controller = new Controller();
-	
+	controller->printMenu();
+
 	return 0;
 }
