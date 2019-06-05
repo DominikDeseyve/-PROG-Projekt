@@ -22,7 +22,7 @@ TEST_CASE("Pass Tests")
 }
 
 
-/*const int SAMPLES_PERSON_COUNT = {3};
+const int SAMPLES_PERSON_COUNT = {3};
 
 const struct SamplesPerson
 {
@@ -63,4 +63,3 @@ TEST_CASE("actionHandler", "functions of main menu")
 {
 
 }
-*/
