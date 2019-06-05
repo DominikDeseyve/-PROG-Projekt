@@ -66,7 +66,20 @@ TEST_CASE("LoadContacts")
 }
 
 
-TEST_CASE("actionHandler", "functions of main menu")
+TEST_CASE("Convert")
 {
+
+  SECTION("string_to_enum")
+  {
+      string gender = "weiblich";
+      GenderType enum = Person::string_to_enum(gender);
+      CHECK(enum == GenderType::WOMAN);
+
+  }
+
+  SECTION("enum_to_string")
+  {
+
+  }
 
 }
