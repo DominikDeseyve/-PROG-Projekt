@@ -12,11 +12,11 @@ using namespace std;
 #include "catch.hpp"
 
 // kurzer Test obs laeuft
-TEST_CASE("Fail test")
+/* TEST_CASE("Fail test")
 {
     CHECK(1 == 0);
 }
-
+*/
 TEST_CASE("Pass Tests")
 {
     CHECK(1 == 1);
@@ -55,31 +55,159 @@ SamplesPersonn SAMPLES_PERSON[SAMPLES_PERSON_COUNT] =
 }
 */
 
-TEST_CASE("LoadContacts")
+TEST_CASE("loadContacts")
 {
   //pointer auf neues Objekt controller
-  //Controller *controller = new Controller();
-  //vector<Person> person = controller->getPersons();
-  //CHECK(person.size() > 0);
+  Controller *controller = new Controller();
+  vector<Person> person = controller->getPersons();
+  CHECK(person.size() > 0);
 
 
 }
 
 
-TEST_CASE("Convert")
+TEST_CASE("intToEnum")
+{
+    SECTION("maennlich")
+    {
+      string gender = "0";
+      GenderType tmp = Person::string_to_enum(gender);
+      CHECK(tmp == GenderType::MAN);
+    }
+
+    SECTION("weiblich")
+    {
+      string gender = "1";
+      GenderType tmp = Person::string_to_enum(gender);
+      CHECK(tmp == GenderType::WOMAN);
+    }
+
+    SECTION("divers")
+    {
+      string gender = "2";
+      GenderType tmp = Person::string_to_enum(gender);
+      CHECK(tmp == GenderType::DIVERSE);
+    }
+
+    SECTION("other")
+    {
+      string gender = "5";
+      GenderType tmp = Person::string_to_enum(gender);
+      CHECK(tmp == GenderType::DIVERSE);
+    }
+
+    SECTION("emtpy")
+    {
+      string gender;
+      GenderType tmp = Person::string_to_enum(gender);
+      CHECK(tmp == GenderType::MAN);
+    }
+
+    SECTION("text")
+    {
+      string gender = "Ich bin ein Mann";
+      GenderType tmp = Person::string_to_enum(gender);
+      CHECK(tmp == GenderType::DIVERSE);
+    }
+
+}
+
+TEST_CASE("enumToInt")
 {
 
-  SECTION("string_to_enum")
-  {
-      string gender = "weiblich";
-      GenderType enum = Person::string_to_enum(gender);
-      CHECK(enum == GenderType::WOMAN);
 
-  }
+}
 
-  SECTION("enum_to_string")
-  {
+TEST_CASE("checkInt")
+{
 
-  }
+}
 
+TEST_CASE("checkString")
+{
+    SECTION("correctInput")
+    {
+      string input = "Anna";
+      bool validate = Controller::checkString(input);
+      CHECK(validate == true);
+    }
+
+    SECTION("wrongInput", "String with numbers")
+    {
+      string input = "Anna1234567890";
+      bool validate = Controller::checkString(input);
+      CHECK(validate == false);
+    }
+
+    SECTION("hyhpen", "Double Name")
+    {
+      string input = "Anna-Rosa";
+      bool validate = Controller::checkString(input);
+      CHECK(validate == true);
+    }
+
+    SECTION("empty")
+    {
+      string input;
+      bool validate = Controller::checkString(input);
+      CHECK(validate == false);
+    }
+
+    SECTION("longInput")
+    {
+      string input = "Robindominiklukasstefanjoeyjanfelixrobertdanielmatthiaskasimirleonthongkevinronnicojohannes";
+      bool validate = Controller::checkString(input);
+      CHECK(validate == false);
+    }
+
+    SECTION("special", "Input with special characters")
+    {
+      string input = "Anna#!?$%^&*(hi)+_=";
+      bool validate = Controller::checkString(input);
+      CHECK(validate == false);
+    }
+
+    SECTION("single", "single charakter")
+    {
+      string input = "P";
+      bool validate = Controller::checkString(input);
+      CHECK(validate == false);
+    }
+}
+
+TEST_CASE("checkInt")
+{
+    SECTION("correctInput")
+    {
+      string input = "123";
+      bool validate = Controller::checkInt(input);
+      CHECK(validate == true);
+    }
+
+    SECTION("wrongInput", "Input with characters")
+    {
+      string input = "3abcDEFG";
+      bool validate = Controller::checkInt(input);
+      CHECK(validate == false);
+    }
+
+    SECTION("negative")
+    {
+
+    }
+
+    SECTION("long")
+    {
+
+    }
+
+    SECTION("special")
+    {
+
+    }
+
+    SECTION("float")
+    {
+
+    }
 }
