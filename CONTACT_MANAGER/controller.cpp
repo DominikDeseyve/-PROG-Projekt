@@ -91,11 +91,11 @@ void Controller::saveContacts(vector<Person>& person) {
 	{	
 		// Jede Person in eine Zeile schreiben
 		if (i < person.size() - 1) {
-			file << person[i].csv_string().str();
+			file << person[i].csv_string().str() << "\n";
 		}
 		// Letzte Person in eine Zeile schreiben, aber ohne "\n"
 		else {
-			file << person[i].last_csv_string().str();
+			file << person[i].csv_string().str();
 		}
 	}
 
@@ -165,21 +165,24 @@ void Controller::printMenu() {
 	cout << "  | 7 | Programm speichern und beenden" << endl;
 
 	// Eingabe der entsprechenden Nummer
-	int menu_number;
+	string menu_number;
+	bool correctInput = false;
 
-	while (menu_number > 7 || menu_number < 0){
+	while (!correctInput) {
 		cout << endl << "  Gib deine Nummer ein: ";
 		cin >> menu_number;
-
-		if(menu_number > 7 || menu_number < 0){
-			cout << "\x1B[0;31m" << "  Die eingegebene Nummer war falsch!" << "\x1B[0;37m" << endl;
-		}
+		correctInput = checkInt(menu_number);
+		if(correctInput) {
+			if(stoi(menu_number) > 7 || stoi(menu_number) < 0){
+				cout << "\x1B[0;31m" << "  Die eingegebene Nummer war falsch!" << "\x1B[0;37m" << endl;
+			}
+		}		
 	}
 
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 
 	// Actionhandler nach Eingabe ausfuehren, um entsprechende Funktion aufzurufen
-	actionHandler(menu_number);
+	actionHandler(stoi(menu_number));
 }
 
 // Alle Kontakte ausgeben
@@ -254,7 +257,7 @@ void Controller::createContact(vector<Person>& person) {
 
 	// einzelne Eingaben für die entsprechenden Werte
 	cout << "  Gib deinen Vornamen ein: ";
-	cin >> firstname;
+	cin >> firstname;	
 	cout << "  Gib deinen Nachnamen ein: ";
 	cin >> lastname;
 	cout << "  Gib dein Geschlecht ein (Man = 0, Woman = 1, Diverse = 2): ";
@@ -537,4 +540,18 @@ void Controller::exitProgram(vector<Person>& person) {
 
 vector<Person> Controller::getPersons(vector<Person>& person) {
 	return person;
+}
+
+/********************************************************************************/
+/************					Check - Funtkionen					*************/
+/********************************************************************************/
+
+bool Controller::checkInt(int input){
+
+	return true;
+}
+
+bool Controller::checkString(string input){
+
+	return false;
 }

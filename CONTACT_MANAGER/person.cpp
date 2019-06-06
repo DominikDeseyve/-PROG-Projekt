@@ -25,13 +25,6 @@ Person::Person(string pFirstname, string pLastname, GenderType pGender, uint32_t
 // 
 stringstream Person::csv_string() {
 	stringstream ss;
-	ss << firstname << ';' << lastname << ';' << gender << ';' << age << ';' << postcode << ';' << place << ';' << street << ';' << housenumber << ';' << prefix << ';' << phonenumber << '\n';
-	return ss;
-}
-
-// 
-stringstream Person::last_csv_string() {
-	stringstream ss;
 	ss << firstname << ';' << lastname << ';' << gender << ';' << age << ';' << postcode << ';' << place << ';' << street << ';' << housenumber << ';' << prefix << ';' << phonenumber;
 	return ss;
 }

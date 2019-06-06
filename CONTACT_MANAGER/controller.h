@@ -49,6 +49,10 @@ namespace ContactManager {
 		// Programm beenden
 		void exitProgram(vector<Person>& person);
 
+		// CheckFunktionen
+		bool checkInt(string input);
+		bool checkString(string input);
+
 		vector<Person> getPersons(vector<Person>& person);
 	};
 }

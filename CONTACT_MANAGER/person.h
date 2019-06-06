@@ -66,7 +66,6 @@ namespace ContactManager {
 
 		// sonstige Methoden
 		stringstream csv_string();
-		stringstream last_csv_string();
 
 		void editPerson(int ind, string input);
 
