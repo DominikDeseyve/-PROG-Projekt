@@ -53,7 +53,7 @@ namespace ContactManager {
 		static bool checkInt(string input);
 		static bool checkString(string input);
 
-		vector<Person> getPersons(vector<Person>& person);
+		vector<Person> getPersons();
 	};
 }
 #endif

@@ -139,9 +139,6 @@ void Controller::actionHandler(int number) {
 
 		// Funktion zum Beenden des Programms wird aufgerufen
 		case 7: exitProgram(person); break;
-
-		// Funktion bei Eingabe eines falschen Wertes
-		default: cout << endl << "  Die eingegebene Nummer war falsch!" << endl; break;
 	}
 }
 
@@ -258,10 +255,22 @@ void Controller::createContact(vector<Person>& person) {
 	// lokale Attribute
 	string firstname, lastname, place, street, gender;
 	uint32_t age, housenumber, prefix, phonenumber, postcode;
+	bool correctInput = false;
 
-	// einzelne Eingaben für die entsprechenden Werte
+	// einzelne Eingaben für die entsprechenden Werte	
 	cout << "  Gib deinen Vornamen ein: ";
-	cin >> firstname;	
+	cin >> lastname;
+	/*
+	while (!correctInput) {
+		cout << "  Gib deinen Vornamen ein: ";
+		cin >> firstname;
+		correctInput = checkString(firstname);
+
+		if(correctInput) {
+			cout << "\x1B[0;31m" << "  Es wurde kein Text eingegeben!" << "\x1B[0;37m" << endl;
+		}		
+	}*/
+
 	cout << "  Gib deinen Nachnamen ein: ";
 	cin >> lastname;
 	cout << "  Gib dein Geschlecht ein (Man = 0, Woman = 1, Diverse = 2): ";
@@ -329,24 +338,17 @@ void Controller::editContact(vector<Person>& person) {
 	}
 
 	string tmp3;
-
+	stringstream ss;
+	
 	switch (tmp2) {
-		case 0: 
-			cout << endl << "  Gib den neuen Vorname ein: ";
-			cin >> tmp3; 
-			break;
-		case 1: 
-			cout << endl << "  Gib den neuen Nachname ein: ";
-			cin >> tmp3;
-			break;
-		case 2:
-			cout << endl << "  Gib das neue Geschlecht ein (Man = 0, Woman = 1, Diverse = 2): ";
-			cin >> tmp3;
-			break;
-		case 3: 
-			cout << endl << "  Gib das neue Alter ein: ";
-			cin >> tmp3;
-			break;
+		case 0: ss << endl << "  Gib den neuen Vornamen ein: "; break;
+
+		case 1: ss << endl << "  Gib den neuen Nachname ein: "; break;
+
+		case 2:	ss << endl << "  Gib das neue Geschlecht ein (Man = 0, Woman = 1, Diverse = 2): "; break;
+		
+		case 3: ss << endl << "  Gib das neue Alter ein: "; break;
+
 		case 4: 
 			cout << endl << "  Gib die neue Postleitzahl ein: ";
 			cin >> tmp3;
@@ -374,9 +376,22 @@ void Controller::editContact(vector<Person>& person) {
 		default: cout << endl << "  Die eingegebene Nummer war falsch!" << endl; break;
 	}
 
+	bool correctInput = false;
+
+	while (!correctInput) {
+		cout << ss.str();		
+		cin >> tmp3;
+		correctInput = checkString(tmp3);
+
+		if(correctInput) {
+			cout << "\x1B[0;31m" << "  Es wurde kein Text eingegeben!" << "\x1B[0;37m" << endl;
+			correctInput = false;
+		}		
+	}
+/*
 	// entsprechende Person in der Personenliste wird bearbeitet
 	person[tmp - 1].editPerson(tmp2, tmp3);
-
+*/
 	cout << endl << "\x1B[0;32m" << "  Der Kontakt " << tmp << " wurde erfolgreich bearbeitet!" << "\x1B[0;37m" << endl;
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 	
@@ -542,7 +557,7 @@ void Controller::exitProgram(vector<Person>& person) {
 	cout << endl << "------------------------------------------------------------" << "\x1B[0;37m" << endl << endl;
 }
 
-vector<Person> Controller::getPersons(vector<Person>& person) {
+vector<Person> Controller::getPersons() {
 	return person;
 }
 
@@ -563,6 +578,22 @@ bool Controller::checkInt(string input){
 }
 
 bool Controller::checkString(string input){
+	bool isString = false;
 
-	return false;
+	for ( int j = 0; j < input.length(); j++){
+		cout << endl << input[j];
+	}
+
+	for (int i = 0; i < input.length(); ++i){
+		if(!isalpha(input[i])){
+			isString = true;
+		}
+	}
+
+	if(input.length() > 30) {
+		cout << "\x1B[0;31m" << "  Der eingegebene Text war zu lang!" << "\x1B[0;37m" << endl;
+		isString = true;
+	}
+
+	return isString;
 }
