@@ -118,25 +118,16 @@ TEST_CASE("enumToInt")
 
 }
 
-TEST_CASE("checkInt")
-{
 
-}
 
 TEST_CASE("checkString")
 {
-    SECTION("correctInput")
+    // correct input
+    SECTION("normal")
     {
       string input = "Anna";
       bool validate = Controller::checkString(input);
       CHECK(validate == true);
-    }
-
-    SECTION("wrongInput", "String with numbers")
-    {
-      string input = "Anna1234567890";
-      bool validate = Controller::checkString(input);
-      CHECK(validate == false);
     }
 
     SECTION("hyhpen", "Double Name")
@@ -144,6 +135,15 @@ TEST_CASE("checkString")
       string input = "Anna-Rosa";
       bool validate = Controller::checkString(input);
       CHECK(validate == true);
+    }
+
+
+    // wrong input
+    SECTION("number", "String with numbers")
+    {
+      string input = "Anna1234567890";
+      bool validate = Controller::checkString(input);
+      CHECK(validate == false);
     }
 
     SECTION("empty")
@@ -177,37 +177,47 @@ TEST_CASE("checkString")
 
 TEST_CASE("checkInt")
 {
-    SECTION("correctInput")
+    // correct input
+    SECTION("normal")
     {
       string input = "123";
       bool validate = Controller::checkInt(input);
       CHECK(validate == true);
     }
 
-    SECTION("wrongInput", "Input with characters")
+    // wrong input
+    SECTION("character", "input with characters")
     {
       string input = "3abcDEFG";
       bool validate = Controller::checkInt(input);
       CHECK(validate == false);
     }
 
-    SECTION("negative")
+    SECTION("negative", "negative numbers")
     {
-
+      string input = "-300";
+      bool validate = Controller::checkInt(input);
+      CHECK(validate == false);
     }
 
-    SECTION("long")
+    SECTION("long", "too long number")
     {
-
+      string input = "19487520848123456789009876543211234";
+      bool validate = Controller::checkInt(input);
+      CHECK(validate == false);
     }
 
-    SECTION("special")
+    SECTION("special", "number with special character")
     {
-
+      string input = "13!@#$%^&*()_";
+      bool validate = Controller::checkInt(input);
+      CHECK(validate == false);
     }
 
     SECTION("float")
     {
-
+      string input = "82.41";
+      bool validate = Controller::checkInt(input);
+      CHECK(validate == false);
     }
 }
