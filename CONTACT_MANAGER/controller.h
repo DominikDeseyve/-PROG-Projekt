@@ -50,8 +50,8 @@ namespace ContactManager {
 		void exitProgram(vector<Person>& person);
 
 		// CheckFunktionen
-		bool checkInt(string input);
-		bool checkString(string input);
+		static bool checkInt(string input);
+		static bool checkString(string input);
 
 		vector<Person> getPersons(vector<Person>& person);
 	};

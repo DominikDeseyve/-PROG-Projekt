@@ -172,10 +172,14 @@ void Controller::printMenu() {
 		cout << endl << "  Gib deine Nummer ein: ";
 		cin >> menu_number;
 		correctInput = checkInt(menu_number);
+
 		if(correctInput) {
 			if(stoi(menu_number) > 7 || stoi(menu_number) < 0){
+				correctInput = false;
 				cout << "\x1B[0;31m" << "  Die eingegebene Nummer war falsch!" << "\x1B[0;37m" << endl;
 			}
+		} else {
+			cout << "\x1B[0;31m" << "  Es wurde keine Nummer eingegeben!" << "\x1B[0;37m" << endl;
 		}		
 	}
 
@@ -546,9 +550,16 @@ vector<Person> Controller::getPersons(vector<Person>& person) {
 /************					Check - Funtkionen					*************/
 /********************************************************************************/
 
-bool Controller::checkInt(int input){
-
-	return true;
+bool Controller::checkInt(string input){
+	bool isInt = true;
+	
+	for (int i = 0; i < input.length(); ++i){
+		if(!isdigit(input[i])){
+			isInt = false;
+		}
+	}
+	
+	return isInt;
 }
 
 bool Controller::checkString(string input){
