@@ -1,6 +1,15 @@
 #ifndef _CONTROLLER_H_
 #define _CONTROLLER_H_
 
+/** \mainpage
+* Die Klasse Temperature verwaltet Temperaturen unabhängig von der
+* physikalischen Einheit und formatiert je nach Einstellung
+* den Wert in die passende physikalische Einheit um.
+* Basistemperatur ist °K (Kelvin).
+* \author Robin Fricker, Anna Kroesen, Dominik Deseyve
+* \date 14. Mai 2019
+*/
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -21,9 +30,12 @@ namespace ContactManager {
 		// Konstruktor
 		Controller();
 
+		/// <summary>Entscheidet auf Basis des Parameters, welcher Menüpunkt gedrückt wurde.</summary>
+    	/// <param name="number">Vom Benutzer gedrückter Menüpunkt</param>    	
 		void actionHandler(int number);
 
-		// Laden und Speichern der Kontakte (aus/in CSV-Datei)
+		/// <summary>Lädt Kontakte aus der Standard CSV-Datei.</summary>
+    	/// <param name="person">Alle Personen im Vector gespeichert.</param>    			
 		void loadContacts(vector<Person>& person);
 		void saveContacts(vector<Person>& person);
 
