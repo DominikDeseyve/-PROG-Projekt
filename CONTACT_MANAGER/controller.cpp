@@ -26,7 +26,7 @@ Controller::Controller(){
 
 // Kontakte aus CSV-Datei laden
 void Controller::loadContacts(vector<Person>& person) {
-	// lokale Attribute	
+	// lokale Attribute
 	ifstream file;
 	string firstname, lastname, helpPostcode, place, street, helpHousenumber, helpAge, helpPhonenumber, helpPrefix, helpGender;
 	uint32_t age, housenumber, prefix, phonenumber, postcode;
@@ -60,18 +60,18 @@ void Controller::loadContacts(vector<Person>& person) {
 			prefix = stoi(helpPrefix);
 
 			// String wird in entsprechenden enum-Wert umgewandelt
-			gender = Person::string_to_enum(helpGender);
+			gender = Person::intToEnum(helpGender);
 
 			// Person wird angelegt mit den entsprechenden Werten
 			Person *person1 = new Person(firstname, lastname, gender, age, postcode, place, street, housenumber, prefix, phonenumber);
-			
+
 			// Die erstellte Person (=> person1) wird in der Personenliste an letzter Stelle angefügt
 			person.push_back(*person1);
 		}
 
 		// CSV-Datei wird wieder geschlossen
 		file.close();
-	} 
+	}
 	// Falls die CSV-Datei nicht ausgelesen werden kann
 	else {
 		cout << "  Datei kann nicht geladen werden!" << endl;
@@ -80,7 +80,7 @@ void Controller::loadContacts(vector<Person>& person) {
 
 // Kontakte in CSV-Datei speichern
 void Controller::saveContacts(vector<Person>& person) {
-	// lokale Attribute	
+	// lokale Attribute
 	ofstream file;
 
 	// CSV-Datei oeffnen
@@ -88,7 +88,7 @@ void Controller::saveContacts(vector<Person>& person) {
 
 	// jeden Kontakt in eine Zeile schreiben
 	for (size_t i = 0; i < person.size(); i++)
-	{	
+	{
 		// Jede Person in eine Zeile schreiben
 		if (i < person.size() - 1) {
 			file << person[i].csv_string().str() << "\n";
@@ -99,7 +99,7 @@ void Controller::saveContacts(vector<Person>& person) {
 		}
 	}
 
-	// CSV Datei schliessen    
+	// CSV Datei schliessen
 	file.close();
 }
 
@@ -113,13 +113,13 @@ void Controller::actionHandler(int number) {
 	switch (number)
 	{
 		// Das Menue wird erneut ausgegeben
-		case 0: system("clear"); 
-			printMenu(); 
+		case 0: system("clear");
+			printMenu();
 			break;
 
 		// Alle Kontakte werden ausgegeben und anschließend wird das Menue wieder ausgegeben
-		case 1: printContacts(person); 
-			printMenu(); 
+		case 1: printContacts(person);
+			printMenu();
 			break;
 
 		// Funktion zum Ausgeben eines einzelnen Kontakts wird aufgerufen
@@ -151,7 +151,7 @@ void Controller::printMenu() {
 	// Ausgabe des Menues
 	cout << endl << "\x1B[0;36m" << "+++++++     HAUPTMENUE       +++++++";
 	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl;
-	
+
 	cout << "  | 0 | Hauptmenue anzeigen" << endl;
 	cout << "  | 1 | Alle Kontakte auflisten" << endl;
 	cout << "  | 2 | Einen Kontakt auflisten" << endl;
@@ -177,7 +177,7 @@ void Controller::printMenu() {
 			}
 		} else {
 			cout << "\x1B[0;31m" << "  Es wurde keine Nummer eingegeben!" << "\x1B[0;37m" << endl;
-		}		
+		}
 	}
 
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
@@ -190,7 +190,7 @@ void Controller::printMenu() {
 void Controller::printContacts(vector<Person>& person) {
 	// Konsole wird gecleared
 	system("clear");
-	
+
 	cout << endl << "\x1B[0;36m" << "  Alle Kontakte: ";
 	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl;
 
@@ -212,7 +212,7 @@ void Controller::printSingleContact(vector<Person>& person) {
 	// Konsole wird gecleared und alle Kontakte werden ausgegeben
 	system("clear");
 	printContacts(person);
-	
+
 	cout << endl << "\x1B[0;36m" << "  Einen Kontakt auflisten";
 	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl;
 
@@ -233,9 +233,9 @@ void Controller::printSingleContact(vector<Person>& person) {
 
 	// Ausgabe des gewuenschten Kontakts
 	cout << person[tmp-1].printPerson().str();
-	
+
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
-	
+
 	// Ausgabe des Menues
 	printMenu();
 }
@@ -257,7 +257,7 @@ void Controller::createContact(vector<Person>& person) {
 	uint32_t age, housenumber, prefix, phonenumber, postcode;
 	bool correctInput = false;
 
-	// einzelne Eingaben für die entsprechenden Werte	
+	// einzelne Eingaben für die entsprechenden Werte
 	cout << "  Gib deinen Vornamen ein: ";
 	cin >> lastname;
 	/*
@@ -268,7 +268,7 @@ void Controller::createContact(vector<Person>& person) {
 
 		if(correctInput) {
 			cout << "\x1B[0;31m" << "  Es wurde kein Text eingegeben!" << "\x1B[0;37m" << endl;
-		}		
+		}
 	}*/
 
 	cout << "  Gib deinen Nachnamen ein: ";
@@ -291,14 +291,14 @@ void Controller::createContact(vector<Person>& person) {
 	cin >> phonenumber;
 
 	// Person mit den eingegebenen Werten anlegen
-	Person* person1 = new Person(firstname, lastname, Person::string_to_enum(gender), age, postcode, place, street, housenumber, prefix, phonenumber);
-	
+	Person* person1 = new Person(firstname, lastname, Person::intToEnum(gender), age, postcode, place, street, housenumber, prefix, phonenumber);
+
 	// Die erstellte Person (=> person1) wird in der Personenliste an letzter Stelle angefügt
 	person.push_back(*person1);
 
 	cout << endl << "\x1B[0;32m" << "  Der Kontakt " << firstname + " " + lastname << " wurde erfolgreich erstellt!" << "\x1B[0;37m" << endl;
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
-	
+
 	// Ausgabe des Menues
 	printMenu();
 }
@@ -308,13 +308,13 @@ void Controller::editContact(vector<Person>& person) {
 	// Konsole wird gecleared und alle Kontakte werden ausgegeben
 	system("clear");
 	printContacts(person);
-	
+
 	cout << endl << "\x1B[0;36m" << "  Einen Kontakt bearbeiten";
 	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl;
 
 	// Eingabe der Nummer des entsprechenden Kontakts
 	int tmp;
-	
+
 	while (tmp > person.size() || tmp <= 0){
 		cout << endl << "  Gib die Nummer des Kontakts ein, welchen du bearbeiten moechtest: ";
 		cin >> tmp;
@@ -327,7 +327,7 @@ void Controller::editContact(vector<Person>& person) {
 	// Eingabe der Nummer des entsprechenden Attributs
 	int tmp2;
 	cout << endl << "  0.) Vorname" << endl << "  1.) Nachname" << endl << "  2.) Geschlecht" << endl << "  3.) Alter" << endl << "  4.) Postleitzahl" << endl << "  5.) Wohnort" << endl << "  6.) Strasse" << endl << "  7.) Hausnummer" << endl << "  8.) Vorwahl" << endl << "  9.) Telefonnummer" << endl;
-	
+
 	while (tmp2 > 9 || tmp2 < 0){
 		cout << endl << "  Gib die Nummer ein, die du bearbeiten moechtest: ";
 		cin >> tmp2;
@@ -339,29 +339,29 @@ void Controller::editContact(vector<Person>& person) {
 
 	string tmp3;
 	stringstream ss;
-	
+
 	switch (tmp2) {
 		case 0: ss << endl << "  Gib den neuen Vornamen ein: "; break;
 
 		case 1: ss << endl << "  Gib den neuen Nachname ein: "; break;
 
 		case 2:	ss << endl << "  Gib das neue Geschlecht ein (Man = 0, Woman = 1, Diverse = 2): "; break;
-		
+
 		case 3: ss << endl << "  Gib das neue Alter ein: "; break;
 
-		case 4: 
+		case 4:
 			cout << endl << "  Gib die neue Postleitzahl ein: ";
 			cin >> tmp3;
 			break;
-		case 5: 
+		case 5:
 			cout << endl << "  Gib den neuen Wohnort ein: ";
 			cin >> tmp3;
 			break;
-		case 6: 
+		case 6:
 			cout << endl << "  Gib die neue Strasse ein: ";
 			cin >> tmp3;
 			break;
-		case 7: 
+		case 7:
 			cout << endl << "  Gib die neue Hausnummer ein: ";
 			cin >> tmp3;
 			break;
@@ -369,7 +369,7 @@ void Controller::editContact(vector<Person>& person) {
 			cout << endl << "  Gib die neue Vorwahl ein: ";
 			cin >> tmp3;
 			break;
-		case 9: 
+		case 9:
 			cout << endl << "  Gib die neue Telefonnummer ein: ";
 			cin >> tmp3;
 			break;
@@ -379,14 +379,14 @@ void Controller::editContact(vector<Person>& person) {
 	bool correctInput = false;
 
 	while (!correctInput) {
-		cout << ss.str();		
+		cout << ss.str();
 		cin >> tmp3;
 		correctInput = checkString(tmp3);
 
 		if(correctInput) {
 			cout << "\x1B[0;31m" << "  Es wurde kein Text eingegeben!" << "\x1B[0;37m" << endl;
 			correctInput = false;
-		}		
+		}
 	}
 /*
 	// entsprechende Person in der Personenliste wird bearbeitet
@@ -394,7 +394,7 @@ void Controller::editContact(vector<Person>& person) {
 */
 	cout << endl << "\x1B[0;32m" << "  Der Kontakt " << tmp << " wurde erfolgreich bearbeitet!" << "\x1B[0;37m" << endl;
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
-	
+
 	// Ausgabe des Menues
 	printMenu();
 }
@@ -404,10 +404,10 @@ void Controller::deleteContact(vector<Person>& person) {
 	// Konsole wird gecleared und alle Kontakte werden ausgegeben
 	system("clear");
 	printContacts(person);
-	
+
 	cout << endl << "\x1B[0;36m" << "  Einen Kontakt loeschen";
 	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl;
-	
+
 	// Eingabe der Nummer des entsprechenden Kontakts
 	int tmp;
 
@@ -425,7 +425,7 @@ void Controller::deleteContact(vector<Person>& person) {
 
 	cout << endl << "\x1B[0;32m" << "  Der Kontakt " << tmp << " wurde erfolgreich geloescht!" << "\x1B[0;37m" << endl;
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
-	
+
 	// Ausgabe des Menues
 	printMenu();
 }
@@ -440,7 +440,7 @@ void Controller::sortContacts(vector<Person>& person) {
 
 	int tmp;
 	cout << "  0.) Vorname" << endl << "  1.) Nachname" << endl << "  2.) Alter" << endl << "  3.) Wohnort" << endl;
-	
+
 	while (tmp > 3 || tmp < 0){
 		cout << endl << "  Gib die Nummer ein, nach der du aufsteigend sortieren moechtest: ";
 		cin >> tmp;
@@ -449,26 +449,26 @@ void Controller::sortContacts(vector<Person>& person) {
 			cout << "\x1B[0;31m" << "  Die eingegebene Nummer war falsch!" << "\x1B[0;37m" << endl;
 		}
 	}
-	
+
 	switch (tmp) {
 		// nach dem Vornamen aufsteigend sortieren
 		case 0: sortFirstname(person); break;
-		
+
 		// nach dem Nachnamen aufsteigend sortieren
 		case 1: sortLastname(person); break;
-		
+
 		// nach dem Alter aufsteigend sortieren
 		case 2: sortAge(person); break;
 
-		// nach dem Wohnort aufsteigend sortieren	
+		// nach dem Wohnort aufsteigend sortieren
 		case 3: sortPlace(person); break;
-		
+
 		default: cout << endl << "  Die eingegebene Nummer war falsch!" << endl; break;
 	}
-	
+
 	cout << endl << "\x1B[0;32m" << "  Die Kontaktliste wurde erfolgreich sortiert!" << "\x1B[0;37m" << endl;
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
-	
+
 	// Ausgabe des Menues
 	printMenu();
 }
@@ -483,7 +483,7 @@ void Controller::sortFirstname(vector<Person>& person){
 	{
 		for (int a = 0; a < person.size() - i; a++)
 		{
-			if (person[a+1].getFirstname().compare(person[a].getFirstname()) < 0) 
+			if (person[a+1].getFirstname().compare(person[a].getFirstname()) < 0)
 			{
 				Person tmp_person = person[a];
 				person[a] = person[a+1];
@@ -499,8 +499,8 @@ void Controller::sortLastname(vector<Person>& person){
 	{
 		for (int a = 0; a < person.size() - i; a++)
 		{
-			if (person[a+1].getLastname().compare(person[a].getLastname()) < 0) 
-			{				
+			if (person[a+1].getLastname().compare(person[a].getLastname()) < 0)
+			{
 				Person tmp_person = person[a];
 				person[a] = person[a+1];
 				person[a+1] = tmp_person;
@@ -523,7 +523,7 @@ void Controller::sortAge(vector<Person>& person){
 			}
 		}
 	}
-}	
+}
 
 // Bubblesort-Algorithmus zum aufsteigenden Sortieren des Wohnorts
 void Controller::sortPlace(vector<Person>& person){
@@ -531,7 +531,7 @@ void Controller::sortPlace(vector<Person>& person){
 	{
 		for (int a = 0; a < person.size() - i; a++)
 		{
-			if (person[a+1].getPlace().compare(person[a].getPlace()) < 0) 
+			if (person[a+1].getPlace().compare(person[a].getPlace()) < 0)
 			{
 				Person tmp_person = person[a];
 				person[a] = person[a+1];
@@ -567,13 +567,13 @@ vector<Person> Controller::getPersons() {
 
 bool Controller::checkInt(string input){
 	bool isInt = true;
-	
+
 	for (int i = 0; i < input.length(); ++i){
 		if(!isdigit(input[i])){
 			isInt = false;
 		}
 	}
-	
+
 	return isInt;
 }
 

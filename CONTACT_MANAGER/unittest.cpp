@@ -55,6 +55,7 @@ SamplesPersonn SAMPLES_PERSON[SAMPLES_PERSON_COUNT] =
 }
 */
 
+/*
 TEST_CASE("loadContacts")
 {
   //pointer auf neues Objekt controller
@@ -64,49 +65,50 @@ TEST_CASE("loadContacts")
 
 
 }
+*/
 
-
+// methods in person.cpp
 TEST_CASE("intToEnum")
 {
     SECTION("maennlich")
     {
       string gender = "0";
-      GenderType tmp = Person::string_to_enum(gender);
+      GenderType tmp = Person::intToEnum(gender);
       CHECK(tmp == GenderType::MAN);
     }
 
     SECTION("weiblich")
     {
       string gender = "1";
-      GenderType tmp = Person::string_to_enum(gender);
+      GenderType tmp = Person::intToEnum(gender);
       CHECK(tmp == GenderType::WOMAN);
     }
 
     SECTION("divers")
     {
       string gender = "2";
-      GenderType tmp = Person::string_to_enum(gender);
+      GenderType tmp = Person::intToEnum(gender);
       CHECK(tmp == GenderType::DIVERSE);
     }
 
     SECTION("other")
     {
       string gender = "5";
-      GenderType tmp = Person::string_to_enum(gender);
+      GenderType tmp = Person::intToEnum(gender);
       CHECK(tmp == GenderType::DIVERSE);
     }
 
     SECTION("emtpy")
     {
       string gender;
-      GenderType tmp = Person::string_to_enum(gender);
+      GenderType tmp = Person::intToEnum(gender);
       CHECK(tmp == GenderType::MAN);
     }
 
     SECTION("text")
     {
       string gender = "Ich bin ein Mann";
-      GenderType tmp = Person::string_to_enum(gender);
+      GenderType tmp = Person::intToEnum(gender);
       CHECK(tmp == GenderType::DIVERSE);
     }
 
@@ -114,12 +116,31 @@ TEST_CASE("intToEnum")
 
 TEST_CASE("enumToInt")
 {
+    SECTION("maennlich")
+    {
+      GenderType gender = MAN;
+      string tmp = Person::enumToInt(gender);
+      CHECK(tmp == "maennlich");
+    }
 
+    SECTION("weibich")
+    {
+      GenderType gender = WOMAN;
+      string tmp = Person::enumToInt(gender);
+      CHECK(tmp == "weiblich");
+    }
+
+    SECTION("divers")
+    {
+      GenderType gender = DIVERSE;
+      string tmp = Person::enumToInt(gender);
+      CHECK(tmp == "divers");
+    }
 
 }
 
 
-
+// methods in controller.cpp
 TEST_CASE("checkString")
 {
     // correct input

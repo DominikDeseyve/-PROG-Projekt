@@ -22,24 +22,24 @@ Person::Person(string pFirstname, string pLastname, GenderType pGender, uint32_t
 	this->phonenumber = pPhonenumber;
 }
 
-// 
+//
 stringstream Person::csv_string() {
 	stringstream ss;
 	ss << firstname << ';' << lastname << ';' << gender << ';' << age << ';' << postcode << ';' << place << ';' << street << ';' << housenumber << ';' << prefix << ';' << phonenumber;
 	return ss;
 }
 
-// 
+//
 stringstream Person::printAllPersons() {
 	stringstream ss;
 	ss << setw(20) << firstname << setw(20) << lastname << setw(10) << age << setw(15) << place;
 	return ss;
 }
 
-// 
+//
 stringstream Person::printPerson() {
 	stringstream ss;
-	ss << endl << setw(18) << "  Vorname: " << firstname << endl << setw(18) << "  Nachname: " << lastname << endl << setw(18) << "  Geschlecht: " << enum_to_string(gender) << endl << setw(18) << "  Alter: " << age << endl << setw(18) << "  Wohnort: " << postcode << " " << place << endl << setw(18) << "  Strasse: " << street << " " << housenumber << endl << setw(18) << "  Telefonnummer: " << prefix << "/" << phonenumber << endl;
+	ss << endl << setw(18) << "  Vorname: " << firstname << endl << setw(18) << "  Nachname: " << lastname << endl << setw(18) << "  Geschlecht: " <<enumToInt(gender) << endl << setw(18) << "  Alter: " << age << endl << setw(18) << "  Wohnort: " << postcode << " " << place << endl << setw(18) << "  Strasse: " << street << " " << housenumber << endl << setw(18) << "  Telefonnummer: " << prefix << "/" << phonenumber << endl;
 	return ss;
 }
 
@@ -54,7 +54,7 @@ void Person::editPerson(int ind, string input) {
 		this->lastname = input;
 		break;
 	case 2:
-		this->gender = string_to_enum(input);
+		this->gender = intToEnum(input);
 		break;
 	case 3:
 		this->age = stoi(input);
@@ -82,10 +82,10 @@ void Person::editPerson(int ind, string input) {
 }
 
 // enum wird in String umgewandelt
-string Person::enum_to_string(GenderType tmp) {
-	
+string Person::enumToInt(GenderType tmp) {
+
 	string gender;
-	
+
 	switch (tmp){
 		case MAN: gender = "maennlich"; break;
 		case WOMAN: gender = "weiblich"; break;
@@ -96,7 +96,7 @@ string Person::enum_to_string(GenderType tmp) {
 }
 
 // String wird in enum umgewandelt
-GenderType Person::string_to_enum(string tmp) {
+GenderType Person::intToEnum(string tmp) {
 	GenderType gender;
 
 	switch (stoi(tmp))

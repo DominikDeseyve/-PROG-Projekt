@@ -23,7 +23,7 @@ namespace ContactManager {
 	class Person {
 
 	protected:
-		// Attribute 
+		// Attribute
 		/// <summary>Vorname der Person</summary>
 		string firstname;
 
@@ -86,8 +86,8 @@ namespace ContactManager {
 
 		stringstream printPerson();
 
-		static GenderType string_to_enum(string tmp);
-		static string enum_to_string(GenderType tmp);
+		static GenderType intToEnum(string tmp);
+		static string enumToInt(GenderType tmp);
 	};
 
 }
