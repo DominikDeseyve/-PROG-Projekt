@@ -8,20 +8,14 @@
 using namespace std;
 
 namespace ContactManager {
-
+	/// <summary>Aufzählungstyp zur Bestimmung des Geschlechts.</summary>
 	typedef enum
 	{
-		/// <summary>
-		/// m�nnlich (0)
-		/// </summary>
+		/// <summary>männlich (0)</summary>
 		MAN,
-		/// <summary>
-		/// weiblich (1)
-		/// </summary>
+		/// <summary>weiblich (1)</summary>
 		WOMAN,
-		/// <summary>
-		/// diverse (2)
-		/// </summary>
+		/// <summary>diverse (2)</summary>
 		DIVERSE
 	} GenderType;
 
@@ -30,15 +24,34 @@ namespace ContactManager {
 
 	protected:
 		// Attribute 
+		/// <summary>Vorname der Person</summary>
 		string firstname;
+
+		/// <summary>Nachname der Person</summary>
 		string lastname;
+
+		/// <summary>Geschlechtstyp der Person</summary>
 		GenderType gender;
+
+		/// <summary>Alter der Person</summary>
 		uint32_t age;
+
+		/// <summary>Postleitzahl der Person</summary>
 		uint32_t postcode;
+
+		/// <summary>Wohnort der Person</summary>
 		string place;
+
+		/// <summary>Straße der Person</summary>
 		string street;
+
+		/// <summary>Hausnummer der Person</summary>
 		uint32_t housenumber;
+
+		/// <summary>Prefix der Telefonnummer der Person</summary>
 		uint32_t prefix;
+
+		/// <summary>Suffix der Telefonnummer der Person</summary>
 		uint32_t phonenumber;
 
 

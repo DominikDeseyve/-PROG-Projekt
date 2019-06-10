@@ -5,6 +5,7 @@ var menudata={children:[
 {text:"Klassen-Verzeichnis",url:"classes.html"},
 {text:"Klassen-Elemente",url:"functions.html",children:[
 {text:"Alle",url:"functions.html"},
-{text:"Funktionen",url:"functions_func.html"}]}]},
+{text:"Funktionen",url:"functions_func.html"},
+{text:"Variablen",url:"functions_vars.html"}]}]},
 {text:"Dateien",url:"files.html",children:[
 {text:"Auflistung der Dateien",url:"files.html"}]}]}

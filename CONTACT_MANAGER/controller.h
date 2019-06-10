@@ -2,10 +2,10 @@
 #define _CONTROLLER_H_
 
 /** \mainpage
-* Die Klasse Temperature verwaltet Temperaturen unabhängig von der
-* physikalischen Einheit und formatiert je nach Einstellung
-* den Wert in die passende physikalische Einheit um.
-* Basistemperatur ist °K (Kelvin).
+* Unser Contact - Manager hilft Ihnen eine übersichtliche
+* Verwaltung ihrer Kontakte zu haben.
+* Durch drücken der jeweiligen Menütaste
+* können sie u. a. neue Kontakte erstellen oder vorhandene Kontakte bearbeiten.
 * \author Robin Fricker, Anna Kroesen, Dominik Deseyve
 * \date 14. Mai 2019
 */
@@ -23,7 +23,7 @@ namespace ContactManager {
 	class Controller {
 	
 	private:
-		// Vector für die Liste der Personen
+		/// <summary>Vektor für die Liste ALLER Personen.</summary>
 		vector<Person> person;
 
 	public:
@@ -37,13 +37,20 @@ namespace ContactManager {
 		/// <summary>Lädt Kontakte aus der Standard CSV-Datei.</summary>
     	/// <param name="person">Alle Personen im Vector gespeichert.</param>    			
 		void loadContacts(vector<Person>& person);
+
+		/// <summary>Speichert Kontakt in die Standard CSV-Datei.</summary>
+    	/// <param name="person">Alle Personen im Vector gespeichert.</param>    	
 		void saveContacts(vector<Person>& person);
 
-		// Menue ausgeben
+		/// <summary>Das Hauptmenü wird in der Konsole ausgegeben.</summary>
 		void printMenu();
 
-		// Alle Kontakte und einzelnen Kontakt ausgeben
+		/// <summary>ALLE Kontakte werden ausgegeben.</summary>
+    	/// <param name="person">Alle Personen im Vector gespeichert.</param>    	
 		void printContacts(vector<Person>& person);
+
+		/// <summary>Ein EINZELNER Kontakt wird ausgegeben.</summary>
+    	/// <param name="person">Alle Personen im Vector gespeichert.</param>    	
 		void printSingleContact(vector<Person>& person);
 
 		// Kontakt erstellen, bearbeiten, loeschen und sortieren
