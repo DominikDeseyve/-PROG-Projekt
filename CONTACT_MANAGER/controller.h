@@ -72,6 +72,10 @@ namespace ContactManager {
 		static bool checkInt(string input);
 		static bool checkString(string input);
 
+		//Convert Funktionen
+		static GenderType intToEnum(string tmp);
+		static string enumToInt(GenderType tmp);
+
 		vector<Person> getPersons();
 	};
 }

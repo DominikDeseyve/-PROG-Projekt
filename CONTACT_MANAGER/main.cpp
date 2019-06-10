@@ -42,7 +42,7 @@ int main()
 	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl << endl;
 
 	// ein Controller wird erstellt
-	Controller *controller = new Controller();
+	Controller *controller = new Controller();	
 	controller->printMenu();
 
 	return 0;

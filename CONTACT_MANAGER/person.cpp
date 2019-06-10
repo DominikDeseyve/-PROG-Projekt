@@ -4,6 +4,7 @@
 #include <iomanip>
 
 #include "person.h"
+#include "controller.h"
 
 using namespace std;
 using namespace ContactManager;
@@ -39,7 +40,7 @@ stringstream Person::printAllPersons() {
 //
 stringstream Person::printPerson() {
 	stringstream ss;
-	ss << endl << setw(18) << "  Vorname: " << firstname << endl << setw(18) << "  Nachname: " << lastname << endl << setw(18) << "  Geschlecht: " <<enumToInt(gender) << endl << setw(18) << "  Alter: " << age << endl << setw(18) << "  Wohnort: " << postcode << " " << place << endl << setw(18) << "  Strasse: " << street << " " << housenumber << endl << setw(18) << "  Telefonnummer: " << prefix << "/" << phonenumber << endl;
+	ss << endl << setw(18) << "  Vorname: " << firstname << endl << setw(18) << "  Nachname: " << lastname << endl << setw(18) << "  Geschlecht: " << Controller::enumToInt(gender) << endl << setw(18) << "  Alter: " << age << endl << setw(18) << "  Wohnort: " << postcode << " " << place << endl << setw(18) << "  Strasse: " << street << " " << housenumber << endl << setw(18) << "  Telefonnummer: " << prefix << "/" << phonenumber << endl;
 	return ss;
 }
 
@@ -54,7 +55,7 @@ void Person::editPerson(int ind, string input) {
 		this->lastname = input;
 		break;
 	case 2:
-		this->gender = intToEnum(input);
+		this->gender = Controller::intToEnum(input);
 		break;
 	case 3:
 		this->age = stoi(input);
@@ -79,32 +80,4 @@ void Person::editPerson(int ind, string input) {
 		break;
 	default: cout << endl << "  Die eingegebene Nummer war falsch!" << endl; break;
 	}
-}
-
-// enum wird in String umgewandelt
-string Person::enumToInt(GenderType tmp) {
-
-	string gender;
-
-	switch (tmp){
-		case MAN: gender = "maennlich"; break;
-		case WOMAN: gender = "weiblich"; break;
-		case DIVERSE: gender = "divers"; break;
-		default: gender = "divers"; break;
-	}
-	return gender;
-}
-
-// String wird in enum umgewandelt
-GenderType Person::intToEnum(string tmp) {
-	GenderType gender;
-
-	switch (stoi(tmp))
-	{
-		case 0: gender = GenderType::MAN; break;
-		case 1: gender = GenderType::WOMAN; break;
-		case 2: gender = GenderType::DIVERSE; break;
-		default: gender = GenderType::DIVERSE; break;
-	}
-	return gender;
 }

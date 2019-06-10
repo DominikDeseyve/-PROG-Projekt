@@ -86,8 +86,7 @@ namespace ContactManager {
 
 		stringstream printPerson();
 
-		static GenderType intToEnum(string tmp);
-		static string enumToInt(GenderType tmp);
+	
 	};
 
 }

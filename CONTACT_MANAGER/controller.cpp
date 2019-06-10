@@ -60,7 +60,7 @@ void Controller::loadContacts(vector<Person>& person) {
 			prefix = stoi(helpPrefix);
 
 			// String wird in entsprechenden enum-Wert umgewandelt
-			gender = Person::intToEnum(helpGender);
+			gender = Controller::intToEnum(helpGender);
 
 			// Person wird angelegt mit den entsprechenden Werten
 			Person *person1 = new Person(firstname, lastname, gender, age, postcode, place, street, housenumber, prefix, phonenumber);
@@ -291,7 +291,7 @@ void Controller::createContact(vector<Person>& person) {
 	cin >> phonenumber;
 
 	// Person mit den eingegebenen Werten anlegen
-	Person* person1 = new Person(firstname, lastname, Person::intToEnum(gender), age, postcode, place, street, housenumber, prefix, phonenumber);
+	Person* person1 = new Person(firstname, lastname, Controller::intToEnum(gender), age, postcode, place, street, housenumber, prefix, phonenumber);
 
 	// Die erstellte Person (=> person1) wird in der Personenliste an letzter Stelle angefügt
 	person.push_back(*person1);
@@ -568,32 +568,89 @@ vector<Person> Controller::getPersons() {
 bool Controller::checkInt(string input){
 	bool isInt = true;
 
-	for (int i = 0; i < input.length(); ++i){
+	//Überprüfe jede einzelne Zahl
+	int i = 0;
+	while(isInt && i < input.length()) {
 		if(!isdigit(input[i])){
+			cout << "\x1B[0;31m" << "  Die eingegebene Zahl ist nicht korrekt!" << "\x1B[0;37m" << endl;
 			isInt = false;
 		}
+		i++;
 	}
 
+	//Überprüfe auf Leerstring
+	if(input.empty()) {
+		cout << "\x1B[0;31m" << "  Die eingegebene Zahl ist leer!" << "\x1B[0;37m" << endl;
+		isInt = false;
+	}
+
+	//Uberprüfe auf Länge der Zahl
+	if(input.length() > 12) {
+		cout << "\x1B[0;31m" << "  Die eingegebene Zahl ist zu lang!" << "\x1B[0;37m" << endl;
+		isInt = false;
+	}
 	return isInt;
 }
 
 bool Controller::checkString(string input){
-	bool isString = false;
+	bool isString = true;	
 
-	for ( int j = 0; j < input.length(); j++){
-		cout << endl << input[j];
-	}
-
-	for (int i = 0; i < input.length(); ++i){
-		if(!isalpha(input[i])){
-			isString = true;
+	//Jeden Buchstaben überprüfen
+	int i = 0;
+	while(isString && i < input.length()) {
+		if(!isalpha(input[i]) && input[i] != '-'){
+			cout << "\x1B[0;31m" << "  Der eingegebene Text ist kein String!" << "\x1B[0;37m" << endl;
+			isString = false;
 		}
+		i++;
 	}
 
-	if(input.length() > 30) {
-		cout << "\x1B[0;31m" << "  Der eingegebene Text war zu lang!" << "\x1B[0;37m" << endl;
-		isString = true;
+	//Überprüfe auf Leerstring
+	if(input.empty()) {
+		cout << "\x1B[0;31m" << "  Der eingegebene Text ist leer!" << "\x1B[0;37m" << endl;
+		isString = false;
 	}
 
+	//Überprüfe maximale Länge
+	if(input.length() > 30 || input.length() < 2) {
+		cout << "\x1B[0;31m" << "  Die Länge des eingegebenen Text ist nicht korrekt!" << "\x1B[0;37m" << endl;
+		isString = false;
+	}
 	return isString;
 }
+
+/********************************************************************************/
+/************				Convert - Funtkionen					*************/
+/********************************************************************************/
+
+// enum wird in String umgewandelt
+string Controller::enumToInt(GenderType tmp) {
+
+	string gender;
+	switch (tmp){
+		case MAN: gender = "maennlich"; break;
+		case WOMAN: gender = "weiblich"; break;
+		case DIVERSE: gender = "divers"; break;
+		default: gender = "divers"; break;
+	}
+	return gender;
+}
+
+// String wird in enum umgewandelt
+GenderType Controller::intToEnum(string tmp) {
+	GenderType gender;
+	if(Controller::checkInt(tmp)) {
+		switch (stoi(tmp))
+		{
+			case 0: gender = GenderType::MAN; break;
+			case 1: gender = GenderType::WOMAN; break;
+			case 2: gender = GenderType::DIVERSE; break;
+			default: gender = GenderType::DIVERSE; break;
+		}
+	} else {
+		return GenderType::DIVERSE;
+	}
+	
+	return gender;
+}
+
