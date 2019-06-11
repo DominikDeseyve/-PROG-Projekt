@@ -49,7 +49,7 @@ namespace ContactManager {
 		uint32_t housenumber;
 
 		/// <summary>Prefix der Telefonnummer der Person</summary>
-		uint32_t prefix;
+		string prefix;
 
 		/// <summary>Suffix der Telefonnummer der Person</summary>
 		uint32_t phonenumber;
@@ -67,7 +67,7 @@ namespace ContactManager {
 		/// <param name="pHousenumber">Hausnummer der Anschrift der zu erstellenden Person</param>  
 		/// <param name="pPrefix">Prefix der Telefonnummer der zu erstellenden Person</param>  
 		/// <param name="pPhonenumber">Telefonnummer der zu erstellenden Person</param>  
-		Person(string pFirstname, string pLastname, GenderType pGender, uint32_t pAge, uint32_t pPostcode, string pPlace, string pStreet, uint32_t pHousenumber, uint32_t pPrefix, uint32_t pPhonenumber);
+		Person(string pFirstname, string pLastname, GenderType pGender, uint32_t pAge, uint32_t pPostcode, string pPlace, string pStreet, uint32_t pHousenumber, string pPrefix, uint32_t pPhonenumber);
 
 
 		/*************************************/

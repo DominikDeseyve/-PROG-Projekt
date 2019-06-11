@@ -29,7 +29,7 @@ namespace ContactManager {
 	public:
 		// Konstruktor
 		Controller();
-
+		
 		/// <summary>Entscheidet auf Basis des Parameters, welcher Menüpunkt gedrückt wurde.</summary>
     	/// <param name="number">Vom Benutzer gedrückter Menüpunkt</param>    	
 		void actionHandler(int number);

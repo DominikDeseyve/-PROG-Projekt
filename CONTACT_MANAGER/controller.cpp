@@ -27,8 +27,8 @@ Controller::Controller(){
 void Controller::loadContacts(vector<Person>& person) {
 	// lokale Attribute
 	ifstream file;
-	string firstname, lastname, helpPostcode, place, street, helpHousenumber, helpAge, helpPhonenumber, helpPrefix, helpGender;
-	uint32_t age, housenumber, prefix, phonenumber, postcode;
+	string firstname, lastname, helpPostcode, place, street, prefix, helpHousenumber, helpAge, helpPhonenumber, helpGender;
+	uint32_t age, housenumber, phonenumber, postcode;
 	GenderType gender = GenderType::DIVERSE;
 
 	// CSV-Datei oeffnen
@@ -48,7 +48,7 @@ void Controller::loadContacts(vector<Person>& person) {
 			getline(file, place, token);
 			getline(file, street, token);
 			getline(file, helpHousenumber, token);
-			getline(file, helpPrefix, token);
+			getline(file, prefix, token);
 			getline(file, helpPhonenumber, '\n');
 
 			// Die Werte aus der CSV-Datei werden in die entsprechenden Werte umgewandelt
@@ -56,7 +56,6 @@ void Controller::loadContacts(vector<Person>& person) {
 			postcode = stoi(helpPostcode);
 			housenumber = stoi(helpHousenumber);
 			phonenumber = stoi(helpPhonenumber);
-			prefix = stoi(helpPrefix);
 
 			// String wird in entsprechenden enum-Wert umgewandelt
 			gender = Controller::intToEnum(helpGender);
@@ -229,16 +228,7 @@ void Controller::printSingleContact(vector<Person>& person) {
 			}
 		}
 	}
-/*
-	while (tmp > person.size() || tmp <= 0){
-		cout << endl << "  Gib die Nummer des gewuenschten Kontakts ein: ";
-		cin >> tmp;
 
-		if(tmp > person.size() || tmp <= 0){
-			cout << "\x1B[0;31m" << "  Die eingegebene Nummer war falsch!" << "\x1B[0;37m" << endl;
-		}
-	}
-*/
 	cout << endl << "\x1B[1;35m" << "  Ausgabe des Kontakts: " << contactNumber;
 	cout << endl << "------------------------------" << "\x1B[0;37m";
 
@@ -264,24 +254,13 @@ void Controller::createContact(vector<Person>& person) {
 	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl;
 
 	// lokale Attribute
-	string firstname, lastname, place, street, gender;
-	uint32_t age, housenumber, prefix, phonenumber, postcode;
+	string firstname, lastname, place, street, gender, prefix;
+	uint32_t age, housenumber, phonenumber, postcode;
 	bool correctInput = false;
 
 	// einzelne Eingaben für die entsprechenden Werte
 	cout << "  Gib deinen Vornamen ein: ";
-	cin >> lastname;
-	/*
-	while (!correctInput) {
-		cout << "  Gib deinen Vornamen ein: ";
-		cin >> firstname;
-		correctInput = checkString(firstname);
-
-		if(correctInput) {
-			cout << "\x1B[0;31m" << "  Es wurde kein Text eingegeben!" << "\x1B[0;37m" << endl;
-		}
-	}*/
-
+	cin >> firstname;
 	cout << "  Gib deinen Nachnamen ein: ";
 	cin >> lastname;
 	cout << "  Gib dein Geschlecht ein (Man = 0, Woman = 1, Diverse = 2): ";
@@ -354,7 +333,6 @@ void Controller::editContact(vector<Person>& person) {
 				correctInput = checkString(newInput);
 			}
 			break;
-
 		case 1: 
 			cout << endl << "  Gib den neuen Nachname ein: ";
 			cin >> newInput;
