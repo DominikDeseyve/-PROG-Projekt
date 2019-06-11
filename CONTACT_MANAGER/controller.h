@@ -26,6 +26,8 @@ namespace ContactManager {
 		/// <summary>Vektor für die Liste ALLER Personen.</summary>
 		vector<Person> person;
 
+		string csvPath;
+
 	public:
 		// Konstruktor
 		Controller();
@@ -36,7 +38,7 @@ namespace ContactManager {
 
 		/// <summary>Lädt Kontakte aus der Standard CSV-Datei.</summary>
     	/// <param name="person">Alle Personen im Vector gespeichert.</param>    			
-		void loadContacts(vector<Person>& person);
+		void loadContacts();
 
 		/// <summary>Speichert Kontakt in die Standard CSV-Datei.</summary>
     	/// <param name="person">Alle Personen im Vector gespeichert.</param>    	
@@ -77,6 +79,7 @@ namespace ContactManager {
 		static string enumToInt(GenderType tmp);
 
 		vector<Person> getPersons();
+		void setCSVPath(string path);
 	};
 }
 #endif

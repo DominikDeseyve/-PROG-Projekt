@@ -16,7 +16,8 @@ using namespace ContactManager;
 /************ Controller ************ /
 /*************************************/
 Controller::Controller(){
-	loadContacts(person);
+	//Setze Standardpath für CSV-Datei
+	this->csvPath = "contacts.csv";
 }
 
 /********************************************************************/
@@ -24,7 +25,7 @@ Controller::Controller(){
 /********************************************************************/
 
 // Kontakte aus CSV-Datei laden
-void Controller::loadContacts(vector<Person>& person) {
+void Controller::loadContacts() {
 	// lokale Attribute
 	ifstream file;
 	string firstname, lastname, helpPostcode, place, street, prefix, helpHousenumber, helpAge, helpPhonenumber, helpGender;
@@ -32,7 +33,7 @@ void Controller::loadContacts(vector<Person>& person) {
 	GenderType gender = GenderType::DIVERSE;
 
 	// CSV-Datei oeffnen
-	file.open("contacts.csv");
+	file.open(this->csvPath);
 
 	// Trennungstoken für die CSV-Datei
 	char token = ';';
@@ -64,7 +65,7 @@ void Controller::loadContacts(vector<Person>& person) {
 			Person *person1 = new Person(firstname, lastname, gender, age, postcode, place, street, housenumber, prefix, phonenumber);
 
 			// Die erstellte Person (=> person1) wird in der Personenliste an letzter Stelle angefügt
-			person.push_back(*person1);
+			this->person.push_back(*person1);
 		}
 
 		// CSV-Datei wird wieder geschlossen
@@ -82,7 +83,7 @@ void Controller::saveContacts(vector<Person>& person) {
 	ofstream file;
 
 	// CSV-Datei oeffnen
-	file.open("contacts.csv");
+	file.open(this->csvPath);
 
 	// jeden Kontakt in eine Zeile schreiben
 	for (size_t i = 0; i < person.size(); i++)
@@ -542,6 +543,11 @@ void Controller::exitProgram(vector<Person>& person) {
 
 vector<Person> Controller::getPersons() {
 	return person;
+}
+
+void Controller::setCSVPath(string path) {
+	this->csvPath = path;
+	cout << "\x1B[0;32m" << "Die CSV-Datei names '" << this->csvPath << "' wird geladen... \x1B[0;37m" << endl;
 }
 
 /********************************************************************************/
