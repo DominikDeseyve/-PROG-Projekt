@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 			controller->setCSVPath(argv[2]);		
 		}
 	}	
-
+	
 	controller->loadContacts();
 	controller->printMenu();
 

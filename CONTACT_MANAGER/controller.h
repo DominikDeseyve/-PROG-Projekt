@@ -72,6 +72,8 @@ namespace ContactManager {
 
 		// CheckFunktionen
 		static bool checkInt(string input);
+		static bool checkInt(string input,int pMin,int pMax);
+
 		static bool checkString(string input);
 
 		//Convert Funktionen

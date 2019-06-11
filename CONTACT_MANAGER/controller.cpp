@@ -581,6 +581,17 @@ bool Controller::checkInt(string input){
 	return isInt;
 }
 
+bool Controller::checkInt(string input,int pMin,int pMax){
+	bool isInt = false;
+	if(Controller::checkInt(input)) {
+		int number = stoi(input);
+		if(number >= pMin && number <= pMax) {
+			isInt = true;
+		}
+	}
+	return isInt;
+}
+
 bool Controller::checkString(string input){
 	bool isString = true;	
 
