@@ -49,18 +49,30 @@ namespace ContactManager {
 		uint32_t housenumber;
 
 		/// <summary>Prefix der Telefonnummer der Person</summary>
-		uint32_t prefix;
+		string prefix;
 
 		/// <summary>Suffix der Telefonnummer der Person</summary>
 		uint32_t phonenumber;
 
 
 	public:
-		// Konstruktor
-		Person(string pFirstname, string pLastname, GenderType pGender, uint32_t pAge, uint32_t pPostcode, string pPlace, string pStreet, uint32_t pHousenumber, uint32_t pPrefix, uint32_t pPhonenumber);
+		/// <summary>Kostruktor zur Erstellung eines Personen-Objektes</summary>
+		/// <param name="pFirstname">Vorname der zu erstellenden Person</param>    	
+		/// <param name="pLastname">Nachname der zu erstellenden Person</param>  
+		/// <param name="pGender">Geschlecht der zu erstellenden Person</param>  
+		/// <param name="pAge">Alter der zu erstellenden Person</param>  
+		/// <param name="pPostcode">Postleitzahl der zu erstellenden Person</param>  
+		/// <param name="pPlace">Wohnort der zu erstellenden Person</param>  
+		/// <param name="pStreet">Wohnstraße der zu erstellenden Person</param>  
+		/// <param name="pHousenumber">Hausnummer der Anschrift der zu erstellenden Person</param>  
+		/// <param name="pPrefix">Prefix der Telefonnummer der zu erstellenden Person</param>  
+		/// <param name="pPhonenumber">Telefonnummer der zu erstellenden Person</param>  
+		Person(string pFirstname, string pLastname, GenderType pGender, uint32_t pAge, uint32_t pPostcode, string pPlace, string pStreet, uint32_t pHousenumber, string pPrefix, uint32_t pPhonenumber);
 
 
-		// Getter
+		/*************************************/
+		/********** GET - METHODEN ********** /
+		/*************************************/
 		string& getFirstname() {
 			return firstname;
 		}
@@ -77,7 +89,9 @@ namespace ContactManager {
 			return place;
 		}
 
-		// sonstige Methoden
+		/*************************************/
+		/********** HILFSMETHODEN ************/
+		/*************************************/
 		stringstream csv_string();
 
 		void editPerson(int ind, string input);
@@ -86,8 +100,7 @@ namespace ContactManager {
 
 		stringstream printPerson();
 
-		static GenderType intToEnum(string tmp);
-		static string enumToInt(GenderType tmp);
+	
 	};
 
 }

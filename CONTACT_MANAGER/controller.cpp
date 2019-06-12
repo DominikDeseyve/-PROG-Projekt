@@ -3,7 +3,6 @@
 #include <sstream>
 #include <vector>
 #include <iostream>
-#include <istream>
 #include <iomanip>
 
 #include "controller.h"
@@ -13,11 +12,12 @@
 using namespace std;
 using namespace ContactManager;
 
-/********************************************************************/
-/************		Controller							*************/
-/********************************************************************/
+/*************************************/
+/************ Controller ************ /
+/*************************************/
 Controller::Controller(){
-	loadContacts(person);
+	//Setze Standardpath für CSV-Datei
+	this->csvPath = "contacts.csv";
 }
 
 /********************************************************************/
@@ -25,15 +25,15 @@ Controller::Controller(){
 /********************************************************************/
 
 // Kontakte aus CSV-Datei laden
-void Controller::loadContacts(vector<Person>& person) {
+void Controller::loadContacts() {
 	// lokale Attribute
 	ifstream file;
-	string firstname, lastname, helpPostcode, place, street, helpHousenumber, helpAge, helpPhonenumber, helpPrefix, helpGender;
-	uint32_t age, housenumber, prefix, phonenumber, postcode;
+	string firstname, lastname, helpPostcode, place, street, prefix, helpHousenumber, helpAge, helpPhonenumber, helpGender;
+	uint32_t age, housenumber, phonenumber, postcode;
 	GenderType gender = GenderType::DIVERSE;
 
 	// CSV-Datei oeffnen
-	file.open("contacts.csv");
+	file.open(this->csvPath);
 
 	// Trennungstoken für die CSV-Datei
 	char token = ';';
@@ -49,7 +49,7 @@ void Controller::loadContacts(vector<Person>& person) {
 			getline(file, place, token);
 			getline(file, street, token);
 			getline(file, helpHousenumber, token);
-			getline(file, helpPrefix, token);
+			getline(file, prefix, token);
 			getline(file, helpPhonenumber, '\n');
 
 			// Die Werte aus der CSV-Datei werden in die entsprechenden Werte umgewandelt
@@ -57,16 +57,15 @@ void Controller::loadContacts(vector<Person>& person) {
 			postcode = stoi(helpPostcode);
 			housenumber = stoi(helpHousenumber);
 			phonenumber = stoi(helpPhonenumber);
-			prefix = stoi(helpPrefix);
 
 			// String wird in entsprechenden enum-Wert umgewandelt
-			gender = Person::intToEnum(helpGender);
+			gender = Controller::intToEnum(helpGender);
 
 			// Person wird angelegt mit den entsprechenden Werten
 			Person *person1 = new Person(firstname, lastname, gender, age, postcode, place, street, housenumber, prefix, phonenumber);
 
 			// Die erstellte Person (=> person1) wird in der Personenliste an letzter Stelle angefügt
-			person.push_back(*person1);
+			this->person.push_back(*person1);
 		}
 
 		// CSV-Datei wird wieder geschlossen
@@ -84,7 +83,7 @@ void Controller::saveContacts(vector<Person>& person) {
 	ofstream file;
 
 	// CSV-Datei oeffnen
-	file.open("contacts.csv");
+	file.open(this->csvPath);
 
 	// jeden Kontakt in eine Zeile schreiben
 	for (size_t i = 0; i < person.size(); i++)
@@ -162,28 +161,26 @@ void Controller::printMenu() {
 	cout << "  | 7 | Programm speichern und beenden" << endl;
 
 	// Eingabe der entsprechenden Nummer
-	string menu_number;
+	string menuNumber;
 	bool correctInput = false;
 
 	while (!correctInput) {
 		cout << endl << "  Gib deine Nummer ein: ";
-		cin >> menu_number;
-		correctInput = checkInt(menu_number);
+		cin >> menuNumber;
+		correctInput = checkInt(menuNumber);
 
 		if(correctInput) {
-			if(stoi(menu_number) > 7 || stoi(menu_number) < 0){
+			if(stoi(menuNumber) > 7 || stoi(menuNumber) < 0){
 				correctInput = false;
-				cout << "\x1B[0;31m" << "  Die eingegebene Nummer war falsch!" << "\x1B[0;37m" << endl;
+				cout << "\x1B[0;31m" << "  Die eingegebene Zahl ist nicht korrekt!" << "\x1B[0;37m" << endl;
 			}
-		} else {
-			cout << "\x1B[0;31m" << "  Es wurde keine Nummer eingegeben!" << "\x1B[0;37m" << endl;
 		}
 	}
 
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 
 	// Actionhandler nach Eingabe ausfuehren, um entsprechende Funktion aufzurufen
-	actionHandler(stoi(menu_number));
+	actionHandler(stoi(menuNumber));
 }
 
 // Alle Kontakte ausgeben
@@ -217,22 +214,27 @@ void Controller::printSingleContact(vector<Person>& person) {
 	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl;
 
 	// Eingabe des gewuenschten Kontakts
-	int tmp;
+	string contactNumber;
+	bool correctInput = false;
 
-	while (tmp > person.size() || tmp <= 0){
+	while (!correctInput) {
 		cout << endl << "  Gib die Nummer des gewuenschten Kontakts ein: ";
-		cin >> tmp;
+		cin >> contactNumber;
+		correctInput = checkInt(contactNumber);
 
-		if(tmp > person.size() || tmp <= 0){
-			cout << "\x1B[0;31m" << "  Die eingegebene Nummer war falsch!" << "\x1B[0;37m" << endl;
+		if(correctInput) {
+			if(stoi(contactNumber) > person.size() || stoi(contactNumber) <= 0){
+				correctInput = false;
+				cout << "\x1B[0;31m" << "  Die eingegebene Zahl ist nicht korrekt!" << "\x1B[0;37m" << endl;
+			}
 		}
 	}
 
-	cout << endl << "\x1B[1;35m" << "  Ausgabe des Kontakts: " << tmp;
+	cout << endl << "\x1B[1;35m" << "  Ausgabe des Kontakts: " << contactNumber;
 	cout << endl << "------------------------------" << "\x1B[0;37m";
 
 	// Ausgabe des gewuenschten Kontakts
-	cout << person[tmp-1].printPerson().str();
+	cout << person[stoi(contactNumber)-1].printPerson().str();
 
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 
@@ -253,24 +255,13 @@ void Controller::createContact(vector<Person>& person) {
 	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl;
 
 	// lokale Attribute
-	string firstname, lastname, place, street, gender;
-	uint32_t age, housenumber, prefix, phonenumber, postcode;
+	string firstname, lastname, place, street, gender, prefix;
+	uint32_t age, housenumber, phonenumber, postcode;
 	bool correctInput = false;
 
 	// einzelne Eingaben für die entsprechenden Werte
 	cout << "  Gib deinen Vornamen ein: ";
-	cin >> lastname;
-	/*
-	while (!correctInput) {
-		cout << "  Gib deinen Vornamen ein: ";
-		cin >> firstname;
-		correctInput = checkString(firstname);
-
-		if(correctInput) {
-			cout << "\x1B[0;31m" << "  Es wurde kein Text eingegeben!" << "\x1B[0;37m" << endl;
-		}
-	}*/
-
+	cin >> firstname;
 	cout << "  Gib deinen Nachnamen ein: ";
 	cin >> lastname;
 	cout << "  Gib dein Geschlecht ein (Man = 0, Woman = 1, Diverse = 2): ";
@@ -291,7 +282,7 @@ void Controller::createContact(vector<Person>& person) {
 	cin >> phonenumber;
 
 	// Person mit den eingegebenen Werten anlegen
-	Person* person1 = new Person(firstname, lastname, Person::intToEnum(gender), age, postcode, place, street, housenumber, prefix, phonenumber);
+	Person* person1 = new Person(firstname, lastname, Controller::intToEnum(gender), age, postcode, place, street, housenumber, prefix, phonenumber);
 
 	// Die erstellte Person (=> person1) wird in der Personenliste an letzter Stelle angefügt
 	person.push_back(*person1);
@@ -313,86 +304,79 @@ void Controller::editContact(vector<Person>& person) {
 	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl;
 
 	// Eingabe der Nummer des entsprechenden Kontakts
-	int tmp;
-
-	while (tmp > person.size() || tmp <= 0){
-		cout << endl << "  Gib die Nummer des Kontakts ein, welchen du bearbeiten moechtest: ";
-		cin >> tmp;
-
-		if(tmp > person.size() || tmp <= 0){
-			cout << "\x1B[0;31m" << "  Die eingegebene Nummer war falsch!" << "\x1B[0;37m" << endl;
-		}
-	}
+	int contactNumber = 0;
+	cout << endl << "  Gib die Nummer des Kontakts ein, welchen du bearbeiten moechtest: ";
+	cin >> contactNumber;
 
 	// Eingabe der Nummer des entsprechenden Attributs
-	int tmp2;
+	int elementNumber;
 	cout << endl << "  0.) Vorname" << endl << "  1.) Nachname" << endl << "  2.) Geschlecht" << endl << "  3.) Alter" << endl << "  4.) Postleitzahl" << endl << "  5.) Wohnort" << endl << "  6.) Strasse" << endl << "  7.) Hausnummer" << endl << "  8.) Vorwahl" << endl << "  9.) Telefonnummer" << endl;
 
-	while (tmp2 > 9 || tmp2 < 0){
+	while (elementNumber > 9 || elementNumber < 0){
 		cout << endl << "  Gib die Nummer ein, die du bearbeiten moechtest: ";
-		cin >> tmp2;
+		cin >> elementNumber;
 
-		if(tmp2 > 9 || tmp2 < 0){
+		if(elementNumber > 9 || elementNumber < 0){
 			cout << "\x1B[0;31m" << "  Die eingegebene Nummer war falsch!" << "\x1B[0;37m" << endl;
 		}
 	}
 
-	string tmp3;
+	bool correctInput = false;
+	string newInput;
 	stringstream ss;
 
-	switch (tmp2) {
-		case 0: ss << endl << "  Gib den neuen Vornamen ein: "; break;
+	switch (elementNumber) {
+		case 0: 
+			while (!correctInput) {
+				cout << endl << "  Gib den neuen Vornamen ein: ";
+				cin >> newInput;
 
-		case 1: ss << endl << "  Gib den neuen Nachname ein: "; break;
-
-		case 2:	ss << endl << "  Gib das neue Geschlecht ein (Man = 0, Woman = 1, Diverse = 2): "; break;
-
-		case 3: ss << endl << "  Gib das neue Alter ein: "; break;
-
+				correctInput = checkString(newInput);
+			}
+			break;
+		case 1: 
+			cout << endl << "  Gib den neuen Nachname ein: ";
+			cin >> newInput;
+			break;
+		case 2:	
+			cout << endl << "  Gib das neue Geschlecht ein (Man = 0, Woman = 1, Diverse = 2): ";
+			cin >> newInput;
+			break;
+		case 3: 
+			cout << endl << "  Gib das neue Alter ein: ";
+			cin >> newInput;
+			break;
 		case 4:
 			cout << endl << "  Gib die neue Postleitzahl ein: ";
-			cin >> tmp3;
+			cin >> newInput;
 			break;
 		case 5:
 			cout << endl << "  Gib den neuen Wohnort ein: ";
-			cin >> tmp3;
+			cin >> newInput;
 			break;
 		case 6:
 			cout << endl << "  Gib die neue Strasse ein: ";
-			cin >> tmp3;
+			cin >> newInput;
 			break;
 		case 7:
 			cout << endl << "  Gib die neue Hausnummer ein: ";
-			cin >> tmp3;
+			cin >> newInput;
 			break;
 		case 8:
 			cout << endl << "  Gib die neue Vorwahl ein: ";
-			cin >> tmp3;
+			cin >> newInput;
 			break;
 		case 9:
 			cout << endl << "  Gib die neue Telefonnummer ein: ";
-			cin >> tmp3;
+			cin >> newInput;
 			break;
 		default: cout << endl << "  Die eingegebene Nummer war falsch!" << endl; break;
 	}
 
-	bool correctInput = false;
-
-	while (!correctInput) {
-		cout << ss.str();
-		cin >> tmp3;
-		correctInput = checkString(tmp3);
-
-		if(correctInput) {
-			cout << "\x1B[0;31m" << "  Es wurde kein Text eingegeben!" << "\x1B[0;37m" << endl;
-			correctInput = false;
-		}
-	}
-/*
 	// entsprechende Person in der Personenliste wird bearbeitet
-	person[tmp - 1].editPerson(tmp2, tmp3);
-*/
-	cout << endl << "\x1B[0;32m" << "  Der Kontakt " << tmp << " wurde erfolgreich bearbeitet!" << "\x1B[0;37m" << endl;
+	person[contactNumber - 1].editPerson(elementNumber, newInput);
+
+	cout << endl << "\x1B[0;32m" << "  Der Kontakt " << contactNumber << " wurde erfolgreich bearbeitet!" << "\x1B[0;37m" << endl;
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 
 	// Ausgabe des Menues
@@ -561,6 +545,11 @@ vector<Person> Controller::getPersons() {
 	return person;
 }
 
+void Controller::setCSVPath(string path) {
+	this->csvPath = path;
+	cout << "\x1B[0;32m" << "Die CSV-Datei names '" << this->csvPath << "' wird geladen... \x1B[0;37m" << endl;
+}
+
 /********************************************************************************/
 /************					Check - Funtkionen					*************/
 /********************************************************************************/
@@ -568,32 +557,100 @@ vector<Person> Controller::getPersons() {
 bool Controller::checkInt(string input){
 	bool isInt = true;
 
-	for (int i = 0; i < input.length(); ++i){
+	//Überprüfe jede einzelne Zahl
+	int i = 0;
+	while(isInt && i < input.length()) {
 		if(!isdigit(input[i])){
+			cout << "\x1B[0;31m" << "  Die eingegebene Zahl ist nicht korrekt!" << "\x1B[0;37m" << endl;
 			isInt = false;
 		}
+		i++;
 	}
 
+	//Überprüfe auf Leerstring
+	if(input.empty()) {
+		cout << "\x1B[0;31m" << "  Die eingegebene Zahl ist leer!" << "\x1B[0;37m" << endl;
+		isInt = false;
+	}
+
+	//Überprüfe auf Länge der Zahl
+	if(input.length() > 12) {
+		cout << "\x1B[0;31m" << "  Die eingegebene Zahl ist zu lang!" << "\x1B[0;37m" << endl;
+		isInt = false;
+	}
+	return isInt;
+}
+
+bool Controller::checkInt(string input,int pMin,int pMax){
+	bool isInt = false;
+	if(Controller::checkInt(input)) {
+		int number = stoi(input);
+		if(number >= pMin && number <= pMax) {
+			isInt = true;
+		}
+	}
 	return isInt;
 }
 
 bool Controller::checkString(string input){
-	bool isString = false;
+	bool isString = true;	
 
-	for ( int j = 0; j < input.length(); j++){
-		cout << endl << input[j];
-	}
-
-	for (int i = 0; i < input.length(); ++i){
-		if(!isalpha(input[i])){
-			isString = true;
+	//Jeden Buchstaben überprüfen
+	int i = 0;
+	while(isString && i < input.length()) {
+		if(!isalpha(input[i]) && input[i] != '-'){
+			cout << "\x1B[0;31m" << "  Der eingegebene Text ist kein String!" << "\x1B[0;37m" << endl;
+			isString = false;
 		}
+		i++;
 	}
 
-	if(input.length() > 30) {
-		cout << "\x1B[0;31m" << "  Der eingegebene Text war zu lang!" << "\x1B[0;37m" << endl;
-		isString = true;
+	//Überprüfe auf Leerstring
+	if(input.empty()) {
+		cout << "\x1B[0;31m" << "  Der eingegebene Text ist leer!" << "\x1B[0;37m" << endl;
+		isString = false;
 	}
 
+	//Überprüfe maximale Länge
+	if(input.length() > 30 || input.length() < 2) {
+		cout << "\x1B[0;31m" << "  Die Länge des eingegebenen Text ist nicht korrekt!" << "\x1B[0;37m" << endl;
+		isString = false;
+	}
 	return isString;
 }
+
+/********************************************************************************/
+/************				Convert - Funtkionen					*************/
+/********************************************************************************/
+
+// enum wird in String umgewandelt
+string Controller::enumToInt(GenderType tmp) {
+
+	string gender;
+	switch (tmp){
+		case MAN: gender = "maennlich"; break;
+		case WOMAN: gender = "weiblich"; break;
+		case DIVERSE: gender = "divers"; break;
+		default: gender = "divers"; break;
+	}
+	return gender;
+}
+
+// String wird in enum umgewandelt
+GenderType Controller::intToEnum(string tmp) {
+	GenderType gender;
+	if(Controller::checkInt(tmp)) {
+		switch (stoi(tmp))
+		{
+			case 0: gender = GenderType::MAN; break;
+			case 1: gender = GenderType::WOMAN; break;
+			case 2: gender = GenderType::DIVERSE; break;
+			default: gender = GenderType::DIVERSE; break;
+		}
+	} else {
+		return GenderType::DIVERSE;
+	}
+	
+	return gender;
+}
+

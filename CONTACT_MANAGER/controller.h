@@ -26,17 +26,19 @@ namespace ContactManager {
 		/// <summary>Vektor für die Liste ALLER Personen.</summary>
 		vector<Person> person;
 
+		string csvPath;
+
 	public:
 		// Konstruktor
 		Controller();
-
+		
 		/// <summary>Entscheidet auf Basis des Parameters, welcher Menüpunkt gedrückt wurde.</summary>
     	/// <param name="number">Vom Benutzer gedrückter Menüpunkt</param>    	
 		void actionHandler(int number);
 
 		/// <summary>Lädt Kontakte aus der Standard CSV-Datei.</summary>
     	/// <param name="person">Alle Personen im Vector gespeichert.</param>    			
-		void loadContacts(vector<Person>& person);
+		void loadContacts();
 
 		/// <summary>Speichert Kontakt in die Standard CSV-Datei.</summary>
     	/// <param name="person">Alle Personen im Vector gespeichert.</param>    	
@@ -70,9 +72,16 @@ namespace ContactManager {
 
 		// CheckFunktionen
 		static bool checkInt(string input);
+		static bool checkInt(string input,int pMin,int pMax);
+
 		static bool checkString(string input);
 
+		//Convert Funktionen
+		static GenderType intToEnum(string tmp);
+		static string enumToInt(GenderType tmp);
+
 		vector<Person> getPersons();
+		void setCSVPath(string path);
 	};
 }
 #endif
