@@ -115,8 +115,6 @@ namespace ContactManager {
 		/// <summary>Bereitet die Ausgabe eines EINZELNEN Kontaktes vor.</summary>
 		/// <returns>Stringstream, mit einem Kontaktdatensatz</returns>
 		stringstream printPerson();
-
-	
 	};
 
 }

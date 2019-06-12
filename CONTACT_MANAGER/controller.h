@@ -81,6 +81,10 @@ namespace ContactManager {
     	/// <param name="person">Alle Personen im Vector gespeichert.</param>    
 		void exitProgram(vector<Person>& person);
 
+		static string waitForInput(string coutText, string type);
+
+		static string waitForInput(string coutText, int pMin, int pMax);
+
 		/// <summary>Funktion zur Überprüfung, ob es sich bei dem übergebenen String um einen korrekten Integer handelt.</summary>
     	/// <param name="input">Die zu überprüfende Benutzereingabe.</param>    
 		static bool checkInt(string input);

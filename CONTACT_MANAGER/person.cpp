@@ -23,21 +23,21 @@ Person::Person(string pFirstname, string pLastname, GenderType pGender, uint32_t
 	this->phonenumber = pPhonenumber;
 }
 
-//
+// Stringstream zum Speichern eines Kontaktes in der CSV-Datei wird zurückgegeben
 stringstream Person::csv_string() {
 	stringstream ss;
 	ss << firstname << ';' << lastname << ';' << gender << ';' << age << ';' << postcode << ';' << place << ';' << street << ';' << housenumber << ';' << prefix << ';' << phonenumber;
 	return ss;
 }
 
-//
+// Stringstream für die Ausgabe eines Kontakts wird zurückgegeben
 stringstream Person::printAllPersons() {
 	stringstream ss;
 	ss << setw(20) << firstname << setw(20) << lastname << setw(10) << age << setw(15) << place;
 	return ss;
 }
 
-//
+// Stringstream für die Ausgabe eines kompletten Kontakts wird zurückgegeben
 stringstream Person::printPerson() {
 	stringstream ss;
 	ss << endl << setw(18) << "  Vorname: " << firstname << endl << setw(18) << "  Nachname: " << lastname << endl << setw(18) << "  Geschlecht: " << Controller::enumToInt(gender) << endl << setw(18) << "  Alter: " << age << endl << setw(18) << "  Wohnort: " << postcode << " " << place << endl << setw(18) << "  Strasse: " << street << " " << housenumber << endl << setw(18) << "  Telefonnummer: " << prefix << "/" << phonenumber << endl;
