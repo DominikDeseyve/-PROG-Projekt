@@ -55,10 +55,20 @@ namespace ContactManager {
     	/// <param name="person">Alle Personen im Vector gespeichert.</param>    	
 		void printSingleContact(vector<Person>& person);
 
-		// Kontakt erstellen, bearbeiten, loeschen und sortieren
+		/// <summary>Neuer Kontakt wird angelegt. Kontaktdaten werden durch einen Benutzerdialog eingegeben.</summary>
+    	/// <param name="person">Alle Personen im Vector gespeichert.</param>    
 		void createContact(vector<Person>& person);
+
+		/// <summary>Ein vorhandener Kontakt wird bearbeitet. Dazu wird der Benutzer gefragt, welcher Attribute abgeändert werden sollen. Neue Kontaktdaten werden durch einen Benutzerdialog eingegeben.</summary>
+    	/// <param name="person">Alle Personen im Vector gespeichert.</param>    
 		void editContact(vector<Person>& person);
+
+		/// <summary>Der Benutzer wird gefragt, welcher Kontakt gelöscht werden soll.</summary>
+    	/// <param name="person">Alle Personen im Vector gespeichert.</param>    
 		void deleteContact(vector<Person>& person);
+
+		/// <summary>Sortierfunktion zur Auswahl der Spalte, nach der sortiert werden soll.</summary>
+    	/// <param name="person">Alle Personen im Vector gespeichert.</param>    
 		void sortContacts(vector<Person>& person);
 
 		// sortFirstname, sortLastname, sortAge und sortPlace
@@ -67,20 +77,36 @@ namespace ContactManager {
 		void sortAge(vector<Person>& person);
 		void sortPlace(vector<Person>& person);
 
-		// Programm beenden
+		/// <summary>Neue Kontaktdaten werden gespeichert und das Programm ordnungsgemäß beendet.</summary>
+    	/// <param name="person">Alle Personen im Vector gespeichert.</param>    
 		void exitProgram(vector<Person>& person);
 
-		// CheckFunktionen
+		/// <summary>Funktion zur Überprüfung, ob es sich bei dem übergebenen String um einen korrekten Integer handelt.</summary>
+    	/// <param name="input">Die zu überprüfende Benutzereingabe.</param>    
 		static bool checkInt(string input);
+
+		/// <summary>Überladene Funktion, zur zusätzlichen Überprüfung ob es sich um einen korrekten Integer handelt, der zusätzlich im parametrisierten Zahlenbereich ist.</summary>
+    	/// <param name="input">Die zu überprüfende Benutzereingabe.</param>    
+		/// <param name="pMin">Minimum-Wert des Zahlenbereichs der überprüft werden soll.</param>   
+		/// <param name="pMax">Maximum-Wert des Zahlenbereichs der überprüft werden soll.</param>   
 		static bool checkInt(string input,int pMin,int pMax);
 
+		/// <summary>Funktion zur Überprüfung, ob es sich bei dem übergebenen String um einen korrekten String handelt.</summary>
+    	/// <param name="input">Die zu überprüfende Benutzereingabe.</param>    
 		static bool checkString(string input);
 
-		//Convert Funktionen
+		/// <summary>Die übergebene Benutzereingabe des Geschlechts wird zu einem Aufzählungstyp konvertiert.</summary>
+    	/// <param name="tmp">Benutzereingabe des Geschlechts.</param>  
 		static GenderType intToEnum(string tmp);
+
+		/// <summary>Das gespeicherte Geschlecht wird für die Ausgabe in einen String konvertiert.</summary>
+    	/// <param name="tmp">Gespeicherter Geschlechtstyp.</param>  
 		static string enumToInt(GenderType tmp);
 
 		vector<Person> getPersons();
+
+		/// <summary>Der beim Start übergebene CSV-Pfad der Kontaktdaten wird übernommen. Sollte kein Startparameter vorhanden sein, bleibt der default Wert bestehen.</summary>
+    	/// <param name="path">Neuer Speicherpfad der CSV-Datei</param>  
 		void setCSVPath(string path);
 	};
 }

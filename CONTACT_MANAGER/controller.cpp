@@ -625,7 +625,7 @@ bool Controller::checkString(string input){
 
 // enum wird in String umgewandelt
 string Controller::enumToInt(GenderType tmp) {
-
+	
 	string gender;
 	switch (tmp){
 		case MAN: gender = "maennlich"; break;
