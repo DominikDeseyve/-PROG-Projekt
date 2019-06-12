@@ -26,10 +26,9 @@ int main(int argc, char *argv[])
 			controller->setCSVPath(argv[2]);		
 		}
 	}	
-	GenderType gender;
-	cout << controller->enumToInt(gender);
-	//controller->loadContacts();
-	//controller->printMenu();
+	
+	controller->loadContacts();
+	controller->printMenu();
 
 	return 0;
 }
