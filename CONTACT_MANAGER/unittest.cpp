@@ -22,7 +22,7 @@ TEST_CASE("Pass Tests")
     CHECK(1 == 1);
 }
 
-/*
+/* // weiss it ob das Sinn ergibt
 const int SAMPLES_PERSON_COUNT = {3};
 
 const struct SamplesPerson
@@ -55,7 +55,7 @@ SamplesPersonn SAMPLES_PERSON[SAMPLES_PERSON_COUNT] =
 }
 */
 
-/*
+// method in controller.cpp
 TEST_CASE("loadContacts")
 {
   //pointer auf neues Objekt controller
@@ -63,9 +63,8 @@ TEST_CASE("loadContacts")
   vector<Person> person = controller->getPersons();
   CHECK(person.size() > 0);
 
-
 }
-*/
+
 
 // methods in person.cpp
 TEST_CASE("intToEnum")
@@ -123,7 +122,7 @@ TEST_CASE("enumToInt")
       CHECK(tmp == "maennlich");
     }
 
-    SECTION("weibich")
+    SECTION("weiblich")
     {
       GenderType gender = WOMAN;
       string tmp = Person::enumToInt(gender);
