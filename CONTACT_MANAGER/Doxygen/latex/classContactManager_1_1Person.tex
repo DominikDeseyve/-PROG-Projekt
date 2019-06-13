@@ -3,15 +3,15 @@
 \subsection*{Öffentliche Methoden}
 \begin{DoxyCompactItemize}
 \item 
-\hyperlink{classContactManager_1_1Person_a7e15c64ecd91d9fe3a86089296a96119}{Person} (string p\+Firstname, string p\+Lastname, Gender\+Type p\+Gender, uint32\+\_\+t p\+Age, uint32\+\_\+t p\+Postcode, string p\+Place, string p\+Street, uint32\+\_\+t p\+Housenumber, string p\+Prefix, uint32\+\_\+t p\+Phonenumber)
+\hyperlink{classContactManager_1_1Person_ab1082b4e670d792fa0e7089a1834f2a2}{Person} (string p\+Firstname, string p\+Lastname, Gender\+Type p\+Gender, uint32\+\_\+t p\+Age, uint32\+\_\+t p\+Postcode, string p\+Place, string p\+Street, uint32\+\_\+t p\+Housenumber, uint32\+\_\+t p\+Prefix, uint32\+\_\+t p\+Phonenumber)
 \begin{DoxyCompactList}\small\item\em Kostruktor zur Erstellung eines Personen-\/\+Objektes\end{DoxyCompactList}\item 
-string \& \hyperlink{classContactManager_1_1Person_abaf0c8225bed1c63d3fc8edf39c091cb}{get\+Firstname} ()
+const string \& \hyperlink{classContactManager_1_1Person_a22614abf3860a8a1232b12477b91fd86}{get\+Firstname} ()
 \begin{DoxyCompactList}\small\item\em G\+E\+T-\/\+Methode für den Vornamen des Kontaktes.\end{DoxyCompactList}\item 
-string \& \hyperlink{classContactManager_1_1Person_a7be599e567469609abc206c4e20b1ef3}{get\+Lastname} ()
+const string \& \hyperlink{classContactManager_1_1Person_afc0fffbd413c5767998772af068a1230}{get\+Lastname} ()
 \begin{DoxyCompactList}\small\item\em G\+E\+T-\/\+Methode für den Nachnamen des Kontaktes.\end{DoxyCompactList}\item 
-uint32\+\_\+t \& \hyperlink{classContactManager_1_1Person_a785d2a902e5fb396adf21e3a69718edd}{get\+Age} ()
+const uint32\+\_\+t \& \hyperlink{classContactManager_1_1Person_ad311ea106906c881d4659d37db460c80}{get\+Age} ()
 \begin{DoxyCompactList}\small\item\em G\+E\+T-\/\+Methode für das Alter des Kontaktes.\end{DoxyCompactList}\item 
-string \& \hyperlink{classContactManager_1_1Person_abc73080d9a92362af3ef25183d7186e5}{get\+Place} ()
+const string \& \hyperlink{classContactManager_1_1Person_a27adc1676f898aeadf2e372f0d158715}{get\+Place} ()
 \begin{DoxyCompactList}\small\item\em G\+E\+T-\/\+Methode für den Wohnort des Kontaktes.\end{DoxyCompactList}\item 
 stringstream \hyperlink{classContactManager_1_1Person_a3bc1692664e68de81b431caa6a77510b}{csv\+\_\+string} ()
 \begin{DoxyCompactList}\small\item\em Bereit die Ausgabe in die Speicherdatei eines einzelnen Kontaktes vor.\end{DoxyCompactList}\item 
@@ -21,37 +21,14 @@ stringstream \hyperlink{classContactManager_1_1Person_a781616d2e1b0ebe4601b3914d
 \begin{DoxyCompactList}\small\item\em Bereitet die Ausgabe A\+L\+L\+ER Kontakte vor.\end{DoxyCompactList}\item 
 stringstream \hyperlink{classContactManager_1_1Person_ab1be17c0aac5d094a6fd94d9e1fa7ed4}{print\+Person} ()
 \begin{DoxyCompactList}\small\item\em Bereitet die Ausgabe eines E\+I\+N\+Z\+E\+L\+N\+EN Kontaktes vor.\end{DoxyCompactList}\end{DoxyCompactItemize}
-\subsection*{Geschützte Attribute}
-\begin{DoxyCompactItemize}
-\item 
-string \hyperlink{classContactManager_1_1Person_a9337552bd8f1b26c6d9b73294d524948}{firstname}
-\begin{DoxyCompactList}\small\item\em Vorname der \hyperlink{classContactManager_1_1Person}{Person}\end{DoxyCompactList}\item 
-string \hyperlink{classContactManager_1_1Person_ac445e26ae314d647bd8ee1319f709167}{lastname}
-\begin{DoxyCompactList}\small\item\em Nachname der \hyperlink{classContactManager_1_1Person}{Person}\end{DoxyCompactList}\item 
-Gender\+Type \hyperlink{classContactManager_1_1Person_a0bd13df83ce9266e7963e8e750e60388}{gender}
-\begin{DoxyCompactList}\small\item\em Geschlechtstyp der \hyperlink{classContactManager_1_1Person}{Person}\end{DoxyCompactList}\item 
-uint32\+\_\+t \hyperlink{classContactManager_1_1Person_a213b6be638a046de34bce8fc8301288c}{age}
-\begin{DoxyCompactList}\small\item\em Alter der \hyperlink{classContactManager_1_1Person}{Person}\end{DoxyCompactList}\item 
-uint32\+\_\+t \hyperlink{classContactManager_1_1Person_a2fd82a38ead08ec16730736327e6ef63}{postcode}
-\begin{DoxyCompactList}\small\item\em Postleitzahl der \hyperlink{classContactManager_1_1Person}{Person}\end{DoxyCompactList}\item 
-string \hyperlink{classContactManager_1_1Person_a1714ccedb4e54e6725f7a67b8232dcc0}{place}
-\begin{DoxyCompactList}\small\item\em Wohnort der \hyperlink{classContactManager_1_1Person}{Person}\end{DoxyCompactList}\item 
-string \hyperlink{classContactManager_1_1Person_aa406cf31ed8b781704ea91aa2efded51}{street}
-\begin{DoxyCompactList}\small\item\em Straße der \hyperlink{classContactManager_1_1Person}{Person}\end{DoxyCompactList}\item 
-uint32\+\_\+t \hyperlink{classContactManager_1_1Person_a8d5ff4192378dbfade263defa5b0198b}{housenumber}
-\begin{DoxyCompactList}\small\item\em Hausnummer der \hyperlink{classContactManager_1_1Person}{Person}\end{DoxyCompactList}\item 
-string \hyperlink{classContactManager_1_1Person_afdfe473856f60b61dea2bc1fdabeafd4}{prefix}
-\begin{DoxyCompactList}\small\item\em Prefix der Telefonnummer der \hyperlink{classContactManager_1_1Person}{Person}\end{DoxyCompactList}\item 
-uint32\+\_\+t \hyperlink{classContactManager_1_1Person_afc600ce59bcb61e62e90db8eeaad398b}{phonenumber}
-\begin{DoxyCompactList}\small\item\em Suffix der Telefonnummer der \hyperlink{classContactManager_1_1Person}{Person}\end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Beschreibung der Konstruktoren und Destruktoren}
-\mbox{\Hypertarget{classContactManager_1_1Person_a7e15c64ecd91d9fe3a86089296a96119}\label{classContactManager_1_1Person_a7e15c64ecd91d9fe3a86089296a96119}} 
+\mbox{\Hypertarget{classContactManager_1_1Person_ab1082b4e670d792fa0e7089a1834f2a2}\label{classContactManager_1_1Person_ab1082b4e670d792fa0e7089a1834f2a2}} 
 \index{Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}!Person@{Person}}
 \index{Person@{Person}!Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}}
 \subsubsection{\texorpdfstring{Person()}{Person()}}
-{\footnotesize\ttfamily Person\+::\+Person (\begin{DoxyParamCaption}\item[{string}]{p\+Firstname,  }\item[{string}]{p\+Lastname,  }\item[{Gender\+Type}]{p\+Gender,  }\item[{uint32\+\_\+t}]{p\+Age,  }\item[{uint32\+\_\+t}]{p\+Postcode,  }\item[{string}]{p\+Place,  }\item[{string}]{p\+Street,  }\item[{uint32\+\_\+t}]{p\+Housenumber,  }\item[{string}]{p\+Prefix,  }\item[{uint32\+\_\+t}]{p\+Phonenumber }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily Person\+::\+Person (\begin{DoxyParamCaption}\item[{string}]{p\+Firstname,  }\item[{string}]{p\+Lastname,  }\item[{Gender\+Type}]{p\+Gender,  }\item[{uint32\+\_\+t}]{p\+Age,  }\item[{uint32\+\_\+t}]{p\+Postcode,  }\item[{string}]{p\+Place,  }\item[{string}]{p\+Street,  }\item[{uint32\+\_\+t}]{p\+Housenumber,  }\item[{uint32\+\_\+t}]{p\+Prefix,  }\item[{uint32\+\_\+t}]{p\+Phonenumber }\end{DoxyParamCaption})}
 
 
 
@@ -113,11 +90,11 @@ Stringstream, welcher als Zeile in der C\+S\+V-\/\+Datei platziert werden kann
 {\em input} & Neuert Wert der Kontakteigenschaft\\
 \hline
 \end{DoxyParams}
-\mbox{\Hypertarget{classContactManager_1_1Person_a785d2a902e5fb396adf21e3a69718edd}\label{classContactManager_1_1Person_a785d2a902e5fb396adf21e3a69718edd}} 
+\mbox{\Hypertarget{classContactManager_1_1Person_ad311ea106906c881d4659d37db460c80}\label{classContactManager_1_1Person_ad311ea106906c881d4659d37db460c80}} 
 \index{Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}!get\+Age@{get\+Age}}
 \index{get\+Age@{get\+Age}!Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}}
 \subsubsection{\texorpdfstring{get\+Age()}{getAge()}}
-{\footnotesize\ttfamily uint32\+\_\+t\& Contact\+Manager\+::\+Person\+::get\+Age (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const uint32\+\_\+t\& Contact\+Manager\+::\+Person\+::get\+Age (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -126,11 +103,11 @@ G\+E\+T-\/\+Methode für das Alter des Kontaktes.
 \begin{DoxyReturn}{Rückgabe}
 Alter des Kontaktes als Integer
 \end{DoxyReturn}
-\mbox{\Hypertarget{classContactManager_1_1Person_abaf0c8225bed1c63d3fc8edf39c091cb}\label{classContactManager_1_1Person_abaf0c8225bed1c63d3fc8edf39c091cb}} 
+\mbox{\Hypertarget{classContactManager_1_1Person_a22614abf3860a8a1232b12477b91fd86}\label{classContactManager_1_1Person_a22614abf3860a8a1232b12477b91fd86}} 
 \index{Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}!get\+Firstname@{get\+Firstname}}
 \index{get\+Firstname@{get\+Firstname}!Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}}
 \subsubsection{\texorpdfstring{get\+Firstname()}{getFirstname()}}
-{\footnotesize\ttfamily string\& Contact\+Manager\+::\+Person\+::get\+Firstname (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const string\& Contact\+Manager\+::\+Person\+::get\+Firstname (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -139,11 +116,11 @@ G\+E\+T-\/\+Methode für den Vornamen des Kontaktes.
 \begin{DoxyReturn}{Rückgabe}
 Vorname des Kontaktes als String
 \end{DoxyReturn}
-\mbox{\Hypertarget{classContactManager_1_1Person_a7be599e567469609abc206c4e20b1ef3}\label{classContactManager_1_1Person_a7be599e567469609abc206c4e20b1ef3}} 
+\mbox{\Hypertarget{classContactManager_1_1Person_afc0fffbd413c5767998772af068a1230}\label{classContactManager_1_1Person_afc0fffbd413c5767998772af068a1230}} 
 \index{Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}!get\+Lastname@{get\+Lastname}}
 \index{get\+Lastname@{get\+Lastname}!Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}}
 \subsubsection{\texorpdfstring{get\+Lastname()}{getLastname()}}
-{\footnotesize\ttfamily string\& Contact\+Manager\+::\+Person\+::get\+Lastname (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const string\& Contact\+Manager\+::\+Person\+::get\+Lastname (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -152,11 +129,11 @@ G\+E\+T-\/\+Methode für den Nachnamen des Kontaktes.
 \begin{DoxyReturn}{Rückgabe}
 Nachname des Kontaktes als String
 \end{DoxyReturn}
-\mbox{\Hypertarget{classContactManager_1_1Person_abc73080d9a92362af3ef25183d7186e5}\label{classContactManager_1_1Person_abc73080d9a92362af3ef25183d7186e5}} 
+\mbox{\Hypertarget{classContactManager_1_1Person_a27adc1676f898aeadf2e372f0d158715}\label{classContactManager_1_1Person_a27adc1676f898aeadf2e372f0d158715}} 
 \index{Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}!get\+Place@{get\+Place}}
 \index{get\+Place@{get\+Place}!Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}}
 \subsubsection{\texorpdfstring{get\+Place()}{getPlace()}}
-{\footnotesize\ttfamily string\& Contact\+Manager\+::\+Person\+::get\+Place (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+{\footnotesize\ttfamily const string\& Contact\+Manager\+::\+Person\+::get\+Place (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
 
 
 
@@ -191,109 +168,6 @@ Bereitet die Ausgabe eines E\+I\+N\+Z\+E\+L\+N\+EN Kontaktes vor.
 \begin{DoxyReturn}{Rückgabe}
 Stringstream, mit einem Kontaktdatensatz
 \end{DoxyReturn}
-
-
-\subsection{Dokumentation der Datenelemente}
-\mbox{\Hypertarget{classContactManager_1_1Person_a213b6be638a046de34bce8fc8301288c}\label{classContactManager_1_1Person_a213b6be638a046de34bce8fc8301288c}} 
-\index{Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}!age@{age}}
-\index{age@{age}!Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}}
-\subsubsection{\texorpdfstring{age}{age}}
-{\footnotesize\ttfamily uint32\+\_\+t Contact\+Manager\+::\+Person\+::age\hspace{0.3cm}{\ttfamily [protected]}}
-
-
-
-Alter der \hyperlink{classContactManager_1_1Person}{Person}
-
-\mbox{\Hypertarget{classContactManager_1_1Person_a9337552bd8f1b26c6d9b73294d524948}\label{classContactManager_1_1Person_a9337552bd8f1b26c6d9b73294d524948}} 
-\index{Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}!firstname@{firstname}}
-\index{firstname@{firstname}!Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}}
-\subsubsection{\texorpdfstring{firstname}{firstname}}
-{\footnotesize\ttfamily string Contact\+Manager\+::\+Person\+::firstname\hspace{0.3cm}{\ttfamily [protected]}}
-
-
-
-Vorname der \hyperlink{classContactManager_1_1Person}{Person}
-
-\mbox{\Hypertarget{classContactManager_1_1Person_a0bd13df83ce9266e7963e8e750e60388}\label{classContactManager_1_1Person_a0bd13df83ce9266e7963e8e750e60388}} 
-\index{Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}!gender@{gender}}
-\index{gender@{gender}!Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}}
-\subsubsection{\texorpdfstring{gender}{gender}}
-{\footnotesize\ttfamily Gender\+Type Contact\+Manager\+::\+Person\+::gender\hspace{0.3cm}{\ttfamily [protected]}}
-
-
-
-Geschlechtstyp der \hyperlink{classContactManager_1_1Person}{Person}
-
-\mbox{\Hypertarget{classContactManager_1_1Person_a8d5ff4192378dbfade263defa5b0198b}\label{classContactManager_1_1Person_a8d5ff4192378dbfade263defa5b0198b}} 
-\index{Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}!housenumber@{housenumber}}
-\index{housenumber@{housenumber}!Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}}
-\subsubsection{\texorpdfstring{housenumber}{housenumber}}
-{\footnotesize\ttfamily uint32\+\_\+t Contact\+Manager\+::\+Person\+::housenumber\hspace{0.3cm}{\ttfamily [protected]}}
-
-
-
-Hausnummer der \hyperlink{classContactManager_1_1Person}{Person}
-
-\mbox{\Hypertarget{classContactManager_1_1Person_ac445e26ae314d647bd8ee1319f709167}\label{classContactManager_1_1Person_ac445e26ae314d647bd8ee1319f709167}} 
-\index{Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}!lastname@{lastname}}
-\index{lastname@{lastname}!Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}}
-\subsubsection{\texorpdfstring{lastname}{lastname}}
-{\footnotesize\ttfamily string Contact\+Manager\+::\+Person\+::lastname\hspace{0.3cm}{\ttfamily [protected]}}
-
-
-
-Nachname der \hyperlink{classContactManager_1_1Person}{Person}
-
-\mbox{\Hypertarget{classContactManager_1_1Person_afc600ce59bcb61e62e90db8eeaad398b}\label{classContactManager_1_1Person_afc600ce59bcb61e62e90db8eeaad398b}} 
-\index{Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}!phonenumber@{phonenumber}}
-\index{phonenumber@{phonenumber}!Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}}
-\subsubsection{\texorpdfstring{phonenumber}{phonenumber}}
-{\footnotesize\ttfamily uint32\+\_\+t Contact\+Manager\+::\+Person\+::phonenumber\hspace{0.3cm}{\ttfamily [protected]}}
-
-
-
-Suffix der Telefonnummer der \hyperlink{classContactManager_1_1Person}{Person}
-
-\mbox{\Hypertarget{classContactManager_1_1Person_a1714ccedb4e54e6725f7a67b8232dcc0}\label{classContactManager_1_1Person_a1714ccedb4e54e6725f7a67b8232dcc0}} 
-\index{Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}!place@{place}}
-\index{place@{place}!Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}}
-\subsubsection{\texorpdfstring{place}{place}}
-{\footnotesize\ttfamily string Contact\+Manager\+::\+Person\+::place\hspace{0.3cm}{\ttfamily [protected]}}
-
-
-
-Wohnort der \hyperlink{classContactManager_1_1Person}{Person}
-
-\mbox{\Hypertarget{classContactManager_1_1Person_a2fd82a38ead08ec16730736327e6ef63}\label{classContactManager_1_1Person_a2fd82a38ead08ec16730736327e6ef63}} 
-\index{Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}!postcode@{postcode}}
-\index{postcode@{postcode}!Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}}
-\subsubsection{\texorpdfstring{postcode}{postcode}}
-{\footnotesize\ttfamily uint32\+\_\+t Contact\+Manager\+::\+Person\+::postcode\hspace{0.3cm}{\ttfamily [protected]}}
-
-
-
-Postleitzahl der \hyperlink{classContactManager_1_1Person}{Person}
-
-\mbox{\Hypertarget{classContactManager_1_1Person_afdfe473856f60b61dea2bc1fdabeafd4}\label{classContactManager_1_1Person_afdfe473856f60b61dea2bc1fdabeafd4}} 
-\index{Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}!prefix@{prefix}}
-\index{prefix@{prefix}!Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}}
-\subsubsection{\texorpdfstring{prefix}{prefix}}
-{\footnotesize\ttfamily string Contact\+Manager\+::\+Person\+::prefix\hspace{0.3cm}{\ttfamily [protected]}}
-
-
-
-Prefix der Telefonnummer der \hyperlink{classContactManager_1_1Person}{Person}
-
-\mbox{\Hypertarget{classContactManager_1_1Person_aa406cf31ed8b781704ea91aa2efded51}\label{classContactManager_1_1Person_aa406cf31ed8b781704ea91aa2efded51}} 
-\index{Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}!street@{street}}
-\index{street@{street}!Contact\+Manager\+::\+Person@{Contact\+Manager\+::\+Person}}
-\subsubsection{\texorpdfstring{street}{street}}
-{\footnotesize\ttfamily string Contact\+Manager\+::\+Person\+::street\hspace{0.3cm}{\ttfamily [protected]}}
-
-
-
-Straße der \hyperlink{classContactManager_1_1Person}{Person}
-
 
 
 Die Dokumentation für diese Klasse wurde erzeugt aufgrund der Dateien\+:\begin{DoxyCompactItemize}

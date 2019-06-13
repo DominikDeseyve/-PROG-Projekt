@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['deletecontact',['deleteContact',['../classContactManager_1_1Controller.html#a87af8bc174a36e01cedb9a892a6b6aa0',1,'ContactManager::Controller']]]
+  ['deletecontact',['deleteContact',['../classContactManager_1_1Controller.html#a4a22000e1605d3b00af7a7cfd65dd88b',1,'ContactManager::Controller']]]
 ];

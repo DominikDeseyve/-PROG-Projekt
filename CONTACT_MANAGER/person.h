@@ -98,6 +98,7 @@ namespace ContactManager {
 		/*************************************/
 		/********** HILFSMETHODEN ************/
 		/*************************************/
+		
 		/// <summary>Bereit die Ausgabe in die Speicherdatei eines einzelnen Kontaktes vor.</summary>
 		/// <returns>Stringstream, welcher als Zeile in der CSV-Datei platziert werden kann</returns>
 		stringstream csv_string();

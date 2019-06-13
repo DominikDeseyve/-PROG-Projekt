@@ -30,7 +30,7 @@ namespace ContactManager {
 		string csvPath;
 
 	public:
-		// Konstruktor
+		/// <summary>Konstruktor der Controller-Klasse.</summary>
 		Controller();
 		
 		/// <summary>Entscheidet auf Basis des Parameters, welcher Menüpunkt gedrückt wurde.</summary>
@@ -64,18 +64,32 @@ namespace ContactManager {
 		/// <summary>Sortierfunktion zur Auswahl der Spalte, nach der sortiert werden soll.</summary>  
 		void sortContacts();
 
-		// sortFirstname, sortLastname, sortAge und sortPlace
+		/// <summary>Sortiert alle Kontakte dem Vornamen nach innerhalb des Vektors nach dem Bubblesort-Algorithmus.</summary>  
 		void sortFirstname();
+		
+		/// <summary>Sortiert alle Kontakte dem Nachnamen nach innerhalb des Vektors nach dem Bubblesort-Algorithmus.</summary>  
 		void sortLastname();
+
+		/// <summary>Sortiert alle Kontakte dem Alter nach innerhalb des Vektors nach dem Bubblesort-Algorithmus.</summary>  
 		void sortAge();
+
+		/// <summary>Sortiert alle Kontakte dem Wohnort nach innerhalb des Vektors nach dem Bubblesort-Algorithmus.</summary>  
 		void sortPlace();
 
-		/// <summary>Neue Kontaktdaten werden gespeichert und das Programm ordnungsgemäß beendet.</summary>
-    	/// <param name="person">Alle Personen im Vector gespeichert.</param>    
+		/// <summary>Neue Kontaktdaten werden gespeichert und das Programm ordnungsgemäß beendet.</summary>   
 		void exitProgram();
 
+		/// <summary>Statische Funktion, welcher auf eine korrekte Eingabe des Benutzers wartet.</summary>
+    	/// <param name="coutText">Text, der dem Benutzer anzeigt was er eingeben sollte.</param>  
+		/// <param name="type">Definiert welche Art von Eingabe erwartet wird (STRING/INTEGER).</param>  
+		/// <returns>Korrekter Text, welchen der Benutzer eingegeben hat. </returns>  
 		static string waitForInput(string coutText, string type);
 
+		/// <summary>Statische Funktion, welcher auf eine korrekte Eingabe des Benutzers innerhalb eines Zahlenbereichs wartet.</summary>
+    	/// <param name="coutText">Text, der dem Benutzer anzeigt was er eingeben sollte.</param>  
+		/// <param name="pMin">Minimaler Wert des Zahlenbereichs.</param>  
+		/// <param name="pMax">Maximaler Wert des Zahlenbereichs.</param>  
+		/// <returns>Korrekter Text, welchen der Benutzer eingegeben hat. </returns>  
 		static string waitForInput(string coutText, int pMin, int pMax);
 
 		/// <summary>Funktion zur Überprüfung, ob es sich bei dem übergebenen String um einen korrekten Integer handelt.</summary>
@@ -100,6 +114,8 @@ namespace ContactManager {
     	/// <param name="tmp">Gespeicherter Geschlechtstyp.</param>  
 		static string enumToInt(GenderType tmp);
 
+		/// <summary>Gibt Vektor mit allen vorhandenen Personen zurück.</summary>
+		/// <returns>Vektor mit Personen </returns>
 		vector<Person> getPersons();
 
 		/// <summary>Der beim Start übergebene CSV-Pfad der Kontaktdaten wird übernommen. Sollte kein Startparameter vorhanden sein, bleibt der default Wert bestehen.</summary>
