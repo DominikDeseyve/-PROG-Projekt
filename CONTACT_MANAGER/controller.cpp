@@ -12,9 +12,9 @@
 using namespace std;
 using namespace ContactManager;
 
-/*************************************/
-/************ Controller ************ /
-/*************************************/
+/********************************************************************/
+/************ 				Controller 					*************/
+/********************************************************************/
 
 Controller::Controller(){
 	//Setze Standardpath für CSV-Datei
@@ -210,7 +210,8 @@ void Controller::printSingleContact() {
 	cout << endl << "------------------------------" << "\x1B[0;37m";
 
 	// Ausgabe des gewuenschten Kontakts
-	cout << person[stoi(contactNumber)-1].printPerson().str();
+	cout << person[stoi(contactNumber)-1];
+	//cout << person[stoi(contactNumber)-1].printPerson().str();
 
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 
@@ -237,7 +238,7 @@ void Controller::createContact() {
 	// einzelne Eingaben für die entsprechenden Werte
 	firstname = waitForInput("  Gib deinen Vornamen ein: ", "str");
 
-	lastname = waitForInput("  Gib deinen Vornamen ein: ", "str");
+	lastname = waitForInput("  Gib deinen Nachnamen ein: ", "str");
 
 	gender = waitForInput("  Gib dein Geschlecht ein (Man = 0, Woman = 1, Diverse = 2): ", "int");
 
@@ -247,7 +248,7 @@ void Controller::createContact() {
 
 	place = waitForInput("  Gib deinen Wohnort ein: ", "str");
 
-	street = waitForInput("  Gib deine Strasse ein: ", "str");
+	street = waitForInput("  Gib deine Strasse ein (ohne Hausnummer!): ", "str");
 
 	housenumber = stoi(waitForInput("  Gib deine Hausnummer ein: ", "int"));
 
@@ -575,6 +576,8 @@ bool Controller::checkInt(string input, int pMin, int pMax){
 		int number = stoi(input);
 		if(number >= pMin && number <= pMax) {
 			isInt = true;
+		} else {
+			cout << "\x1B[0;31m" << "  Die eingegebene Zahl ist zu groß!" << "\x1B[0;37m" << endl;
 		}
 	}
 	return isInt;
