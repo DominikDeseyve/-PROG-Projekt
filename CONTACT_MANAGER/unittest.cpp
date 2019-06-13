@@ -1,4 +1,4 @@
-#define _UNITTEST_
+
 #include "person.h"
 #include "controller.h"
 
