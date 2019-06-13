@@ -67,12 +67,12 @@ namespace ContactManager {
 		/// <param name="pPrefix">Prefix der Telefonnummer der zu erstellenden Person</param>  
 		/// <param name="pPhonenumber">Telefonnummer der zu erstellenden Person</param>  
 		Person(string pFirstname, string pLastname, GenderType pGender, uint32_t pAge, uint32_t pPostcode, string pPlace, string pStreet, uint32_t pHousenumber, string pPrefix, uint32_t pPhonenumber);
-
+/*
 		friend ostream& operator<< (ostream& os, const Person& tmpPerson){
 			os <<  endl << setw(18) << "  Vorname: " << tmpPerson.firstname << endl ;//<< setw(18) << "  Nachname: " << tmpPerson.getLastname << endl << setw(18) << "  Geschlecht: " << Controller::enumToInt(tmpPerson.getGender) << endl << setw(18) << "  Alter: " << tmpPerson.getAge << endl << setw(18) << "  Wohnort: " << tmpPerson.getPostcode << " " << tmpPerson.getPlace << endl << setw(18) << "  Strasse: " << tmpPerson.getStreet << " " << tmpPerson.getHousenumber << endl << setw(18) << "  Telefonnummer: " << tmpPerson.getPrefix << "/" << tmpPerson.getPhonenumber << endl;
 			return os;
 		}
-
+*/
 		/*************************************/
 		/********** GET - METHODEN ********** /
 		/*************************************/
@@ -146,6 +146,6 @@ namespace ContactManager {
 		
 	};
 
-	extern ostream& operator<< (ostream& os, const Person& tmpPerson);
+	//extern ostream& operator<< (ostream& os, const Person& tmpPerson);
 }
 #endif

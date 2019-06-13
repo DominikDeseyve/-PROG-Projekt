@@ -81,8 +81,9 @@ void Person::editPerson(int ind, string input) {
 	default: break;
 	}
 }
-
+/*
 ostream& operator<< (ostream& os, const Person& tmpPerson){
 	os <<  endl << setw(18) << "  Vorname: " << tmpPerson.firstname << endl ;//<< setw(18) << "  Nachname: " << tmpPerson.getLastname << endl << setw(18) << "  Geschlecht: " << Controller::enumToInt(tmpPerson.getGender) << endl << setw(18) << "  Alter: " << tmpPerson.getAge << endl << setw(18) << "  Wohnort: " << tmpPerson.getPostcode << " " << tmpPerson.getPlace << endl << setw(18) << "  Strasse: " << tmpPerson.getStreet << " " << tmpPerson.getHousenumber << endl << setw(18) << "  Telefonnummer: " << tmpPerson.getPrefix << "/" << tmpPerson.getPhonenumber << endl;
 	return os;
 }
+*/

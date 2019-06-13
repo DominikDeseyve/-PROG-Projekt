@@ -210,8 +210,8 @@ void Controller::printSingleContact() {
 	cout << endl << "------------------------------" << "\x1B[0;37m";
 
 	// Ausgabe des gewuenschten Kontakts
-	cout << person[stoi(contactNumber)-1];
-	//cout << person[stoi(contactNumber)-1].printPerson().str();
+	//cout << person[stoi(contactNumber)-1];
+	cout << person[stoi(contactNumber)-1].printPerson().str();
 
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
 
@@ -577,7 +577,7 @@ bool Controller::checkInt(string input, int pMin, int pMax){
 		if(number >= pMin && number <= pMax) {
 			isInt = true;
 		} else {
-			cout << "\x1B[0;31m" << "  Die eingegebene Zahl ist zu groß!" << "\x1B[0;37m" << endl;
+			cout << "\x1B[0;31m" << "  Die eingegebene Zahl ist nicht korrekt!" << "\x1B[0;37m" << endl;
 		}
 	}
 	return isInt;
