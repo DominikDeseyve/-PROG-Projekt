@@ -211,7 +211,6 @@ void Controller::printSingleContact() {
 	cout << endl << "------------------------------" << "\x1B[0;37m";
 
 	// Ausgabe des gewuenschten Kontakts
-	//cout << person[stoi(contactNumber)-1];
 	cout << person[stoi(contactNumber)-1].printPerson().str();
 
 	cout << endl << "------------------------------------------------------------------------------------------------------------" << endl;
