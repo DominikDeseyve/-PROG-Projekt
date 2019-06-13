@@ -26,6 +26,7 @@ namespace ContactManager {
 		/// <summary>Vektor für die Liste ALLER Personen.</summary>
 		vector<Person> person;
 
+		/// <summary>Speicherpfad der CSV-Datei der Kontakte.</summary>
 		string csvPath;
 
 	public:
