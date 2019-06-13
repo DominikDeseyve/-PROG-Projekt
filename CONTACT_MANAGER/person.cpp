@@ -10,7 +10,7 @@ using namespace std;
 using namespace ContactManager;
 
 // Konstruktor --> Person wird erstellt
-Person::Person(string pFirstname, string pLastname, GenderType pGender, uint32_t pAge, uint32_t pPostcode, string pPlace, string pStreet, uint32_t pHousenumber, string pPrefix, uint32_t pPhonenumber) {
+Person::Person(string pFirstname, string pLastname, GenderType pGender, uint32_t pAge, uint32_t pPostcode, string pPlace, string pStreet, uint32_t pHousenumber, uint32_t pPrefix, uint32_t pPhonenumber) {
 	this->firstname = pFirstname;
 	this->lastname = pLastname;
 	this->gender = pGender;
@@ -40,7 +40,7 @@ stringstream Person::printAllPersons() {
 // Stringstream für die Ausgabe eines kompletten Kontakts wird zurückgegeben
 stringstream Person::printPerson() {
 	stringstream ss;
-	ss << endl << setw(18) << "  Vorname: " << firstname << endl << setw(18) << "  Nachname: " << lastname << endl << setw(18) << "  Geschlecht: " << Controller::enumToInt(gender) << endl << setw(18) << "  Alter: " << age << endl << setw(18) << "  Wohnort: " << postcode << " " << place << endl << setw(18) << "  Strasse: " << street << " " << housenumber << endl << setw(18) << "  Telefonnummer: " << prefix << "/" << phonenumber << endl;
+	ss << endl << setw(18) << "  Vorname: " << firstname << endl << setw(18) << "  Nachname: " << lastname << endl << setw(18) << "  Geschlecht: " << Controller::enumToInt(gender) << endl << setw(18) << "  Alter: " << age << endl << setw(18) << "  Wohnort: " << postcode << " " << place << endl << setw(18) << "  Strasse: " << street << " " << housenumber << endl << setw(18) << "  Telefonnummer: " << "0" << prefix << "/" << phonenumber << endl;
 	return ss;
 }
 
@@ -73,7 +73,7 @@ void Person::editPerson(int ind, string input) {
 		this->housenumber = stoi(input);
 		break;
 	case 8:
-		this->prefix = input;
+		this->prefix = stoi(input);
 		break;
 	case 9:
 		this->phonenumber = stoi(input);
@@ -81,9 +81,3 @@ void Person::editPerson(int ind, string input) {
 	default: break;
 	}
 }
-/*
-ostream& operator<< (ostream& os, const Person& tmpPerson){
-	os <<  endl << setw(18) << "  Vorname: " << tmpPerson.firstname << endl ;//<< setw(18) << "  Nachname: " << tmpPerson.getLastname << endl << setw(18) << "  Geschlecht: " << Controller::enumToInt(tmpPerson.getGender) << endl << setw(18) << "  Alter: " << tmpPerson.getAge << endl << setw(18) << "  Wohnort: " << tmpPerson.getPostcode << " " << tmpPerson.getPlace << endl << setw(18) << "  Strasse: " << tmpPerson.getStreet << " " << tmpPerson.getHousenumber << endl << setw(18) << "  Telefonnummer: " << tmpPerson.getPrefix << "/" << tmpPerson.getPhonenumber << endl;
-	return os;
-}
-*/

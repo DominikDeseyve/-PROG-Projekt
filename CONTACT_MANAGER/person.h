@@ -49,7 +49,7 @@ namespace ContactManager {
 		uint32_t housenumber;
 
 		/// <summary>Prefix der Telefonnummer der Person</summary>
-		string prefix;
+		uint32_t prefix;
 
 		/// <summary>Suffix der Telefonnummer der Person</summary>
 		uint32_t phonenumber;
@@ -66,13 +66,9 @@ namespace ContactManager {
 		/// <param name="pHousenumber">Hausnummer der Anschrift der zu erstellenden Person</param>  
 		/// <param name="pPrefix">Prefix der Telefonnummer der zu erstellenden Person</param>  
 		/// <param name="pPhonenumber">Telefonnummer der zu erstellenden Person</param>  
-		Person(string pFirstname, string pLastname, GenderType pGender, uint32_t pAge, uint32_t pPostcode, string pPlace, string pStreet, uint32_t pHousenumber, string pPrefix, uint32_t pPhonenumber);
-/*
-		friend ostream& operator<< (ostream& os, const Person& tmpPerson){
-			os <<  endl << setw(18) << "  Vorname: " << tmpPerson.firstname << endl ;//<< setw(18) << "  Nachname: " << tmpPerson.getLastname << endl << setw(18) << "  Geschlecht: " << Controller::enumToInt(tmpPerson.getGender) << endl << setw(18) << "  Alter: " << tmpPerson.getAge << endl << setw(18) << "  Wohnort: " << tmpPerson.getPostcode << " " << tmpPerson.getPlace << endl << setw(18) << "  Strasse: " << tmpPerson.getStreet << " " << tmpPerson.getHousenumber << endl << setw(18) << "  Telefonnummer: " << tmpPerson.getPrefix << "/" << tmpPerson.getPhonenumber << endl;
-			return os;
-		}
-*/
+		Person(string pFirstname, string pLastname, GenderType pGender, uint32_t pAge, uint32_t pPostcode, string pPlace, string pStreet, uint32_t pHousenumber, uint32_t pPrefix, uint32_t pPhonenumber);
+
+
 		/*************************************/
 		/********** GET - METHODEN ********** /
 		/*************************************/
@@ -98,31 +94,7 @@ namespace ContactManager {
 		const string& getPlace() {
 			return place;
 		}
-/*
-		const uint32_t& getPostcode() {
-			return postcode;
-		}
 
-		const GenderType& getGender() {
-			return gender;
-		}
-
-		const string& getStreet() {
-			return street;
-		}
-
-		const uint32_t& getHousenumber() {
-			return housenumber;
-		}
-
-		const string& getPrefix() {
-			return prefix;
-		}
-
-		const uint32_t& getPhonenumber() {
-			return phonenumber;
-		}
-*/
 		/*************************************/
 		/********** HILFSMETHODEN ************/
 		/*************************************/
@@ -142,10 +114,6 @@ namespace ContactManager {
 		/// <summary>Bereitet die Ausgabe eines EINZELNEN Kontaktes vor.</summary>
 		/// <returns>Stringstream, mit einem Kontaktdatensatz</returns>
 		stringstream printPerson();
-
-		
 	};
-
-	//extern ostream& operator<< (ostream& os, const Person& tmpPerson);
 }
 #endif

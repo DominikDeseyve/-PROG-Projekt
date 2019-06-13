@@ -29,8 +29,8 @@ Controller::Controller(){
 void Controller::loadContacts() {
 	// lokale Attribute
 	ifstream file;
-	string firstname, lastname, helpPostcode, place, street, prefix, helpHousenumber, helpAge, helpPhonenumber, helpGender;
-	uint32_t age, housenumber, phonenumber, postcode;
+	string firstname, lastname, helpPostcode, place, street, helpHousenumber, helpAge, helpPrefix, helpPhonenumber, helpGender;
+	uint32_t age, housenumber, prefix, phonenumber, postcode;
 	GenderType gender = GenderType::DIVERSE;
 
 	// CSV-Datei oeffnen
@@ -50,7 +50,7 @@ void Controller::loadContacts() {
 			getline(file, place, token);
 			getline(file, street, token);
 			getline(file, helpHousenumber, token);
-			getline(file, prefix, token);
+			getline(file, helpPrefix, token);
 			getline(file, helpPhonenumber, '\n');
 
 			// Die Werte aus der CSV-Datei werden in die entsprechenden Werte umgewandelt
@@ -58,6 +58,7 @@ void Controller::loadContacts() {
 			postcode = stoi(helpPostcode);
 			housenumber = stoi(helpHousenumber);
 			phonenumber = stoi(helpPhonenumber);
+			prefix = stoi(helpPrefix);
 
 			// String wird in entsprechenden enum-Wert umgewandelt
 			gender = Controller::intToEnum(helpGender);
@@ -155,7 +156,7 @@ void Controller::printMenu() {
 
 	cout << "  | 0 | Hauptmenue anzeigen" << endl;
 	cout << "  | 1 | Alle Kontakte auflisten" << endl;
-	cout << "  | 2 | Einen Kontakt auflisten" << endl;
+	cout << "  | 2 | Einen Kontakt vollstaendig auflisten" << endl;
 	cout << "  | 3 | Kontakt erstellen" << endl;
 	cout << "  | 4 | Kontakt bearbeiten" << endl;
 	cout << "  | 5 | Kontakt loeschen" << endl;
@@ -232,8 +233,8 @@ void Controller::createContact() {
 	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl;
 
 	// lokale Attribute
-	string firstname, lastname, place, street, gender, prefix;
-	uint32_t age, housenumber, phonenumber, postcode;
+	string firstname, lastname, place, street, gender;
+	uint32_t age, housenumber, prefix, phonenumber, postcode;
 
 	// einzelne Eingaben für die entsprechenden Werte
 	firstname = waitForInput("  Gib deinen Vornamen ein: ", "str");
@@ -248,11 +249,12 @@ void Controller::createContact() {
 
 	place = waitForInput("  Gib deinen Wohnort ein: ", "str");
 
-	street = waitForInput("  Gib deine Strasse ein (ohne Hausnummer!): ", "str");
-
+	cout << endl << "  Gib deine Strasse ein (ohne Hausnummer!): ";
+	cin >> street;
+	
 	housenumber = stoi(waitForInput("  Gib deine Hausnummer ein: ", "int"));
 
-	prefix = waitForInput("  Gib deine Vorwahl ein: ", "str");
+	prefix = stoi(waitForInput("  Gib deine Vorwahl ein: ", "int"));
 
 	phonenumber = stoi(waitForInput("  Gib deine Telefonnummer ein: ", "int"));
 
@@ -317,8 +319,8 @@ void Controller::editContact() {
 			newInput = waitForInput(coutText3, "str");
 			break;
 		case 6:
-			coutText3 = "  Gib die neue Strasse ein: ";
-			newInput = waitForInput(coutText3, "str");
+			cout << endl << "  Gib die neue Strasse ein (ohne Hausnummer!): ";
+			cin >> newInput;
 			break;
 		case 7:
 			coutText3 = "  Gib die neue Hausnummer ein: ";
@@ -326,7 +328,7 @@ void Controller::editContact() {
 			break;
 		case 8:
 			coutText3 = "  Gib die neue Vorwahl ein: ";
-			newInput = waitForInput(coutText3, "str");
+			newInput = waitForInput(coutText3, "int");
 			break;
 		case 9:
 			coutText3 = "  Gib die neue Telefonnummer ein: ";
@@ -550,7 +552,7 @@ bool Controller::checkInt(string input){
 	int i = 0;
 	while(isInt && i < input.length()) {
 		if(!isdigit(input[i])){
-			cout << "\x1B[0;31m" << "  Die eingegebene Zahl ist nicht korrekt!" << "\x1B[0;37m" << endl;
+			cerr << "\x1B[0;31m" << "  Die eingegebene Zahl ist nicht korrekt!" << "\x1B[0;37m" << endl;
 			isInt = false;
 		}
 		i++;
@@ -558,13 +560,13 @@ bool Controller::checkInt(string input){
 
 	//Überprüfe auf Leerstring
 	if(input.empty()) {
-		cout << "\x1B[0;31m" << "  Die eingegebene Zahl ist leer!" << "\x1B[0;37m" << endl;
+		cerr << "\x1B[0;31m" << "  Die eingegebene Zahl ist leer!" << "\x1B[0;37m" << endl;
 		isInt = false;
 	}
 
 	//Überprüfe auf Länge der Zahl
 	if(input.length() > 12) {
-		cout << "\x1B[0;31m" << "  Die eingegebene Zahl ist zu lang!" << "\x1B[0;37m" << endl;
+		cerr << "\x1B[0;31m" << "  Die eingegebene Zahl ist zu lang!" << "\x1B[0;37m" << endl;
 		isInt = false;
 	}
 	return isInt;
@@ -577,7 +579,7 @@ bool Controller::checkInt(string input, int pMin, int pMax){
 		if(number >= pMin && number <= pMax) {
 			isInt = true;
 		} else {
-			cout << "\x1B[0;31m" << "  Die eingegebene Zahl ist nicht korrekt!" << "\x1B[0;37m" << endl;
+			cerr << "\x1B[0;31m" << "  Die eingegebene Zahl ist nicht korrekt!" << "\x1B[0;37m" << endl;
 		}
 	}
 	return isInt;
@@ -590,7 +592,7 @@ bool Controller::checkString(string input){
 	int i = 0;
 	while(isString && i < input.length()) {
 		if(!isalpha(input[i]) && input[i] != '-'){
-			cout << "\x1B[0;31m" << "  Der eingegebene Text ist kein String!" << "\x1B[0;37m" << endl;
+			cerr << "\x1B[0;31m" << "  Der eingegebene Text ist kein String!" << "\x1B[0;37m" << endl;
 			isString = false;
 		}
 		i++;
@@ -598,13 +600,13 @@ bool Controller::checkString(string input){
 
 	//Überprüfe auf Leerstring
 	if(input.empty()) {
-		cout << "\x1B[0;31m" << "  Der eingegebene Text ist leer!" << "\x1B[0;37m" << endl;
+		cerr << "\x1B[0;31m" << "  Der eingegebene Text ist leer!" << "\x1B[0;37m" << endl;
 		isString = false;
 	}
 
 	//Überprüfe maximale Länge
 	if(input.length() > 30 || input.length() < 2) {
-		cout << "\x1B[0;31m" << "  Die Länge des eingegebenen Text ist nicht korrekt!" << "\x1B[0;37m" << endl;
+		cerr << "\x1B[0;31m" << "  Die Länge des eingegebenen Text ist nicht korrekt!" << "\x1B[0;37m" << endl;
 		isString = false;
 	}
 	return isString;
