@@ -79,7 +79,7 @@ void Controller::loadContacts() {
 }
 
 // Kontakte in CSV-Datei speichern
-void Controller::saveContacts(vector<Person>& person) {
+void Controller::saveContacts() {
 	// lokale Attribute
 	ofstream file;
 
@@ -118,27 +118,27 @@ void Controller::actionHandler(int number) {
 			break;
 
 		// Alle Kontakte werden ausgegeben und anschließend wird das Menue wieder ausgegeben
-		case 1: printContacts(person);
+		case 1: printContacts();
 			printMenu();
 			break;
 
 		// Funktion zum Ausgeben eines einzelnen Kontakts wird aufgerufen
-		case 2: printSingleContact(person); break;
+		case 2: printSingleContact(); break;
 
 		// Funktion zum Erstellen eines Kontakts wird aufgerufen
-		case 3: createContact(person); break;
+		case 3: createContact(); break;
 
 		// Funktion zum Bearbeiten eines Kontakts wird aufgerufen
-		case 4: editContact(person); break;
+		case 4: editContact(); break;
 
 		// Funktion zum Loeschen eines Kontakts wird aufgerufen
-		case 5: deleteContact(person); break;
+		case 5: deleteContact(); break;
 
 		// Funktion zum Sortieren der Kontakte wird aufgerufen
-		case 6: sortContacts(person); break;
+		case 6: sortContacts(); break;
 
 		// Funktion zum Beenden des Programms wird aufgerufen
-		case 7: exitProgram(person); break;
+		case 7: exitProgram(); break;
 		default: break;
 	}
 }
@@ -173,7 +173,7 @@ void Controller::printMenu() {
 }
 
 // Alle Kontakte ausgeben
-void Controller::printContacts(vector<Person>& person) {
+void Controller::printContacts() {
 	// Konsole wird gecleared
 	system("clear");
 
@@ -194,10 +194,10 @@ void Controller::printContacts(vector<Person>& person) {
 }
 
 // Einzelnen Kontakt ausgeben
-void Controller::printSingleContact(vector<Person>& person) {
+void Controller::printSingleContact() {
 	// Konsole wird gecleared und alle Kontakte werden ausgegeben
 	system("clear");
-	printContacts(person);
+	printContacts();
 
 	cout << endl << "\x1B[0;36m" << "  Einen Kontakt auflisten";
 	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl;
@@ -223,7 +223,7 @@ void Controller::printSingleContact(vector<Person>& person) {
 /********************************************************************************/
 
 // Kontakt erstellen
-void Controller::createContact(vector<Person>& person) {
+void Controller::createContact() {
 	// Konsole wird gecleared
 	system("clear");
 
@@ -269,10 +269,10 @@ void Controller::createContact(vector<Person>& person) {
 }
 
 // Kontakt bearbeiten
-void Controller::editContact(vector<Person>& person) {
+void Controller::editContact() {
 	// Konsole wird gecleared und alle Kontakte werden ausgegeben
 	system("clear");
-	printContacts(person);
+	printContacts();
 
 	cout << endl << "\x1B[0;36m" << "  Einen Kontakt bearbeiten";
 	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl;
@@ -345,10 +345,10 @@ void Controller::editContact(vector<Person>& person) {
 }
 
 // Kontakt loeschen
-void Controller::deleteContact(vector<Person>& person) {
+void Controller::deleteContact() {
 	// Konsole wird gecleared und alle Kontakte werden ausgegeben
 	system("clear");
-	printContacts(person);
+	printContacts();
 
 	cout << endl << "\x1B[0;36m" << "  Einen Kontakt loeschen";
 	cout << endl << "------------------------------------" << "\x1B[0;37m" << endl;
@@ -368,7 +368,7 @@ void Controller::deleteContact(vector<Person>& person) {
 }
 
 //Kontakte sortieren
-void Controller::sortContacts(vector<Person>& person) {
+void Controller::sortContacts() {
 	// Konsole wird gecleared
 	system("clear");
 
@@ -383,16 +383,16 @@ void Controller::sortContacts(vector<Person>& person) {
 
 	switch (stoi(sortNumber)) {
 		// nach dem Vornamen aufsteigend sortieren
-		case 0: sortFirstname(person); break;
+		case 0: sortFirstname(); break;
 
 		// nach dem Nachnamen aufsteigend sortieren
-		case 1: sortLastname(person); break;
+		case 1: sortLastname(); break;
 
 		// nach dem Alter aufsteigend sortieren
-		case 2: sortAge(person); break;
+		case 2: sortAge(); break;
 
 		// nach dem Wohnort aufsteigend sortieren
-		case 3: sortPlace(person); break;
+		case 3: sortPlace(); break;
 		default: break;
 	}
 
@@ -408,7 +408,7 @@ void Controller::sortContacts(vector<Person>& person) {
 /********************************************************************************/
 
 // Bubblesort-Algorithmus zum aufsteigenden Sortieren des Vornamens
-void Controller::sortFirstname(vector<Person>& person){
+void Controller::sortFirstname(){
 	for (int i = 1; i < person.size(); i++)
 	{
 		for (int a = 0; a < person.size() - i; a++)
@@ -424,7 +424,7 @@ void Controller::sortFirstname(vector<Person>& person){
 }
 
 // Bubblesort-Algorithmus zum aufsteigenden Sortieren des Nachnamens
-void Controller::sortLastname(vector<Person>& person){
+void Controller::sortLastname(){
 	for (int i = 1; i < person.size(); i++)
 	{
 		for (int a = 0; a < person.size() - i; a++)
@@ -440,7 +440,7 @@ void Controller::sortLastname(vector<Person>& person){
 }
 
 // Bubblesort-Algorithmus zum aufsteigenden Sortieren des Alters
-void Controller::sortAge(vector<Person>& person){
+void Controller::sortAge(){
 	for (int i = 1; i < person.size(); i++)
 	{
 		for (int a = 0; a < person.size() - i ; a++)
@@ -456,7 +456,7 @@ void Controller::sortAge(vector<Person>& person){
 }
 
 // Bubblesort-Algorithmus zum aufsteigenden Sortieren des Wohnorts
-void Controller::sortPlace(vector<Person>& person){
+void Controller::sortPlace(){
 	for (int i = 1; i < person.size(); i++)
 	{
 		for (int a = 0; a < person.size() - i; a++)
@@ -475,12 +475,12 @@ void Controller::sortPlace(vector<Person>& person){
 /************		Programm beenden und Kontakte speichern			*************/
 /********************************************************************************/
 
-void Controller::exitProgram(vector<Person>& person) {
+void Controller::exitProgram() {
 	// Konsole wird gecleared
 	system("clear");
 
 	// Funktion zum Speichern der Kontakte in der CSV-Datei wird ausgeführt
-	saveContacts(person);
+	saveContacts();
 
 	cout << endl << "\x1B[0;32m" << "------------------------------------------------------------";
 	cout << endl << "-------------- Das Programm wird nun beendet! --------------";

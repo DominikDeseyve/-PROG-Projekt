@@ -36,50 +36,42 @@ namespace ContactManager {
     	/// <param name="number">Vom Benutzer gedrückter Menüpunkt</param>    	
 		void actionHandler(int number);
 
-		/// <summary>Lädt Kontakte aus der Standard CSV-Datei.</summary>
-    	/// <param name="person">Alle Personen im Vector gespeichert.</param>    			
+		/// <summary>Lädt Kontakte aus der Standard CSV-Datei.</summary>    	  			
 		void loadContacts();
 
-		/// <summary>Speichert Kontakt in die Standard CSV-Datei.</summary>
-    	/// <param name="person">Alle Personen im Vector gespeichert.</param>    	
-		void saveContacts(vector<Person>& person);
+		/// <summary>Speichert Kontakt in die Standard CSV-Datei.</summary>    	/	
+		void saveContacts();
 
 		/// <summary>Das Hauptmenü wird in der Konsole ausgegeben.</summary>
 		void printMenu();
 
-		/// <summary>ALLE Kontakte werden ausgegeben.</summary>
-    	/// <param name="person">Alle Personen im Vector gespeichert.</param>    	
-		void printContacts(vector<Person>& person);
+		/// <summary>ALLE Kontakte werden ausgegeben.</summary>    		
+		void printContacts();
 
-		/// <summary>Ein EINZELNER Kontakt wird ausgegeben.</summary>
-    	/// <param name="person">Alle Personen im Vector gespeichert.</param>    	
-		void printSingleContact(vector<Person>& person);
+		/// <summary>Ein EINZELNER Kontakt wird ausgegeben.</summary>    	 	
+		void printSingleContact();
 
-		/// <summary>Neuer Kontakt wird angelegt. Kontaktdaten werden durch einen Benutzerdialog eingegeben.</summary>
-    	/// <param name="person">Alle Personen im Vector gespeichert.</param>    
-		void createContact(vector<Person>& person);
+		/// <summary>Neuer Kontakt wird angelegt. Kontaktdaten werden durch einen Benutzerdialog eingegeben.</summary>    	
+		void createContact();
 
 		/// <summary>Ein vorhandener Kontakt wird bearbeitet. Dazu wird der Benutzer gefragt, welcher Attribute abgeändert werden sollen. Neue Kontaktdaten werden durch einen Benutzerdialog eingegeben.</summary>
-    	/// <param name="person">Alle Personen im Vector gespeichert.</param>    
-		void editContact(vector<Person>& person);
+		void editContact();
 
-		/// <summary>Der Benutzer wird gefragt, welcher Kontakt gelöscht werden soll.</summary>
-    	/// <param name="person">Alle Personen im Vector gespeichert.</param>    
-		void deleteContact(vector<Person>& person);
+		/// <summary>Der Benutzer wird gefragt, welcher Kontakt gelöscht werden soll.</summary>    	 
+		void deleteContact();
 
-		/// <summary>Sortierfunktion zur Auswahl der Spalte, nach der sortiert werden soll.</summary>
-    	/// <param name="person">Alle Personen im Vector gespeichert.</param>    
-		void sortContacts(vector<Person>& person);
+		/// <summary>Sortierfunktion zur Auswahl der Spalte, nach der sortiert werden soll.</summary>  
+		void sortContacts();
 
 		// sortFirstname, sortLastname, sortAge und sortPlace
-		void sortFirstname(vector<Person>& person);
-		void sortLastname(vector<Person>& person);
-		void sortAge(vector<Person>& person);
-		void sortPlace(vector<Person>& person);
+		void sortFirstname();
+		void sortLastname();
+		void sortAge();
+		void sortPlace();
 
 		/// <summary>Neue Kontaktdaten werden gespeichert und das Programm ordnungsgemäß beendet.</summary>
     	/// <param name="person">Alle Personen im Vector gespeichert.</param>    
-		void exitProgram(vector<Person>& person);
+		void exitProgram();
 
 		static string waitForInput(string coutText, string type);
 
